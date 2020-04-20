@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get "/api/v1/login", to: "auths#create"
   
   
   
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
       resources :reservations
       resources :locations
       resources :rooms
+      #resources :auths
     end
   end
 
