@@ -14,5 +14,12 @@ const Login = (props, {updateLoginForm}) => {
     )
 }
 
+const mapStateToProps = state => {
+    return {
+        username: state.loginForm.username,
+        password: state.loginForm.password
+    }
+}
+
 
 
