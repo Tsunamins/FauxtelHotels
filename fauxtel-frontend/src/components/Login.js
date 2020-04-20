@@ -21,5 +21,7 @@ const mapStateToProps = state => {
     }
 }
 
+export default connect(mapStateToProps, {updateLoginForm: updateLoginForm})(Login)
+
 
 
