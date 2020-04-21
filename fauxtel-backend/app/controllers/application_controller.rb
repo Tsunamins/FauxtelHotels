@@ -17,6 +17,18 @@ class ApplicationController < ActionController::API
 
     end
 
+    def current_user
+        begin
+          @current_user ||= User.find(decode_token_and_get_user_id)
+        rescue
+          return nil
+        end
+      end
+    
+      def logged_in?
+        !!current_user
+      end
+
 
 
 
