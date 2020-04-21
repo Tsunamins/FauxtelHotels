@@ -1,30 +1,49 @@
+import { resetLoginForm } from "./loginForm.js"
+
+
 export const setCurrentUser = user => {
+    
     return {
         type: "SET_CURRENT_USER",
        
-        payload: user
+        user,
+       
+        
     }
+    
 }
 
+export const clearCurrentUser = () => {
+    return {
+      type: "CLEAR_CURRENT_USER"
+    }
+  }
+
 export const login = credentials => {
+   
     return dispatch => {
 
-        return fetch("http://localhost:3000/api/v1/login", {
-            //credentials: "include",
-            method: "POST", 
+        fetch('http://localhost:3000/api/v1/login', {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
-
-            body: JSON.stringify(credentials) //hard-coded for now
+            method: "POST",
+            body: JSON.stringify(credentials)
         })
         .then(resp => resp.json())
-        .then(resp =>{
+        .then(resp => {
             if (resp.error){
                 alert(resp.error)
+                
             } else {
-                dispatch(setCurrentUser(resp.data))
+                console.log(resp)
+                console.log(resp.data)
+                console.log(resp.user.data)
+                console.log(resp.jwt)
+                dispatch(setCurrentUser(resp.user.data))
                 localStorage.setItem('token', resp.jwt)
+                dispatch(resetLoginForm())
             }
         })
         .catch(console.log)    
@@ -42,7 +61,7 @@ export const getCurrentUser = () => {
         //method: "GET",
         headers: {
           //"Content-Type": "application/json"
-          "Authorizatoin": token
+          "Authorization": token
         },
       })
         .then(resp => resp.json())

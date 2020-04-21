@@ -1,16 +1,17 @@
 import React from 'react';
 import logo from './fauxtellogo.svg';
 import './App.css';
+import { connect } from 'react-redux'
 import Login from './components/Login.js'
 import { getCurrentUser } from './actions/currentUser.js'
 
 //function App() {
 class App extends React.Component {
 
-  componentDidMount(){
-    this.props.getCurrentUser()
+  // componentDidMount(){
+  //   getCurrentUser()
 
-  }
+  // }
 
   render(){
 
