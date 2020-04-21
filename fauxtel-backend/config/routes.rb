@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  get "/api/v1/login", to: "auths#create"
+  post '/api/v1/login', to: 'auths#create'
+  delete '/api/v1/logout', to: 'auths#destroy'
+  get '/api/v1/get_current_user', to: 'auths#get_current_user'
   
   
   
