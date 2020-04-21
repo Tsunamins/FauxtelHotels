@@ -2,8 +2,18 @@ import React from 'react';
 import logo from './fauxtellogo.svg';
 import './App.css';
 import Login from './components/Login.js'
+import { getCurrentUser } from './actions/currentUser.js'
 
-function App() {
+//function App() {
+class App extends React.Component {
+
+  componentDidMount(){
+    this.props.getCurrentUser()
+
+  }
+
+  render(){
+
   return (
     <div className="App">
       <header className="App-header">
@@ -23,6 +33,8 @@ function App() {
       <Login />
     </div>
   );
+
+  }
 }
 
 export default App;
