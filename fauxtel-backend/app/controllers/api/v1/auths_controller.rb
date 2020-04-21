@@ -1,26 +1,33 @@
 class Api::V1::AuthsController < ApplicationController
 
     #representing login
-    def create
-        @user = User.find_by(email: params[:user][:email])
+    def login
+        #binding.pry
+        @user = User.find_by(email: params[:email])
 
-        if @user && @user.authenticate(params[:user][:password])
+        if @user && @user.authenticate(params[:password])
 
             token = encode_token({id: @user.id})
 
+           
             resp = {
-                user: user_object(@user),
+                user: UserSerializer.new(@user),
                 jwt: token
             }
+
             render json: resp
+            
 
         else
-            resp = {
-                error: "Invalid credentials",
-                details: @user.errors.full_messages
-            }
+            # resp = {
+            #     error: "Invalid credentials",
+            #     details: @user.errors.full_messages
+            # }
 
-            render json: resp, status: :unauthorized
+            # render json: resp, status: :unauthorized
+            render json: {
+                error: "Invalid Credentials"
+              }
         end
     end
 
