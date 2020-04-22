@@ -1,21 +1,21 @@
-import { resetLoginForm } from "./loginForm.js"
 
 
-export const setCurrentUser = user => {
+
+export const loginUser = user => {
     
     return {
-        type: "SET_CURRENT_USER",
+        type: "LOGIN_USER",
        
-        user,
+        user
        
         
     }
     
 }
 
-export const clearCurrentUser = () => {
+export const logoutUser = () => {
     return {
-      type: "CLEAR_CURRENT_USER"
+      type: "LOGOUT_USER"
     }
   }
 
@@ -32,18 +32,18 @@ export const login = credentials => {
             body: JSON.stringify(credentials)
         })
         .then(resp => resp.json())
-        .then(resp => {
-            if (resp.error){
-                alert(resp.error)
+        .then(response => {
+            if (response.error){
+                alert(response.error)
                 
             } else {
-                console.log(resp)
-                console.log(resp.data)
-                console.log(resp.user.data)
-                console.log(resp.jwt)
-                dispatch(setCurrentUser(resp.user.data))
-                localStorage.setItem('token', resp.jwt)
-                dispatch(resetLoginForm())
+                console.log(response)
+                console.log(response.data)
+                console.log(response.user.data)
+                console.log(response.jwt)
+                dispatch(loginUser(response.user.data))
+                localStorage.setItem('token', response.jwt)
+              
             }
         })
         .catch(console.log)    
@@ -53,14 +53,14 @@ export const login = credentials => {
 
 export const getCurrentUser = () => {
     //new
+    return dispatch => {
     const token = localStorage.getItem("token")
     if (token) {
-    return dispatch => {
+    
       return fetch("http://localhost:3000/api/v1/get_current_user", {
-       // credentials: "include",
-        //method: "GET",
+     
         headers: {
-          //"Content-Type": "application/json"
+      
           "Authorization": token
         },
       })
@@ -69,7 +69,10 @@ export const getCurrentUser = () => {
           if (response.error) {
             alert(response.error)
           } else {
-            dispatch(setCurrentUser(response.data))
+              console.log(response)
+              console.log(response.user.data)
+              console.log(response.jwt)
+            dispatch(loginUser(response.user.data))
             
           }
         })
@@ -77,4 +80,15 @@ export const getCurrentUser = () => {
         }
     }
 
+}
+
+export const logout = event => {
+    localStorage.removeItem("token")
+    console.log(localStorage.token)
+    console.log("logged out")
+    event.preventDefault()
+    return dispatch => {
+        dispatch(logoutUser())
+        
+    }
 }
