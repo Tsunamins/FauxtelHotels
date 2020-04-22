@@ -1,11 +1,7 @@
 class ApplicationController < ActionController::API
 
     def user_object(user)
-        {
-            name: user.name,
-            email: user.email,
-            id: user.id
-        }
+        UserSerializer.new(@user)
     end
 
     def encode_token(payload)
