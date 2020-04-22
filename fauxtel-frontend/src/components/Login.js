@@ -1,43 +1,52 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import { updateLoginForm } from '../actions/loginForm.js'
-import { login } from '../actions/currentUser.js'
+import { login, getCurrentUser } from '../actions/currentUser.js'
 
-const Login = ({userLoginInput, updateLoginForm, login}) => {
-    
+class Login extends React.Component {
+    state = {
+      email: "",
+      password: ""
+    }
+  
+    handleChange = event => {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+  
+    handleSubmit = event => {
+      event.preventDefault()
 
-    const handleInputChange = event => {
-        const { name, value } = event.target
-        const updatedFormInfo = {
-            ...userLoginInput,
-            [name]: value
-        }
-        updateLoginForm(updatedFormInfo)
+      this.props.login(this.state)
+      this.setState({
+            email: "",
+            password: ""
+      })
     }
 
-    const handleSubmit = event => {
-        event.preventDefault()
-        login(userLoginInput)
-    }
-
-
+    render() {
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="text" name="email"  placeholder="email" value={userLoginInput.email} onChange={handleInputChange}></input>
-            <input type="password" name="password"  placeholder="password" value={userLoginInput.password} onChange={handleInputChange}></input>
+        <form onSubmit={this.handleSubmit}>
+            <input type="text" name="email"  placeholder="email" value={this.state.email} onChange={this.handleChange}></input>
+            <input type="password" name="password"  placeholder="password" value={this.state.password} onChange={this.handleChange}></input>
             <input type="submit" value="Log In"></input>
 
         </form>
     )
 }
-
-const mapStateToProps = state => {
-    return {
-        userLoginInput: state.loginForm //loginForm is reducers/loginForm.js
-    }
 }
 
-export default connect(mapStateToProps, {updateLoginForm, login})(Login)
+// const mapDispatchToProps = dispatch => ({
+//     login: userInfo => dispatch(login(userInfo))
+//   })
+  
+//   export default connect(null, mapDispatchToProps)(Login);
+
+
+  
+
+export default connect(null, {login})(Login)
+
 
 
 
