@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authorized, only: [:create]
+  #skip_before_action :authorized, only: [:create]
 
   # GET /users
   def index
@@ -19,13 +19,26 @@ class Api::V1::UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.new(user_params)
+    @user = User.create(user_params)
+    
 
-    if @user.save
+    if @user.valid?
       token = encode_token({id: @user.id})
-      render json: { user: UserSerializer.new(@user), jwt: token }, status: :accepted
+
+           
+            resp = {
+                user: UserSerializer.new(@user),
+                jwt: token
+            }
+
+            render json: resp
     else
-      render json: { message: 'Invalid username or password' }, status: :unauthorized
+      resp = {
+        error: @user.errors.full_messages.to_sentence
+        
+      }
+      
+      render json: resp, status: :unprocessable_entity
     end
   end
 
@@ -49,6 +62,6 @@ class Api::V1::UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email, :password_digest, :first_name, :last_name)
+      params.require(:user).permit(:email, :password, :first_name, :last_name)
     end
 end
