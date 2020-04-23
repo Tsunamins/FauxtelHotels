@@ -4,10 +4,11 @@ import { signup } from '../actions/currentUser.js'
 
 class SignUp extends React.Component {
     state = {
-      email: "",
-      password: "",
-      first_name: "",
-      last_name: ""
+        first_name: "",
+        last_name: "",  
+        email: "",
+        password: "",
+      
     }
   
     handleChange = event => {
@@ -21,10 +22,11 @@ class SignUp extends React.Component {
 
       this.props.signup(this.state)
       this.setState({
-            email: "",
-            password: "",
             first_name: "",
-            last_name: ""
+            last_name: "",
+            email: "",
+            password: ""
+            
       })
     }
 
@@ -43,12 +45,8 @@ class SignUp extends React.Component {
 }
 
 // const mapDispatchToProps = dispatch => ({
-//     login: userInfo => dispatch(login(userInfo))
+//     signup: userInfo => dispatch(signup(userInfo))
 //   })
-  
-//   export default connect(null, mapDispatchToProps)(Login);
-
-
   
 
 export default connect(null, {signup})(SignUp)

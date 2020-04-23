@@ -2,10 +2,12 @@ import React from 'react';
 import logo from './fauxtellogo.svg';
 import './App.css';
 import { connect } from 'react-redux'
+import UserNav from './containers/UserNav.js'
 import Login from './components/Login.js'
 import SignUp from './components/SignUp.js'
 import Logout from "./components/Logout.js"
 import { getCurrentUser,  } from './actions/currentUser.js'
+
 
 //function App() {
 class App extends React.Component {
@@ -28,16 +30,12 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>Edit <code>src/App.js</code> and save to reload.</p>
-          <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">Learn React</a>
+          <p className="App-link"><UserNav /></p>
+         
         </header>
 
         
-        <Login />
-        <SignUp />
-        
-        
-        <h2>{ loggedIn ? <><p>Logged in as {currentUser}</p><Logout/></> : "Not logged in"}</h2>
+       
       
       </div>
 
