@@ -3,10 +3,7 @@ import logo from './fauxtellogo.svg';
 import './App.css';
 import { connect } from 'react-redux'
 import UserNav from './containers/UserNav.js'
-import Login from './components/Login.js'
-import SignUp from './components/SignUp.js'
-import Logout from "./components/Logout.js"
-import { getCurrentUser,  } from './actions/currentUser.js'
+import { getCurrentUser } from './actions/currentUser.js'
 
 
 //function App() {
@@ -14,39 +11,24 @@ class App extends React.Component {
 
   componentDidMount =() => {
     this.props.getCurrentUser()
-   
-
   }
 
   render(){
     const { loggedIn} = this.props
     let currentUser = this.state
-    
-  
-    
-   
+
   return (
-    
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p className="App-link"><UserNav /></p>
-         
-        </header>
-
-        
-       
-      
+          <p className="App-link"><UserNav /></p>  
+        </header>      
       </div>
 
   );
   
   }
 }
-
-// const mapDispatchToProps = dispatch => ({
-//   getCurrentUser: () => dispatch(getCurrentUser())
-// })
 
 const mapStateToProps = state => {
   console.log(state.currentUser)

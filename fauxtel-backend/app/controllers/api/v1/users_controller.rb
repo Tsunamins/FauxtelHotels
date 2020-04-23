@@ -21,8 +21,11 @@ class Api::V1::UsersController < ApplicationController
   def create
     @user = User.create(user_params)
     
-
+    respond_to do |format| #mailer addition
     if @user.valid?
+
+      UserMailer.with(user: @user).welcome_email.deliver_later #mailer addition
+
       token = encode_token({id: @user.id})
 
            
@@ -39,6 +42,7 @@ class Api::V1::UsersController < ApplicationController
       }
       
       render json: resp, status: :unprocessable_entity
+    end
     end
   end
 
