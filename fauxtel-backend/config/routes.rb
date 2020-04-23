@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   delete '/api/v1/logout', to: 'api/v1/auths#destroy'
   get '/api/v1/get_current_user', to: 'api/v1/auths#get_current_user'
+  post '/api/v1/signup', to: 'api/v1/users#create'
   
   
   
