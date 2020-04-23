@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  before_action :authorized
+  #before_action :authorized
     # def user_object(user)
     #     UserSerializer.new(user)
     # end
