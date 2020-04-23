@@ -3,6 +3,7 @@ import logo from './fauxtellogo.svg';
 import './App.css';
 import { connect } from 'react-redux'
 import Login from './components/Login.js'
+import SignUp from './components/SignUp.js'
 import Logout from "./components/Logout.js"
 import { getCurrentUser,  } from './actions/currentUser.js'
 
@@ -17,7 +18,7 @@ class App extends React.Component {
 
   render(){
     const { loggedIn} = this.props
-    const currentUser = this.state
+    let currentUser = this.state
     
   
     
@@ -33,6 +34,7 @@ class App extends React.Component {
 
         
         <Login />
+        <SignUp />
         
         
         <h2>{ loggedIn ? <><p>Logged in as {currentUser}</p><Logout/></> : "Not logged in"}</h2>
@@ -40,7 +42,7 @@ class App extends React.Component {
       </div>
 
   );
-
+  
   }
 }
 
