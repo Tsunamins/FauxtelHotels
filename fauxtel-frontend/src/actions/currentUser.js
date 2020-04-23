@@ -78,23 +78,32 @@ export const getCurrentUser = () => {
 
 }
 
-export const signup = (credentials) => {
+export const signup = credentials => {
   return dispatch => {
-    
-    return fetch("http://localhost:3001/api/v1/signup", {
+    const userInfo = {
+      user: credentials//added bc has to be wrapped in user object
+    }
+    console.log(credentials)
+    return fetch("http://localhost:3000/api/v1/signup", {
     
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: 'application/json'
+        "Accept": 'application/json'
       },
-      body: JSON.stringify({credentials})
+      body: JSON.stringify(userInfo)
+      
     })
+    
+   
       .then(resp => resp.json())
       .then(response => {
         if (response.error) {
           alert(response.error)
         } else {
+          console.log(response)
+              console.log(response.user.data)
+              console.log(response.jwt)
           dispatch(loginUser(response.user.data))
           localStorage.setItem('token', response.jwt)
         }
