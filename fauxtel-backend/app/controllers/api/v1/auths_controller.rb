@@ -35,7 +35,7 @@ class Api::V1::AuthsController < ApplicationController
     def get_current_user
         if logged_in?
             render json: {
-                user: user_object(current_user)
+                user: UserSerializer.new(current_user)
             }, status: :ok
         else
             render json: {error: "No current user"}
