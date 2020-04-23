@@ -24,18 +24,21 @@ class Api::V1::UsersController < ApplicationController
     respond_to do |format| #mailer addition
     if @user.valid?
 
-      UserMailer.with(user: @user).welcome_email.deliver_later #mailer addition
-
+      UserMailer.with(user: @user).welcome_email.deliver_now #mailer addition
+      format.html { redirect_to(@user, notice: 'User was successfully created.') }
+      format.json { render json: @user, status: :created, location: @user }
+      
       token = encode_token({id: @user.id})
-
-           
             resp = {
                 user: UserSerializer.new(@user),
                 jwt: token
             }
-
             render json: resp
     else
+      #mailer additions
+      format.html { render action: 'new' }
+      format.json { render json: @user.errors, status: :unprocessable_entity 
+      
       resp = {
         error: @user.errors.full_messages.to_sentence
         
