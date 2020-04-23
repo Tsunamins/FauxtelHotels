@@ -1,14 +1,10 @@
 
 
 
-export const loginUser = user => {
-    
+export const loginUser = user => {    
     return {
         type: "LOGIN_USER",
-       
-        user
-       
-        
+        user 
     }
     
 }
@@ -80,6 +76,31 @@ export const getCurrentUser = () => {
         }
     }
 
+}
+
+export const signup = (credentials) => {
+  return dispatch => {
+    
+    return fetch("http://localhost:3001/api/v1/signup", {
+    
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({credentials})
+    })
+      .then(resp => resp.json())
+      .then(response => {
+        if (response.error) {
+          alert(response.error)
+        } else {
+          dispatch(loginUser(response.user.data))
+          localStorage.setItem('token', response.jwt)
+        }
+      })
+      .catch(console.log)
+  }
 }
 
 export const logout = event => {
