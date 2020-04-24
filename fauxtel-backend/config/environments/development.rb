@@ -53,24 +53,35 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.delivery_method = :smtp
-  ActionMailer::Base.smtp_settings = {
-  domain: '.ocalhost:3000',
-  address:        "smtp.sendgrid.net",
-  port:            587,
-  authentication: :plain,
-  user_name:      'apikey',
-  password:       ENV['SENDGRID_API_KEY']
-}
-  #method below if not using api
-  # config.action_mailer.smtp_settings = {
-  #   address: "smtp.gmail.com",
-  #   port: 587,
-  #   domain: "gmail.com",
-  #   authentication: "plain",
-  #   enable_starttls_auto: true,
-  #   user_name: ENV["GMAIL_USERNAME"],
-  #   password: ENV["GMAIL_PASSWORD"]
-  # }
   config.action_mailer.default_url_options = { host: "http://fauxtels.com" }
+  # config.action_mailer.smtp_settings = {
+  #   :address              => "smtp.gmail.com",
+  #   :port                 => 587,
+  #   :user_name            => ENV["GMAIL_USERNAME"],
+  #   :password             => ENV["GMAIL_PASSWORD"],
+  #   :authentication       => "plain",
+  #   :enable_starttls_auto => true
+  # }
+
+#send grid api settings
+#     ActionMailer::Base.smtp_settings = {
+#   domain: '.ocalhost:3000',
+#   address:        "smtp.sendgrid.net",
+#   port:            587,
+#   authentication: :plain,
+#   user_name:      'apikey',
+#   password:       ENV['SENDGRID_API_KEY']
+# }
+  #method below if not using api
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: 587,
+    domain: "localhost:3000",
+    authentication: :login,
+    enable_starttls_auto: true,
+    user_name: ENV["SENDGRID_USERNAME"],
+    password: ENV["SENDGRID_PASSWORD"]
+  }
+  
 
 end
