@@ -1,19 +1,10 @@
 import React from 'react'
 import {Route, Link} from 'react-router-dom' //enables link tags
 import { connect } from 'react-redux'
-
 import { getRooms } from '../actions/getRooms.js'
 
 class Rooms extends React.Component {
 
-    // state = {}
-    
-     
-    
-    // vote = (id) => {
-    //   this.state[id] ? this.setState({[id]: this.state[id] += 1}) : this.setState({[id]: 1})
-    // }
-    
     render() {
       return (
           <div>
