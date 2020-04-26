@@ -5,10 +5,13 @@ import roomsReducer from './reducers/roomsReducer.js'
 import currentUser from './reducers/currentUser.js'
 
 const reducer = combineReducers({
-    users: usersReducer, 
+    //users: usersReducer, 
    
-    currentUser,
-    roomsReducer
+    currentUser: currentUser,
+
+
+    rooms: roomsReducer
+
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
