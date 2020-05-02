@@ -234,4 +234,38 @@
 # Room.create(room_number: 1005, room_type: "city-view-ph", location_id: 3, status: "ready")
 # Room.create(room_number: 1006, room_type: "city-view-ph", location_id: 3, status: "ready")
 
-User.create(email: "graycie@sobe.com", password: "password", first_name: "Graycie", last_name: "The Cat")
+#User.create(email: "graycie@sobe.com", password: "password", first_name: "Graycie", last_name: "The Cat")
+
+long_start = DateTime.new(2020,5,28)
+long_end = DateTime.new(2020,5,31)
+long_range = (long_start..long_end).to_a
+
+
+short_start = DateTime.new(2020,5,29)
+short_end = DateTime.new(2020,5,30)
+short_range = (short_start..short_end).to_a
+
+
+#2 seeds showing 2 long weekend reservations at location 1
+Reservation.create(start_date: long_start, end_date: long_end, date_range: long_range, user_id: 1, room_id: 13, location_id: 1)
+Reservation.create(start_date: long_start, end_date: long_end, date_range: long_range, user_id: 1, room_id: 14, location_id: 1)
+
+
+#rest of seeds for location 1, efford to disable or not show dates avail for fri and sat of same weekend, so fri and sat are compl booked at loc 1
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 1, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 2, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 3, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 4, location_id: 1)
+
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 5, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 6, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 7, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 8, location_id: 1)
+
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 9, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 10, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 11, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 12, location_id: 1)
+
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 15, location_id: 1)
+Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 16, location_id: 1)
