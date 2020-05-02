@@ -4,7 +4,7 @@ import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import './booknow.css'
 
-class BookNow extends React.Component {
+class BookNowCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
@@ -119,7 +119,4 @@ class BookNow extends React.Component {
   }
 }
 
-export default BookNow
-        
-//export default connect(null, {getRooms})(BookNow)
-
+export default BookNowCalendar

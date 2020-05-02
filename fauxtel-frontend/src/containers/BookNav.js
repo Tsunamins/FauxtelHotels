@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { Link, NavLink, Route, Switch } from 'react-router-dom'
 import BookNavHome from '../components/BookNavHome.js'
 import BookNow from '../components/BookNow.js'
+import BookRoomsData from '../components/BookRoomsData.js'
 import Rooms from '../components/Rooms.js'
 import { getRooms } from '../actions/getRooms.js'
 
