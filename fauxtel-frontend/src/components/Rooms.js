@@ -3,36 +3,45 @@ import {Route, Link} from 'react-router-dom' //enables link tags
 import { connect } from 'react-redux'
 import { getRooms } from '../actions/getRooms.js'
 
-class Rooms extends React.Component {
-
-    render() {
-      return (
-          <div>
-            {this.props.rooms.rooms.map(room =>
-              <li key={room.id}>{room.room_number}</li>
-            )}
-          </div>
-        )
-      }
-    }
-    
-    export default connect(null, {getRooms})(Rooms)
-
 
 
 
 // const Rooms = (props) => {
+//   console.log(props)
 
-//     return (
-//       <div>
-//         {/* {props.rooms.map(room =>
-//           <li key={room.id}>
-//             {room.number}
-//           </li> )} */}
-//       </div>
-     
+//   return (
+//     <div>
+//       {props.rooms.rooms.map(room =>
+//         <li key={room.id}>
+//           {room.room_number}
+//         </li> )}
+//     </div>
+
+//   )
+// }
+
+// // const mapStateToProps = state => {
+// //   return {
+// //     rooms: state.rooms
+// //   }
+// // }
+
+// export default connect(null, {getRooms})(Rooms)
+
+
+//previous
+class Rooms extends React.Component {
+
+  render() {
+    console.log(this.props.rooms.rooms[0])
+    return (
+        <div>
+          {this.props.rooms.rooms.map(room =>
+            <li key={room.attributes.id}>{room.attributes.room_number}</li>
+          )}
+        </div>
+      )
+    }
+  }
   
-//     )
-//   }
-  
-//   export default Rooms
+  export default connect(null, {getRooms})(Rooms)
