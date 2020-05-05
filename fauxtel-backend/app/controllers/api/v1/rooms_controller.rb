@@ -5,7 +5,10 @@ class Api::V1::RoomsController < ApplicationController
   def index
     @rooms = Room.all
 
-    render json: @rooms
+
+    #render json: @rooms
+    rooms_json = RoomSerializer.new(@rooms).serialized_json
+    render json: rooms_json
   end
 
   # GET /rooms/1
