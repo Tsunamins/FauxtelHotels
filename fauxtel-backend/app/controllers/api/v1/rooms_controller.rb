@@ -5,9 +5,9 @@ class Api::V1::RoomsController < ApplicationController
   def index
     @rooms = Room.all
 
-
+    #options = {include: [:reservations]}
     #render json: @rooms
-    rooms_json = RoomSerializer.new(@rooms).serialized_json
+    rooms_json = RoomSerializer.new(@rooms)
     render json: rooms_json
   end
 

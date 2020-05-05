@@ -1,9 +1,9 @@
 class RoomSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :room_number, :room_type, :location_id, :occupied_dates, :status
+  attributes :room_number, :room_type, :location_id, :occupied_dates, :status, :reservations
 
-  has_many :reservations
- 
+  
+  
 
 
 
