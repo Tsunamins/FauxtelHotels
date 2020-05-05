@@ -43,13 +43,12 @@ class BookNav extends React.Component {
 
 
 const mapStateToProps = state => {
-    console.log(state.rooms)
-    return ({
-        rooms: state.rooms
-      
-     
-    })
+    console.log(state)
+    return {
+      rooms: state.rooms
+    }
   }
   
-  export default connect(mapStateToProps, {getRooms})(BookNav);
+  export default connect(mapStateToProps, {getRooms})(BookNav)
+  
 

@@ -1,7 +1,11 @@
+
+//const INITIAL_STATE = []
+//const INITIAL_STATE = null
 export default function roomsReducer(state = {rooms: []}, action) {
     switch (action.type) {
       case 'GET_ROOMS':
-        return {rooms: action.payload}
+        return {...state, rooms:  action.rooms}     
+        
         default:
             return state
         }
