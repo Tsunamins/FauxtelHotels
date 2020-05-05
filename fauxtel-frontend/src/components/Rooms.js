@@ -33,11 +33,24 @@ import { getRooms } from '../actions/getRooms.js'
 class Rooms extends React.Component {
 
   render() {
+      const allRooms = this.props.rooms.rooms
+      const locationOne = []
+      for (let i=0; i < allRooms.length; i++){
+        if(allRooms[i].attributes.location_id === 1){
+          
+          locationOne.push(allRooms[i])
+        }
+      }
+      let locationTotal = locationOne.length
+      console.log(locationOne)
     console.log(this.props.rooms.rooms[0])
     return (
+      
         <div>
-          {this.props.rooms.rooms.map(room =>
-            <li key={room.attributes.id}>{room.attributes.room_number}</li>
+          {locationOne.map(room =>
+            
+          <li key={room.attributes.id}>Room number: {room.attributes.room_number} Reservations: {room.attributes.reservations.map(r => r.date_range)}</li>
+              
           )}
         </div>
       )
