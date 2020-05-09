@@ -6,6 +6,8 @@ class Api::V1::ReservationsController < ApplicationController
     @reservations = Reservation.all
 
     render json: @reservations
+    # resos_json = RoomSerializer.new(@reservations)
+    # render json: resos_json
   end
 
   # GET /reservations/1
