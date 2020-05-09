@@ -6,7 +6,7 @@ import './booknow.css'
 var moment = require('moment');
     moment().format();
 
-class BookNow extends React.Component {
+export default class BookNow extends React.Component {
   constructor(props) {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
@@ -58,21 +58,18 @@ class BookNow extends React.Component {
     }
   }
 
-  handleShowRooms(from, to, rooms){
-    console.log(from)
-    console.log(to)
-    console.log(rooms)
+  handleShowRooms(from, to, reservations){
 
     let reservation_build = toDateRange(from, to)
     console.log(reservation_build)
-
     sessionStorage.setItem("reservation_build", reservation_build)
 
-    let found = findAvailability(reservation_build, rooms)
-    console.log(found)
+
+
+    let found = findAvailability(reservation_build, reservations)
+    //console.log(found)
 
     
-    console.log("Doing something here to show rooms")
   
   }
 
@@ -81,10 +78,8 @@ class BookNow extends React.Component {
   }
 
   render() {
-    const rooms = this.props.rooms.rooms
-    console.log(rooms)
+    const reservations = this.props.rooms.reservations
     const today = new Date();
-    console.log(today)
     const { from, to, enteredTo } = this.state;
     const modifiers = { start: from, end: enteredTo };
     const disabledDays = { before: this.state.from, before: today  };
@@ -110,7 +105,7 @@ class BookNow extends React.Component {
                 ${to.toLocaleDateString()}`}{' '}
           {from && to && (
         
-        <button className="link" onClick={this.handleShowRooms(from, to, rooms)}>
+        <button className="link" onClick={this.handleShowRooms(from, to, reservations)}>
           Show Rooms
         </button>
       )}
@@ -139,38 +134,43 @@ class BookNow extends React.Component {
 
 const toDateRange = function(start, end){
   let rangeArray = new Array()
+  let formatArray = []
+  
   //example if need to make a new date dt = new Date(start), make the start and end dates based on customer input, perhaps
   let dateBase = new Date(start)
   while (dateBase <= end){
       rangeArray.push(new Date (dateBase))
       dateBase.setDate(dateBase.getDate() + 1)
   }
-  return rangeArray
-}
-
-function findAvailability(reservation_build, rooms){
-  let uniqueRooms = []
-  let matches = []
-
-  //prob won't need no_matches, unles keeping for some other purpose
-  let no_matches = []
-
-  for(let i = 0; i < rooms.length; i++){
-    let combined_dates = reservation_build.concat(rooms[i].attributes.reservations.date_range).sort()
-    for(let j = 0; j < combined_dates.length; j++){
-        if(moment(combined_dates[j]).isSame(combined_dates[j+1])){
-          //prob won't need no_matches, unless for some future purpose so will propb want to reverse logic in start of if to be a ! match of some kind
-          no_matches.push(rooms[j])
-        } else {
-          matches.push(rooms[i])
-          uniqueRooms = [...new Set(matches)]
-        }
-    }
+  for(let i = 0; i < rangeArray.length; i++){
+    formatArray.push(rangeArray[i].toISOString().split('T')[0])
   }
-  return uniqueRooms
+  return formatArray
 }
 
-export default BookNow
+function findAvailability(reservation_build, reservations){
+  let overlap_detected = []
+  
+  for(let i = 0; i < reservations.length; i++){
+      //so finds when there is date overlap - returns true - so "true" means room will not be available
+      //returns false when there is no date overlap and the rooms would be available
+      //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
+      console.log(findDateOverlap(reservation_build, reservations[i].date_range))
+  
+     
+    
+  }
+  console.log(overlap_detected)
+}
+
+function findDateOverlap(reservation_build, just_res_array) { 
+  return reservation_build.some(item => just_res_array.includes(item)) 
+} 
+
+
+
+
+//export default BookNow
         
 //export default connect(null, {getRooms})(BookNow)
 

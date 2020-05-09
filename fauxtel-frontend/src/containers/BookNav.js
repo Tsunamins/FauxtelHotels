@@ -8,13 +8,17 @@ import { Link, NavLink, Route, Switch } from 'react-router-dom'
 import BookNavHome from '../components/BookNavHome.js'
 import BookNow from '../components/BookNow.js'
 import BookRoomsData from '../components/BookRoomsData.js'
-import Rooms from '../components/Rooms.js'
-import { getRooms } from '../actions/getRooms.js'
+//import Rooms from '../components/Rooms.js'
+import Reservations from '../components/Reservations.js'
+//import { getRooms } from '../actions/getRooms.js'
+import { getReservations } from '../actions/reservations.js'
+import { bindActionCreators } from 'redux';
 
 class BookNav extends React.Component {
 
     componentDidMount() {
-        this.props.getRooms()
+        //this.props.getRooms()
+        this.props.getReservations()
     }       
 
     render(){
@@ -24,13 +28,15 @@ class BookNav extends React.Component {
            {/* will need some kind of logic to hide this once using it */}
            {/* some of this is temporary for viewing functions of these things */}
            <Switch>
-                <Route path="/booknow" render={(routerProps) => <BookNow {...routerProps} rooms={this.props.rooms}/>} >
-                
-                   
+                <Route path="/booknow" render={(routerProps) => <BookNow {...routerProps} rooms={this.props.reservations}/>} >
                 </Route>
-                <Route path="/rooms" render={(routerProps) => <Rooms {...routerProps} rooms={this.props.rooms}/>} >
-                   
+
+                {/* <Route path="/rooms" render={(routerProps) => <Rooms {...routerProps} rooms={this.props.rooms}/>} >
+                </Route> */}
+
+                <Route path="/reservations" render={(routerProps) => <Reservations {...routerProps} rooms={this.props.reservations}/>} >
                 </Route>
+
             </Switch>
       
            
@@ -45,10 +51,17 @@ class BookNav extends React.Component {
 const mapStateToProps = state => {
     console.log(state)
     return {
-      rooms: state.rooms
+      //rooms: state.rooms,
+      reservations: state.reservations
     }
   }
+//   const mapDispatchToProps = dispatch => {
+//       return {
+//           getRooms,
+//           getReservations
+//       }
+//   }
   
-  export default connect(mapStateToProps, {getRooms})(BookNav)
+  export default connect(mapStateToProps, {getReservations})(BookNav)
   
 
