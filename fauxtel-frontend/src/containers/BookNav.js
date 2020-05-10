@@ -28,13 +28,13 @@ class BookNav extends React.Component {
            {/* will need some kind of logic to hide this once using it */}
            {/* some of this is temporary for viewing functions of these things */}
            <Switch>
-                <Route path="/booknow" render={(routerProps) => <BookNow {...routerProps} rooms={this.props.reservations}/>} >
+                <Route path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}/>} >
                 </Route>
 
                 {/* <Route path="/rooms" render={(routerProps) => <Rooms {...routerProps} rooms={this.props.rooms}/>} >
                 </Route> */}
 
-                <Route path="/reservations" render={(routerProps) => <Reservations {...routerProps} rooms={this.props.reservations}/>} >
+                <Route path="/reservations" render={(routerProps) => <Reservations {...routerProps} reservations={this.props.reservations}/>} >
                 </Route>
 
             </Switch>
