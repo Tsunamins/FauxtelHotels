@@ -3,16 +3,22 @@ import {Helmet} from 'react-helmet';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import './booknow.css'
-var moment = require('moment');
-    moment().format();
+import { connect } from 'react-redux'
+import { getRooms } from '../actions/getRooms.js'
+import { getReservations } from '../actions/reservations.js'
 
-export default class BookNow extends React.Component {
+
+class BookNow extends React.Component {
   constructor(props) {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleDayMouseEnter = this.handleDayMouseEnter.bind(this);
     this.handleResetClick = this.handleResetClick.bind(this);
     this.state = this.getInitialState();
+  }
+
+  componentDidMount(){
+    this.props.getRooms()
   }
 
   getInitialState() {
@@ -63,11 +69,10 @@ export default class BookNow extends React.Component {
     let reservation_build = toDateRange(from, to)
     console.log(reservation_build)
     sessionStorage.setItem("reservation_build", reservation_build)
-
-
-
     let found = findAvailability(reservation_build, reservations)
-    //console.log(found)
+
+
+
 
     
   
@@ -78,7 +83,9 @@ export default class BookNow extends React.Component {
   }
 
   render() {
-    const reservations = this.props.rooms.reservations
+    console.log(this.props)
+    const reservations = this.props.reservations.reservations
+    //const reservations = this.props.reservation_build.reservations
     const today = new Date();
     const { from, to, enteredTo } = this.state;
     const modifiers = { start: from, end: enteredTo };
@@ -149,18 +156,26 @@ const toDateRange = function(start, end){
 }
 
 function findAvailability(reservation_build, reservations){
-  let overlap_detected = []
+  let no_conflict = []
+
   
   for(let i = 0; i < reservations.length; i++){
       //so finds when there is date overlap - returns true - so "true" means room will not be available
       //returns false when there is no date overlap and the rooms would be available
       //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
-      console.log(findDateOverlap(reservation_build, reservations[i].date_range))
+      let date_check = findDateOverlap(reservation_build, reservations[i].date_range)
+      console.log(date_check)
+      if (date_check === false){
+        no_conflict.push(reservations[i])
+      }
+      
+
+
   
      
     
   }
-  console.log(overlap_detected)
+  console.log(no_conflict)
 }
 
 function findDateOverlap(reservation_build, just_res_array) { 
@@ -168,9 +183,23 @@ function findDateOverlap(reservation_build, just_res_array) {
 } 
 
 
+const mapStateToProps = state => {
+  console.log(state)
+  return {
+    //reservations: state.reservations,
+    rooms: state.rooms,
+    
+  }
+}
+
+  const mapDispatchToProps = dispatch => {
+      return {
+        getRooms: () => { dispatch(getRooms()) },
+      }
+  }
 
 
 //export default BookNow
         
-//export default connect(null, {getRooms})(BookNow)
+export default connect(mapStateToProps, mapDispatchToProps)(BookNow)
 
