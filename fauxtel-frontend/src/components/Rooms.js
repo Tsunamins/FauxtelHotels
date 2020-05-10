@@ -1,60 +1,21 @@
-import React from 'react'
-import {Route, Link} from 'react-router-dom' //enables link tags
-import { connect } from 'react-redux'
-import { getRooms } from '../actions/getRooms.js'
+import React from 'react';
 
 
-
-
-// const Rooms = (props) => {
-//   console.log(props)
-
-//   return (
-//     <div>
-//       {props.rooms.rooms.map(room =>
-//         <li key={room.id}>
-//           {room.room_number}
-//         </li> )}
-//     </div>
-
-//   )
-// }
-
-// // const mapStateToProps = state => {
-// //   return {
-// //     rooms: state.rooms
-// //   }
-// // }
-
-// export default connect(null, {getRooms})(Rooms)
-
-
-//previous
-class Rooms extends React.Component {
-
-  render() {
-      const allRooms = this.props.rooms.rooms
-      const locationOne = []
-      for (let i=0; i < allRooms.length; i++){
-        if(allRooms[i].attributes.location_id === 1){
-          
-          locationOne.push(allRooms[i])
-        }
-      }
-      let locationTotal = locationOne.length
-      console.log(locationOne)
-    console.log(this.props.rooms.rooms[0])
-    return (
-      
+const Rooms = (props) => {
+  console.log(props.availRooms)
+  if(props.availRooms.length > 0){
+      return(
         <div>
-          {locationOne.map(room =>
-            
-          <li key={room.attributes.id}>Room number: {room.attributes.room_number} Reservations: {room.attributes.reservations.map(r => r.date_range)}</li>
-              
-          )}
+             {props.availRooms.map(room =>
+                 <li key={room.id}>Room#: {room.attributes.room_number} Room-Type: {room.attributes.room_type} Room-Location: {room.attributes.location_id}</li>
+             )}
         </div>
       )
-    }
+  } else {
+    return(
+      <div></div>
+    )
   }
-  
-  export default connect(null, {getRooms})(Rooms)
+}
+
+  export default Rooms;
