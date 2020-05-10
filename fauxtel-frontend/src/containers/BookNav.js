@@ -7,12 +7,9 @@ import { connect } from 'react-redux'
 import { Link, NavLink, Route, Switch } from 'react-router-dom'
 import BookNavHome from '../components/BookNavHome.js'
 import BookNow from '../components/BookNow.js'
-import BookRoomsData from '../components/BookRoomsData.js'
-//import Rooms from '../components/Rooms.js'
-import Reservations from '../components/Reservations.js'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
-import { bindActionCreators } from 'redux';
+
 
 class BookNav extends React.Component {
 
@@ -31,12 +28,7 @@ class BookNav extends React.Component {
                 <Route path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} >
                 </Route>
 
-                {/* <Route path="/rooms" render={(routerProps) => <Rooms {...routerProps} rooms={this.props.rooms}/>} >
-                </Route> */}
-{/* 
-                <Route path="/reservations" render={(routerProps) => <Reservations {...routerProps} reservations={this.props.reservations} rooms={this.props.rooms}/>} >
-                </Route> */}
-
+         
             </Switch>
       
            

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import UserNav from './containers/UserNav.js'
 import BookNav from './containers/BookNav.js'
 import { getCurrentUser } from './actions/currentUser.js'
-import Rooms from './components/Rooms.js'
+
 
 
 //function App() {
