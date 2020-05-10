@@ -6,6 +6,7 @@ import './booknow.css'
 import { connect } from 'react-redux'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
+import Rooms from './Rooms.js'
 
 
 class BookNow extends React.Component {
@@ -13,6 +14,7 @@ class BookNow extends React.Component {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.handleDayMouseEnter = this.handleDayMouseEnter.bind(this);
+    this.handleShowRooms = this.handleShowRooms.bind(this)
     this.handleResetClick = this.handleResetClick.bind(this);
     this.state = this.getInitialState();
   }
@@ -26,6 +28,7 @@ class BookNow extends React.Component {
       from: null,
       to: null,
       enteredTo: null, // Keep track of the last day for mouseEnter.
+      reservationBuild: [],
     };
   }
 
@@ -64,30 +67,31 @@ class BookNow extends React.Component {
     }
   }
 
-  handleShowRooms(from, to, reservations, rooms){
-
+  handleShowRooms(){
+    const { from, to } = this.state;
+    const reservations = this.props.reservations.reservations
+    const rooms = this.props.rooms.rooms
     let reservation_build = toDateRange(from, to)
     sessionStorage.setItem("reservation_build", reservation_build)
     let no_conflict_room_ids = determineAvailability(reservation_build, reservations)
     let match1 = matchAvailableRooms(no_conflict_room_ids, rooms)
     let match2 = roomsNoReservations(rooms)
-
-
-
-
-
-
-    
-  
+    let allMatches = match1.concat(match2)
+    this.setState({
+      reservationBuild: allMatches
+    })
   }
+
+ 
 
   handleResetClick() {
     this.setState(this.getInitialState());
   }
 
   render() {
-    const rooms = this.props.rooms.rooms
-    const reservations = this.props.reservations.reservations
+ 
+    //const rooms = this.props.rooms.rooms
+    //const reservations = this.props.reservations.reservations
     const today = new Date();
     const { from, to, enteredTo } = this.state;
     const modifiers = { start: from, end: enteredTo };
@@ -105,37 +109,44 @@ class BookNow extends React.Component {
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayMouseEnter}
         />
-        <div>
-          {!from && !to && 'Please select the first day.'}
-          {from && !to && 'Please select the last day.'}
-          {from &&
-            to &&
-            `Selected from ${from.toLocaleDateString()} to
-                ${to.toLocaleDateString()}`}{' '}
-          {from && to && (
-        
-        <button className="link" onClick={this.handleShowRooms(from, to, reservations, rooms)}>
-          Show Rooms
-        </button>
-      )}
-          {from && to && (
-        
-            <button className="link" onClick={this.handleResetClick}>
-              Reset
-            </button>
-          )}
-        </div>
-        <Helmet>
-          <style>{`
-  .Range .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-    background-color: #f0f8ff !important;
-    color: #4a90e2;
-  }
-  .Range .DayPicker-Day {
-    border-radius: 25 !important;
-  }
-`}</style>
-        </Helmet>
+            <div>
+                {!from && !to && 'Please select the first day.'}
+                {from && !to && 'Please select the last day.'}
+                {from && to && `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()}`}{' '}
+               
+                {from && to && (
+                    <button className="link" onClick={this.handleResetClick}>
+                                                    Reset
+                    </button>
+                )}
+
+                {from && to && (        //(from, to, reservations, rooms)
+                    <button className="link" onClick={this.handleShowRooms}> 
+                                Show Rooms
+                    </button>
+                )}
+            </div>
+            <Rooms availRooms={this.state.reservationBuild} />
+            <br></br>
+
+            <Helmet>
+              <style>
+                  {
+                    `.Range .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+                          background-color: #f0f8ff !important;
+                          color: #4a90e2;
+                      }
+                      .Range .DayPicker-Day {
+                          border-radius: 25 !important;
+                    }`
+                  }
+              </style>
+            </Helmet>
+            
+            
+            <br></br>
+           
+          
       </div>
     );
   }
