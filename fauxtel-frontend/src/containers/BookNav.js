@@ -49,7 +49,6 @@ class BookNav extends React.Component {
 
 
 const mapStateToProps = state => {
-    console.log(state)
     return {
      // rooms: state.rooms,
       reservations: state.reservations
