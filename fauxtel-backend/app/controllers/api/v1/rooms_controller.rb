@@ -13,6 +13,7 @@ class Api::V1::RoomsController < ApplicationController
 
   # GET /rooms/1
   def show
+    @room = Room.find_by(id: params[:id])
     render json: @room
   end
 
