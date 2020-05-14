@@ -5,51 +5,66 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, NavLink, Route, Switch } from 'react-router-dom'
-import BookNavHome from '../components/BookNavHome.js'
+import BookNavLinks from '../components/BookNavLinks.js'
 import BookNow from '../components/BookNow.js'
+import Reserve from '../components/Reserve.js'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
+import { getRoom } from '../actions/buildReservation.js'
 
 
 class BookNav extends React.Component {
 
     componentDidMount() {
+        this.props.getRoom()
         this.props.getRooms()
         this.props.getReservations()
     }       
 
     render(){
+        console.log(this.props)
 
+    if(this.props.buildReservation.length > 0){
+        const reserve = this.props.buildReservation
+     return (
+         <div>
+             <Reserve reserve={reserve} />
+         </div>
+     )       
+    } else {
     return (
+      
         <div className="BookNav">
            {/* will need some kind of logic to hide this once using it */}
            {/* some of this is temporary for viewing functions of these things */}
-           <Switch>
-                <Route path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} >
+           
+                <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} >
                 </Route>
-
+               
          
-            </Switch>
       
            
-            <BookNavHome />
+      
               
         </div>
     ) 
+    }
 }
-}
+ }
 
 
 const mapStateToProps = state => {
+    console.log(state)
     return {
-     // rooms: state.rooms,
+      buildReservation: state.buildReservation,
       reservations: state.reservations
     }
   }
   const mapDispatchToProps = dispatch => {
       return {
           getRooms: () => { dispatch(getRooms()) },
-          getReservations: () => { dispatch(getReservations()) }
+          getReservations: () => { dispatch(getReservations()) },
+          getRoom: () => { dispatch(getRoom())}
       }
   }
   
