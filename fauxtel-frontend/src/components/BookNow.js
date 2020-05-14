@@ -214,8 +214,8 @@ function roomsNoReservations(rooms){
       loc1.push(rooms[i])
     }
 
-    console.log(rooms[i].attributes.location_id)
-    console.log(rooms[i].attributes.reservations) //prob looking to filter where array.length is < 1
+    //console.log(rooms[i].attributes.location_id)
+    //console.log(rooms[i].attributes.reservations) //prob looking to filter where array.length is < 1
   }
 
   let room_available = []
