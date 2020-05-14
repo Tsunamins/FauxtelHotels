@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, Route } from 'react-router-dom'
+import Reserve from './Reserve.js'
+import {connect} from 'react-redux'
+import { getRoom } from '../actions/buildReservation.js'
+import '../styles/rooms.css' 
 
 
-const Rooms = (props) => {
-  console.log(props.availRooms)
+function Rooms(props) {
+  const [room, setRoom] = useState(null)
+
+  const handleSelect = event => {
+    setRoom(event.target.value)
+  }
+  
+  const handleSubmit = event => {
+    event.preventDefault()
+    props.getRoom(room)
+
+  }
+
   if(props.availRooms.length > 0){
       return(
         <div>
+          <form onSubmit={handleSubmit}>
              {props.availRooms.map(room =>
-                 <li key={room.id}>Room#: {room.attributes.room_number} Room-Type: {room.attributes.room_type} Room-Location: {room.attributes.location_id}</li>
+                   <> 
+                   <label key={room.id}>{room.attributes.room_type}
+                        <input type="radio" key={room.id} name="room" id="room" value={room.id} onClick={handleSelect}>
+                  
+                        </input> 
+                    </label>
+                   </>
+                
              )}
+             <input type="submit" value="Reserve this Room"></input>
+           
+           </form>
         </div>
       )
   } else {
@@ -18,4 +45,5 @@ const Rooms = (props) => {
   }
 }
 
-  export default Rooms;
+
+export default connect(null, {getRoom})(Rooms)
