@@ -7,16 +7,25 @@ import '../styles/rooms.css'
 
 
 function Rooms(props) {
+  
   const [room, setRoom] = useState(null)
 
   const handleSelect = event => {
+    console.log(event.target)
     setRoom(event.target.value)
+ 
+
+  }
+
+  const handleStyle = event => {
+    event.target.style.backgroundColor = '#466eb8';
+    event.target.style.color = 'white';
   }
   
   const handleSubmit = event => {
     event.preventDefault()
     props.getRoom(room)
-
+    
   }
 
   if(props.availRooms.length > 0){
@@ -25,9 +34,9 @@ function Rooms(props) {
           <form onSubmit={handleSubmit}>
              {props.availRooms.map(room =>
                    <> 
-                   <label key={room.id}>{room.attributes.room_type}
-                        <input type="radio" key={room.id} name="room" id="room" value={room.id} onClick={handleSelect}>
-                  
+                   <label className="each-room" key={room.id} onClick={handleStyle}>{room.attributes.room_type}<span className="checkSymbol"></span>
+                        <input type="radio" key={room.id} name="room" value={room.id} onClick={handleSelect}>
+                   
                         </input> 
                     </label>
                    </>
