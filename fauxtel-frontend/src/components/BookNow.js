@@ -194,8 +194,7 @@ function matchAvailableRooms(no_conflict_room_ids, rooms){
   for(let i = 0; i < no_conflict_room_ids.length; i++){
     
     for(let j = 0; j < no_conflict_room_ids.length; j++){
-      console.log(typeof no_conflict_room_ids[i])
-      console.log(typeof rooms[j].id)
+    
       if(no_conflict_room_ids[i] === rooms[j].id){
         room_available.push(rooms[i])
       }

@@ -14,7 +14,7 @@
 
   /* Hide the browser's default radio button */
 input[type="radio"]{
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
  /* Create a custom radio button */
@@ -34,34 +34,6 @@ label:hover {
     color: white;
   }
 
-
-
-  /* When the radio button is checked, add a blue background */
-  .container input:checked ~ .checkSymbol {
-    background-color: #2196F3;
-  }  
-
-  /* Create the indicator (the dot/circle - hidden when not checked) */
-.checkSymbol:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-
-  /* Show the indicator (dot/circle) when checked */
-.container input:checked ~ .checkSymbol:after {
-    display: block;
-  }
-
-/* Style the indicator (dot/circle) */
-.container .checkSymbol:after {
-    top: 9px;
-   left: 9px;
-   width: 8px;
-   height: 8px;
-   border-radius: 50%;
-   background: white;
-}
 
 
 
