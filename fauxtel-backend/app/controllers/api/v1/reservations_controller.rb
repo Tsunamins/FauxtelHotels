@@ -1,5 +1,5 @@
 class Api::V1::ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :update, :destroy]
+  #before_action :set_reservation, only: [:show, :update, :destroy]
 
   # GET /reservations
   def index
@@ -17,13 +17,18 @@ class Api::V1::ReservationsController < ApplicationController
 
   # POST /reservations
   def create
-    @reservation = Reservation.new(reservation_params)
-
-    if @reservation.save
-      render json: @reservation, status: :created, location: @reservation
-    else
-      render json: @reservation.errors, status: :unprocessable_entity
-    end
+ 
+    if current_user
+     
+      @reservation = current_user.reservations.build(reservation_params)
+     
+        if @reservation.save
+          render json: @reservation, status: :created, location: @reservation
+        else
+          render json: @reservation.errors, status: :unprocessable_entity
+        end
+     
+      end
   end
 
   # PATCH/PUT /reservations/1
