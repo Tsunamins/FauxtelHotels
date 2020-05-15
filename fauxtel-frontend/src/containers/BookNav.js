@@ -11,41 +11,36 @@ import Reserve from '../components/Reserve.js'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
 import { getRoom } from '../actions/buildReservation.js'
-
+import { getCurrentUser } from '../actions/currentUser.js'
 
 class BookNav extends React.Component {
 
     componentDidMount() {
         this.props.getRoom()
+        this.props.getCurrentUser()
         this.props.getRooms()
         this.props.getReservations()
     }       
 
     render(){
-        console.log(this.props)
+     
+       
 
-    if(this.props.buildReservation.length > 0){
+    if(this.props.buildReservation.room.length > 0){
         const reserve = this.props.buildReservation
+        const currentUser = this.props.currentUser
      return (
          <div>
+           
              <Reserve reserve={reserve} />
          </div>
      )       
     } else {
     return (
-      
         <div className="BookNav">
-           {/* will need some kind of logic to hide this once using it */}
-           {/* some of this is temporary for viewing functions of these things */}
-           
                 <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} >
                 </Route>
-               
-         
-      
-           
-      
-              
+                <BookNavLinks />
         </div>
     ) 
     }
@@ -54,17 +49,19 @@ class BookNav extends React.Component {
 
 
 const mapStateToProps = state => {
-    console.log(state)
+   
     return {
       buildReservation: state.buildReservation,
-      reservations: state.reservations
+      reservations: state.reservations,
+      currentUser: state.currentUser
     }
   }
   const mapDispatchToProps = dispatch => {
       return {
           getRooms: () => { dispatch(getRooms()) },
           getReservations: () => { dispatch(getReservations()) },
-          getRoom: () => { dispatch(getRoom())}
+          getRoom: () => { dispatch(getRoom())}, 
+          getCurrentUser: () => { dispatch(getCurrentUser())}
       }
   }
   
