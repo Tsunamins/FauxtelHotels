@@ -66,9 +66,6 @@ export const getCurrentUser = () => {
           if (response.error) {
             alert(response.error)
           } else {
-              console.log(response)
-              console.log(response.user.data)
-              console.log(response.jwt)
             dispatch(loginUser(response.user.data))
             
           }
