@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
 import Rooms from './Rooms.js'
+//import { setDates } from '../actions/buildReservation.js'
 
 
 class BookNow extends React.Component {
@@ -28,7 +29,10 @@ class BookNow extends React.Component {
       from: null,
       to: null,
       enteredTo: null, // Keep track of the last day for mouseEnter.
-      reservationBuild: [],
+      rooms: [],
+      
+   
+
     };
   }
 
@@ -71,15 +75,20 @@ class BookNow extends React.Component {
     const { from, to } = this.state;
     const reservations = this.props.reservations.reservations
     const rooms = this.props.rooms.rooms
-    let reservation_build = toDateRange(from, to)
-    sessionStorage.setItem("reservation_build", reservation_build)
-    let no_conflict_room_ids = determineAvailability(reservation_build, reservations)
+    let date_range = toDateRange(from, to)
+    sessionStorage.setItem("date_range", date_range)
+    sessionStorage.setItem("start_date", from)
+    sessionStorage.setItem("end_date", to)
+    let no_conflict_room_ids = determineAvailability(date_range, reservations)
     let match1 = matchAvailableRooms(no_conflict_room_ids, rooms)
     let match2 = roomsNoReservations(rooms)
     let allMatches = match1.concat(match2)
     this.setState({
-      reservationBuild: allMatches
+      rooms: allMatches,
+     
+
     })
+   
   }
 
  
@@ -126,7 +135,7 @@ class BookNow extends React.Component {
                     </button>
                 )}
             </div>
-            <Rooms availRooms={this.state.reservationBuild} />
+            <Rooms availRooms={this.state.rooms} />
             <br></br>
 
             <Helmet>
@@ -168,14 +177,14 @@ const toDateRange = function(start, end){
   return formatArray
 }
 
-function determineAvailability(reservation_build, reservations){
+function determineAvailability(date_range, reservations){
   let no_conflict = []
   let isolate_room_id = []
   for(let i = 0; i < reservations.length; i++){
       //so finds when there is date overlap - returns true - so "true" means room will not be available
       //returns false when there is no date overlap and the rooms would be available
       //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
-      let date_check = findDateOverlap(reservation_build, reservations[i].date_range)
+      let date_check = findDateOverlap(date_range, reservations[i].date_range)
       if (date_check === false){
         no_conflict.push(reservations[i])
         isolate_room_id.push(reservations[i].room_id.toString())
@@ -184,8 +193,8 @@ function determineAvailability(reservation_build, reservations){
   return isolate_room_id
 }
 
-function findDateOverlap(reservation_build, just_res_array) { 
-  return reservation_build.some(item => just_res_array.includes(item)) 
+function findDateOverlap(date_range, just_res_array) { 
+  return date_range.some(item => just_res_array.includes(item)) 
 } 
 
 function matchAvailableRooms(no_conflict_room_ids, rooms){
@@ -200,7 +209,7 @@ function matchAvailableRooms(no_conflict_room_ids, rooms){
       }
     }
   }
-  console.log(room_available)
+ 
   return room_available
 }
 
@@ -223,7 +232,7 @@ function roomsNoReservations(rooms){
       room_available.push(loc1[j])
     }
   }
-  console.log(room_available)
+ 
   return (room_available)
 }
 
@@ -235,7 +244,7 @@ function roomsNoReservations(rooms){
 
 const mapStateToProps = state => {
   return {
-    //reservations: state.reservations,
+    //dates: state.buildReservation.dates,
     rooms: state.rooms,
     
   }
@@ -244,6 +253,7 @@ const mapStateToProps = state => {
   const mapDispatchToProps = dispatch => {
       return {
         getRooms: () => { dispatch(getRooms()) },
+        //setDates: () => { dispatch(setDates()) }
       }
   }
 
