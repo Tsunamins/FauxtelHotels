@@ -24,3 +24,11 @@ export const buildReservation = room => {
           .catch(console.log)
         }
 }
+
+// export const setDates = dates => {
+//     console.log(dates)
+//     return {
+//       type: "SET_DATES",
+//       dates
+//     }
+//   }
