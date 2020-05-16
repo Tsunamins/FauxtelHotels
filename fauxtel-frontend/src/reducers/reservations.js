@@ -3,7 +3,8 @@ export default function reservations(state = {reservations: []}, action) {
       case 'GET_RESERVATIONS':  
         return {...state, reservations:  action.reservations}
       case 'ADD_RES':
-        return state.concat(action.res)     
+         
+        return {...state, reservations: [...state.reservations, action.res]}   
         
         default:
             return state
