@@ -270,5 +270,3 @@ short_range = (short_start..short_end).to_a
 # Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 15, location_id: 1)
 # Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 16, location_id: 1)
 
-Reservation.create(start_date: long_start, end_date: long_end, date_range: long_range, user_id: 1, room_id: 13, location_id: 1)
-Reservation.create(start_date: long_start, end_date: long_end, date_range: long_range, user_id: 1, room_id: 14, location_id: 1)

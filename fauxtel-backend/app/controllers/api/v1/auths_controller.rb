@@ -2,9 +2,9 @@ class Api::V1::AuthsController < ApplicationController
 
     #representing login
     def login
-        #binding.pry
+       
         @user = User.find_by(email: params[:email])
-
+        
         if @user && @user.authenticate(params[:password])
 
             token = encode_token({id: @user.id})
@@ -34,6 +34,7 @@ class Api::V1::AuthsController < ApplicationController
     #representing retrieving the current user
     def get_current_user
         if logged_in?
+          
             render json: {
                 user: UserSerializer.new(current_user)
             }, status: :ok
