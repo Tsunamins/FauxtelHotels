@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+
+    <h1>Your reservation is confirmed, <%= @user.first_name %></h1>
+    <p>
+      Your Reservation Details: From: <%= @reservation.start_date %>
+                                        <br>
+                                To:    <%= @reservation.end_date %>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= @url %>.
+    </p>
+    <p>Thanks for reserving and we will see you soon!</p>
+  </body>
+</html>

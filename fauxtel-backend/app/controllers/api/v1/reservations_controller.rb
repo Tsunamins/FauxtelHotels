@@ -20,7 +20,16 @@ class Api::V1::ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
 
     if @reservation.save
+       u_id = @reservation.user_id
+      
+       @user = User.find_by(id: u_id)
+      
+      
+       ReservationMailer.with(reservation: @reservation, user: @user).reservation_confirmation.deliver_now
+      
       render json: @reservation, status: :created, reservation: @reservation
+
+
     else
       render json: @reservation.errors, status: :unprocessable_entity
     end
