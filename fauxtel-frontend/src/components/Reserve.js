@@ -21,19 +21,25 @@ class Reserve extends React.Component {
     date_range: "",
     room_id: "",
     location_id: "",
+    user_id: ""
     }
   }
 
 handleDetails() {
  
   const room = this.props.reserve.room[0]
- console.log(sessionStorage)
+  const user = this.props.currentUser
+  console.log(user.id)
+  console.log(sessionStorage)
+
   this.setState({
     start_date: sessionStorage.start_date,
     end_date: sessionStorage.end_date,
     date_range: sessionStorage.date_range,
     room_id: room.id,
-    location_id: room.location_id
+    location_id: room.location_id,
+    user_id: user.id
+    
   })
  
 }
@@ -49,6 +55,7 @@ handleSubmit = event => {
         date_range: "",
         room_id: "",
         location_id: "",
+        user_id: ""
         
   })
 }

@@ -17,18 +17,25 @@ class Api::V1::ReservationsController < ApplicationController
 
   # POST /reservations
   def create
- 
-    if current_user
+    @reservation = Reservation.new(reservation_params)
+
+    if @reservation.save
+      render json: @reservation, status: :created, reservation: @reservation
+    else
+      render json: @reservation.errors, status: :unprocessable_entity
+    end
+    # binding.pry
+    # if logged_in?
      
-      @reservation = current_user.reservations.build(reservation_params)
+    #   @reservation = current_user.reservations.build(reservation_params)
      
-        if @reservation.save
-          render json: @reservation, status: :created, location: @reservation
-        else
-          render json: @reservation.errors, status: :unprocessable_entity
-        end
+    #     if @reservation.save
+    #       render json: @reservation, status: :created, location: @reservation
+    #     else
+    #       render json: @reservation.errors, status: :unprocessable_entity
+    #     end
      
-      end
+    #   end
   end
 
   # PATCH/PUT /reservations/1
