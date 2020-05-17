@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import {connect} from 'react-redux'
 import { createReservation } from '../actions/reservations.js'
+//import { startOver } from '../actions/buildReservation.js'
 import currentUser from '../reducers/currentUser.js';
 import { getCurrentUser } from '../actions/currentUser.js'
 
@@ -11,6 +12,7 @@ class Reserve extends React.Component {
     super(props);
     
     this.handleDetails = this.handleDetails.bind(this);
+    //this.resetRes = this.resetRes(this);
     this.state = this.getInitialState();
   }
 
@@ -28,9 +30,8 @@ class Reserve extends React.Component {
 handleDetails() {
  
   const room = this.props.reserve.room[0]
+  console.log(room)
   const user = this.props.currentUser
-  console.log(user.id)
-  console.log(sessionStorage)
 
   this.setState({
     start_date: sessionStorage.start_date,
@@ -39,16 +40,23 @@ handleDetails() {
     room_id: room.id,
     location_id: room.location_id,
     user_id: user.id
-    
   })
- 
 }
+
+// resetRes(){
+//   sessionStorage.clear();
+//  // startOver();
+
+// }
+
+
  
   
 handleSubmit = event => {
   event.preventDefault()
   console.log(this.state)
   this.props.createReservation(this.state)
+ 
   this.setState({
         start_date: "",
         end_date: "",
@@ -77,6 +85,7 @@ handleSubmit = event => {
           <p>From: {sessionStorage.getItem('start_date')}  To: {sessionStorage.getItem('end_date')} </p>
           <p>Email Confirmation: {currentUser.attributes.email}</p>
           <button onClick={this.handleDetails}>Confirm Details</button>
+          {/* <button onClick={this.resetRes}>Start Over</button> */}
           <form onClick={this.handleSubmit} >
          
 

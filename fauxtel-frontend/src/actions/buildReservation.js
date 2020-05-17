@@ -6,6 +6,12 @@ export const buildReservation = room => {
     }
   }
 
+// export const startOver = data => {
+//   return {
+//     type: "START_OVER"
+//   }
+// }
+
   export const getRoom = (room_id) => {
       
     //return dispatch (built in) as an argument, a thunk function 
@@ -17,7 +23,7 @@ export const buildReservation = room => {
           if(response.error){
               alert(response.error)
           } else {
-            //console.log(response)
+            console.log(response)
             dispatch(buildReservation(response))
           }
           })
