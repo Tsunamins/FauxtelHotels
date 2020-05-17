@@ -1,14 +1,43 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-
-const UserNavLinks = () => (
+const UserNavLinks = ({currentUser, loggedIn}) => (
   <div>
-    <span>
-      <Link to="/signup">Sign Up</Link> or <Link to="/login">Log In</Link>
-    </span>
+  
+     
+     { loggedIn ? 
+                   
+                   <>
+                          <Link to="/view-reservations">View My Reservations</Link>
+                   
+                          </> 
+                : 
+                <>
+                      <Link to="/signup">Sign Up</Link> <br></br>
+                      
+                      <Link to="/login">Log In</Link>
+               </> 
+              
+
+                 }
+           
+               
   </div>
+
+
+
 
 );
 
-export default UserNavLinks;
+const mapStateToProps = ({currentUser}) => {
+    
+  return ({
+      currentUser,
+    
+    loggedIn: !!currentUser
+   
+  })
+}
+//{getUserReservations}
+export default connect(mapStateToProps)(UserNavLinks);
