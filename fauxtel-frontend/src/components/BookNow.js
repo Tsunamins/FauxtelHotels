@@ -81,34 +81,25 @@ class BookNow extends React.Component {
     sessionStorage.setItem("start_date", from)
     sessionStorage.setItem("end_date", to)
 
-    //new
     let no_conflict_found = determineConflicts(date_range, reservations, false)
     let conflict_found = determineConflicts(date_range, reservations, true)
     console.log(no_conflict_found)
     console.log(conflict_found)
-
-    let matches = compareArrays(no_conflict_found, conflict_found)
-    console.log(matches)
     const intersection = conflict_found.filter(element => no_conflict_found.includes(element));
     console.log(intersection)
-
-    //from what "can" be booked in no_conflict_found - line 87
-    //I must subtract from the array what "cannot" be booked found in intersection line 93
+    let actual_available_rooms = removeUnavailable(no_conflict_found, intersection)
+    let matches1 = matchAvailaleRoomIds(actual_available_rooms, rooms)
+    let matches2 = roomsNoReservations(rooms)
+    let allMatches = matches1.concat(matches2)
+    //how above was thought out:
+    //from what "can" be booked, in theory in no_conflict_found - line 87
+    //I must subtract from no_conflict_found what "cannot" be booked found in the intersection array line 93
     //so I need a function or other technique = to remove elements in no_conflict_found that match with intersection
 
-
-
-   
-    let allMatches = []
     this.setState({
       rooms: allMatches,
-     
-
     })
-   
   }
-
- 
 
   handleResetClick() {
     this.setState(this.getInitialState());
@@ -178,7 +169,7 @@ class BookNow extends React.Component {
     );
   }
 }
-//keep
+
 const toDateRange = function(start, end){
   let rangeArray = new Array()
   let formatArray = []
@@ -194,10 +185,8 @@ const toDateRange = function(start, end){
   return formatArray
 }
 
-
 function determineConflicts(date_range, reservations, condition){
   let array = []
- 
   for(let i = 0; i < reservations.length; i++){
       //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
       let date_check = findDateOverlap(date_range, reservations[i].date_range)
@@ -205,130 +194,58 @@ function determineConflicts(date_range, reservations, condition){
         array.push(reservations[i].room_id.toString())
   }
 }
-
   let setArray  = [...new Set(array)].sort((a, b) => {return a - b})  
-  
- 
   return setArray
 }
 
-function compareArrays(no_conflict, conflict){
-     let room_conflict = []
-     let no_room_conflict = []
-
-      for (let i = 0; i < no_conflict.length; i++){
-        for (let j = 0; j < conflict.length; j++){
-            if (no_conflict[i] === conflict[j]){
-             room_conflict.push(no_conflict[i])
-             
-        } else{
-          no_room_conflict.push(no_conflict[i])
-        }
-      }
-    }
-    return no_room_conflict;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function noConflictRoomIds(date_range, reservations){
-  let no_conflict = []
-
-  let conflict = []
-  
-  for(let i = 0; i < reservations.length; i++){
-      //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
-      let date_check = findDateOverlap(date_range, reservations[i].date_range)
-      if (date_check === false){
-        
-       
-        no_conflict.push(reservations[i].room_id.toString())
-      } else {
-        conflict.push(reservations[i].room_id.toString())
+function removeUnavailable(no_conflict_array, intersection_array){
+  for(let i = 0; i < intersection_array.length; i++){
+      let index = no_conflict_array.indexOf(intersection_array[i])
+      if(index > -1){
+        no_conflict_array.splice(index, 1)
       }
   }
-  
-  let combineArr = no_conflict.concat(conflict)
-  let findUnique = [...new Set(combineArr)]
-  console.log(findUnique)
-
-
-  
-
-  
-  return findUnique
- 
+  console.log(no_conflict_array)
+  return no_conflict_array
 }
 
 function findDateOverlap(date_range, just_res_array) { 
   return date_range.some(item => just_res_array.includes(item)) 
 } 
 
-function matchResToRoom(no_conflict_res, rooms){
-
+function matchAvailaleRoomIds(actual_available_rooms, rooms){
   //match reservation room_id's with room.id of all rooms
   let room_available = []
-  for(let i = 0; i < no_conflict_res.length; i++){
-      console.log(no_conflict_res[i])
+  for(let i = 0; i < actual_available_rooms.length; i++){
+      console.log(actual_available_rooms[i])
       console.log(rooms[i].id)
-     for(let j = 0; j < no_conflict_res.length; j++){
+     for(let j = 0; j < actual_available_rooms.length; j++){
     
-      if(no_conflict_res[i] === rooms[j].id){
+      if(actual_available_rooms[i] === rooms[j].id){
     
         room_available.push(rooms[i])
        }
     }
   }
-
   return room_available
 }
 
 function roomsNoReservations(rooms){
-
   //using extra loop to filter out location 1 for now, would modify if adding more locations to expand app later, or even add additional param to specify location
   let loc1 = []
   for(let i = 0; i < rooms.length; i++){
     if(rooms[i].attributes.location_id === 1){
       loc1.push(rooms[i])
     }
-
-    //console.log(rooms[i].attributes.location_id)
-    //console.log(rooms[i].attributes.reservations) //prob looking to filter where array.length is < 1
   }
-
   let room_available = []
   for(let j = 0; j < loc1.length; j++){
     if(loc1[j].attributes.reservations.length < 1){
-    
       room_available.push(loc1[j])
     }
   }
- 
   return room_available
 }
-
-
-
-
-
 
 
 const mapStateToProps = state => {
