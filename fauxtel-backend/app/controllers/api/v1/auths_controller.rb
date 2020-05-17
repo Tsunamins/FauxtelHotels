@@ -1,15 +1,10 @@
 class Api::V1::AuthsController < ApplicationController
-
-    #representing login
     def login
-       
         @user = User.find_by(email: params[:email])
-        
         if @user && @user.authenticate(params[:password])
 
             token = encode_token({id: @user.id})
-
-           
+             
             resp = {
                 user: UserSerializer.new(@user),
                 jwt: token

@@ -3,11 +3,19 @@ class Api::V1::ReservationsController < ApplicationController
 
   # GET /reservations
   def index
-    @reservations = Reservation.all
 
+    @reservations = Reservation.all 
     render json: @reservations
-    # resos_json = RoomSerializer.new(@reservations)
-    # render json: resos_json
+
+    # if logged_in?
+    #   @reservations = current_user.reservations
+
+    #   render json: @reservations, status: : ok
+    # else
+    #   render json: {
+    #     error: "not logged in", status: :unauthorized
+    #   }
+   
   end
 
   # GET /reservations/1
