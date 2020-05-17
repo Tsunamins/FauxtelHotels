@@ -71,6 +71,7 @@ class BookNow extends React.Component {
     }
   }
 
+  //remember only showing location 1 for now
   handleShowRooms(){
     const { from, to } = this.state;
     const reservations = this.props.reservations.reservations
@@ -79,10 +80,26 @@ class BookNow extends React.Component {
     sessionStorage.setItem("date_range", date_range)
     sessionStorage.setItem("start_date", from)
     sessionStorage.setItem("end_date", to)
-    let no_conflict_room_ids = determineAvailability(date_range, reservations)
-    let match1 = matchAvailableRooms(no_conflict_room_ids, rooms)
-    let match2 = roomsNoReservations(rooms)
-    let allMatches = match1.concat(match2)
+
+    //new
+    let no_conflict_found = determineConflicts(date_range, reservations, false)
+    let conflict_found = determineConflicts(date_range, reservations, true)
+    console.log(no_conflict_found)
+    console.log(conflict_found)
+
+    let matches = compareArrays(no_conflict_found, conflict_found)
+    console.log(matches)
+    const intersection = conflict_found.filter(element => no_conflict_found.includes(element));
+    console.log(intersection)
+
+    //from what "can" be booked in no_conflict_found - line 87
+    //I must subtract from the array what "cannot" be booked found in intersection line 93
+    //so I need a function or other technique = to remove elements in no_conflict_found that match with intersection
+
+
+
+   
+    let allMatches = []
     this.setState({
       rooms: allMatches,
      
@@ -135,6 +152,7 @@ class BookNow extends React.Component {
                     </button>
                 )}
             </div>
+           
             <Rooms availRooms={this.state.rooms} />
             <br></br>
 
@@ -160,12 +178,11 @@ class BookNow extends React.Component {
     );
   }
 }
-
+//keep
 const toDateRange = function(start, end){
   let rangeArray = new Array()
   let formatArray = []
-  
-  //example if need to make a new date dt = new Date(start), make the start and end dates based on customer input, perhaps
+    //example if need to make a new date dt = new Date(start), make the start and end dates based on customer input, perhaps
   let dateBase = new Date(start)
   while (dateBase <= end){
       rangeArray.push(new Date (dateBase))
@@ -177,39 +194,110 @@ const toDateRange = function(start, end){
   return formatArray
 }
 
-function determineAvailability(date_range, reservations){
-  let no_conflict = []
-  let isolate_room_id = []
+
+function determineConflicts(date_range, reservations, condition){
+  let array = []
+ 
   for(let i = 0; i < reservations.length; i++){
-      //so finds when there is date overlap - returns true - so "true" means room will not be available
-      //returns false when there is no date overlap and the rooms would be available
+      //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
+      let date_check = findDateOverlap(date_range, reservations[i].date_range)
+      if (date_check === condition){ //if the findDateOverlap function found no overlap
+        array.push(reservations[i].room_id.toString())
+  }
+}
+
+  let setArray  = [...new Set(array)].sort((a, b) => {return a - b})  
+  
+ 
+  return setArray
+}
+
+function compareArrays(no_conflict, conflict){
+     let room_conflict = []
+     let no_room_conflict = []
+
+      for (let i = 0; i < no_conflict.length; i++){
+        for (let j = 0; j < conflict.length; j++){
+            if (no_conflict[i] === conflict[j]){
+             room_conflict.push(no_conflict[i])
+             
+        } else{
+          no_room_conflict.push(no_conflict[i])
+        }
+      }
+    }
+    return no_room_conflict;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function noConflictRoomIds(date_range, reservations){
+  let no_conflict = []
+
+  let conflict = []
+  
+  for(let i = 0; i < reservations.length; i++){
       //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
       let date_check = findDateOverlap(date_range, reservations[i].date_range)
       if (date_check === false){
-        no_conflict.push(reservations[i])
-        isolate_room_id.push(reservations[i].room_id.toString())
+        
+       
+        no_conflict.push(reservations[i].room_id.toString())
+      } else {
+        conflict.push(reservations[i].room_id.toString())
       }
   }
-  return isolate_room_id
+  
+  let combineArr = no_conflict.concat(conflict)
+  let findUnique = [...new Set(combineArr)]
+  console.log(findUnique)
+
+
+  
+
+  
+  return findUnique
+ 
 }
 
 function findDateOverlap(date_range, just_res_array) { 
   return date_range.some(item => just_res_array.includes(item)) 
 } 
 
-function matchAvailableRooms(no_conflict_room_ids, rooms){
+function matchResToRoom(no_conflict_res, rooms){
+
   //match reservation room_id's with room.id of all rooms
   let room_available = []
-  for(let i = 0; i < no_conflict_room_ids.length; i++){
+  for(let i = 0; i < no_conflict_res.length; i++){
+      console.log(no_conflict_res[i])
+      console.log(rooms[i].id)
+     for(let j = 0; j < no_conflict_res.length; j++){
     
-    for(let j = 0; j < no_conflict_room_ids.length; j++){
+      if(no_conflict_res[i] === rooms[j].id){
     
-      if(no_conflict_room_ids[i] === rooms[j].id){
         room_available.push(rooms[i])
-      }
+       }
     }
   }
- 
+
   return room_available
 }
 
@@ -229,11 +317,12 @@ function roomsNoReservations(rooms){
   let room_available = []
   for(let j = 0; j < loc1.length; j++){
     if(loc1[j].attributes.reservations.length < 1){
+    
       room_available.push(loc1[j])
     }
   }
  
-  return (room_available)
+  return room_available
 }
 
 
