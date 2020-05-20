@@ -5,7 +5,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, NavLink, Route, Switch } from 'react-router-dom'
-import BookNavLinks from '../components/BookNavLinks.js'
+import BookNavLinks from '../links/BookNavLinks.js'
 import BookNow from '../components/BookNow.js'
 import Reserve from '../components/Reserve.js'
 import { getRooms } from '../actions/getRooms.js'
@@ -23,7 +23,7 @@ class BookNav extends React.Component {
     }       
 
     render(){
-     
+     console.log(this.props)
      
     if(this.props.buildReservation.room.length > 0){
         const reserve = this.props.buildReservation

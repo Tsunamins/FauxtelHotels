@@ -38,6 +38,58 @@ export const getRoom = (room_id) => {
         }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const getUserReservations = (user_id) => {
   return dispatch => {
   const token = localStorage.getItem("token")
@@ -59,3 +111,5 @@ export const getUserReservations = (user_id) => {
       .catch(console.log)
 }
 }
+
+
