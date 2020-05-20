@@ -52,7 +52,7 @@ class UserNav extends React.Component {
             }/>
             <Route exact path='/modify-reservation/:id/edit' render={props => {
             
-            const res = userReservations.find(element => element.id.toString() === props.match.params.id)
+            const res = allReservations.find(element => element.id.toString() === props.match.params.id)
          
                 return <ModifyResv res={res} {...props}/>
               }
