@@ -21,11 +21,16 @@ class UserNav extends React.Component {
     }
   
     render(){
-      console.log(this.props)
+      console.log(this.props.reservations.reservations)
       const { loggedIn, currentUser} = this.props
+
+      //current serializer can either get all reservations.rooms passed to next component
+     
+       const allReservations = this.props.reservations.reservations
   
 
       const userReservations = loggedIn ? currentUser.attributes.reservations : []
+
       console.log(userReservations[0])
    
       return (
@@ -38,7 +43,7 @@ class UserNav extends React.Component {
             <Route exact path='/view-reservations' component={UserResv}/>
             <Route exact path='/view-reservations/:id' render={props => {
               
-                const res = userReservations.find(element => element.id.toString() === props.match.params.id)
+                const res = allReservations.find(element => element.id.toString() === props.match.params.id)
                 // userReservations.find(res => console.log(typeof res.id))
                 // console.log(typeof props.match.params.id)
                 console.log(res)
@@ -64,6 +69,7 @@ class UserNav extends React.Component {
   const mapStateToProps = state => {
    
     return ({
+        reservations: state.reservations,
         currentUser: state.currentUser,
       loggedIn: !!state.currentUser,
       //userReservations: state.currentUser.attributes.reservations
