@@ -32,12 +32,8 @@ const UserResv = (props) => {
     console.log(state)
     return ({
         currentUser: state.currentUser,
-      
-      loggedIn: !!state.currentUser,
-      //userReservations: state.currentUser.attributes.reservations
-     
+        loggedIn: !!state.currentUser,
+
     })
   }
-
- // export default UserResv
  export default connect(mapStateToProps)(UserResv)
