@@ -13,7 +13,17 @@ class Api::V1::UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find_by(id: params[:id]) 
+   
     #render json: @user
+    # options = {}
+    # options[:meta] = { total: 3}
+    # options[:links] = {
+    #   self: '...',
+    #   next: '...',
+    #   prev: '...'
+    # }
+    # options[:include] = [:]
+   
     user_json = UserSerializer.new(@user).serialized_json
     render json: user_json
   end

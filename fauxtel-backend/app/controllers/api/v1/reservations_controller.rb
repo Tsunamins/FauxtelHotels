@@ -5,8 +5,10 @@ class Api::V1::ReservationsController < ApplicationController
   def index
 
     @reservations = Reservation.all 
-    render json: @reservations
+    #render json: @reservations
 
+    res_json = ReservationSerializer.new(@reservations).serialized_json
+    render json: res_json
     # if logged_in?
     #   @reservations = current_user.reservations
 
@@ -20,7 +22,10 @@ class Api::V1::ReservationsController < ApplicationController
 
   # GET /reservations/1
   def show
-    render json: @reservation
+    @reservation = Reservation.find_by(id: params[:id]) 
+    #render json: @user
+    res_json = ReservationSerializer.new(@reservation).serialized_json
+    render json: res_json
   end
 
   # POST /reservations
