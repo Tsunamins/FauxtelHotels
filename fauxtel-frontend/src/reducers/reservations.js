@@ -8,6 +8,8 @@ export default function reservations(state = {reservations: []}, action) {
         return {...state, reservations: [...state.reservations, action.res]}
       case 'DELETE_RES':
         return  state.reservations.filter(res => res.id === action.res ? false : true)
+      case 'UPDATE_RES':
+        return state.reservations.map(res => res.id === action.res.id ? action.res : res)
         
         default:
             return state
