@@ -1,5 +1,5 @@
 class Api::V1::ReservationsController < ApplicationController
-  #before_action :set_reservation, only: [:show, :update, :destroy]
+  before_action :set_reservation, only: [:show, :update, :destroy]
 
   # GET /reservations
   def index
@@ -66,13 +66,23 @@ class Api::V1::ReservationsController < ApplicationController
 
   # DELETE /reservations/1
   def destroy
-    @reservation.destroy
+    #change later if using based on no login, but a reservation code generator, change based on incoming params, i.e. am_wine_reviewer/index
+     @user = current_user
+    
+     if @user.id != @reservation.user_id
+      render json: {
+        error: "not logged in", status: :unauthorized
+      }
+     else
+      @reservation.destroy
+      render json: { data: "Reservation cancelled" }, status: :ok
+     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
-      @reservation = Reservation.find(params[:id])
+      @reservation = Reservation.find_by(id: params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
