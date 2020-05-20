@@ -35,10 +35,10 @@ import { getRoom } from '../actions/buildReservation.js'
     
      res ?
       <div>
-        <h3>Location: {res.location_id}</h3>
-        <p>Room ID, later to be room type: {res.room_id}</p>
-        <p>From: {res.start_date}</p>
-        <p>To: {res.end_date}</p>
+        <h3>Location: {res.attributes.location.name}</h3>
+        <p>Room Type: {res.attributes.room.room_type}</p>
+        <p>From: {res.attributes.start_date}</p>
+        <p>To: {res.attributes.end_date}</p>
         <Link to={`/modify-reservation/${res.id}/edit`}>Modify Reservation</Link>
         <br></br>
         <br></br>
@@ -53,6 +53,7 @@ const mapStateToProps = state => {
   console.log(state)
   return {
     rooms: state.rooms,
+    reservations: state.reservations
   
   }
 }
