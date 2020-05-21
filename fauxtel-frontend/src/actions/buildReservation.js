@@ -6,7 +6,16 @@ export const buildReservation = room => {
     }
   }
 
+export const modifyReservation = resv => {
+
+  return {
+    type: "SET_MODIFY_RESV",
+    resv
+  }
+}
+
 export const setUserReservations = resv => {
+
     return {
       type: "SET_USER_RESERVATIONS",
       resv
@@ -20,6 +29,7 @@ export const setUserReservations = resv => {
 // }
 
 export const getRoom = (room_id) => {
+  
       
     //return dispatch (built in) as an argument, a thunk function 
     return dispatch => {
@@ -36,6 +46,25 @@ export const getRoom = (room_id) => {
           })
           .catch(console.log)
         }
+}
+
+export const getResv = (res_id) => {
+      console.log(res_id)
+  //return dispatch (built in) as an argument, a thunk function 
+  return dispatch => {
+
+   return fetch(`http://localhost:3000/api/v1/reservations/${res_id}`)
+    .then(resp => resp.json())
+    .then(response => {
+        if(response.error){
+            alert(response.error)
+        } else {
+          console.log(response)
+          dispatch(modifyReservation(response.data))
+        }
+        })
+        .catch(console.log)
+      }
 }
 
 
