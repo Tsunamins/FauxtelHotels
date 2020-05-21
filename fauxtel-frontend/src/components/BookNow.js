@@ -22,6 +22,8 @@ class BookNow extends React.Component {
 
   componentDidMount(){
     this.props.getRooms()
+    this.props.getReservations()
+    
   }
 
   getInitialState() {
@@ -73,8 +75,10 @@ class BookNow extends React.Component {
 
   //remember only showing location 1 for now
   handleShowRooms(){
+  
     const { from, to } = this.state;
-    const reservations = this.props.reservations.reservations
+    const reservations = this.props.reservations
+  
     const rooms = this.props.rooms.rooms
     let date_range = toDateRange(from, to)
     sessionStorage.setItem("date_range", date_range)
@@ -83,18 +87,18 @@ class BookNow extends React.Component {
 
     let no_conflict_found = determineConflicts(date_range, reservations, false)
     let conflict_found = determineConflicts(date_range, reservations, true)
-    console.log(no_conflict_found)
-    console.log(conflict_found)
+
     const intersection = conflict_found.filter(element => no_conflict_found.includes(element));
-    console.log(intersection)
+   
     let actual_available_rooms = removeUnavailable(no_conflict_found, intersection)
     let matches1 = matchAvailaleRoomIds(actual_available_rooms, rooms)
     let matches2 = roomsNoReservations(rooms)
     let allMatches = matches1.concat(matches2)
+
     //how above was thought out:
     //from what "can" be booked, in theory in no_conflict_found - line 87
     //I must subtract from no_conflict_found what "cannot" be booked found in the intersection array line 93
-    //so I need a function or other technique = to remove elements in no_conflict_found that match with intersection
+ 
 
     this.setState({
       rooms: allMatches,
@@ -107,8 +111,6 @@ class BookNow extends React.Component {
 
   render() {
  
-    //const rooms = this.props.rooms.rooms
-    //const reservations = this.props.reservations.reservations
     const today = new Date();
     const { from, to, enteredTo } = this.state;
     const modifiers = { start: from, end: enteredTo };
@@ -189,9 +191,10 @@ function determineConflicts(date_range, reservations, condition){
   let array = []
   for(let i = 0; i < reservations.length; i++){
       //also remember at this time, only location 1 has reservations, so if, later, incorporating room avail, will have to re-filter locations where appl
-      let date_check = findDateOverlap(date_range, reservations[i].date_range)
+      
+      let date_check = findDateOverlap(date_range, reservations[i].attributes.date_range)
       if (date_check === condition){ //if the findDateOverlap function found no overlap
-        array.push(reservations[i].room_id.toString())
+        array.push(reservations[i].attributes.room_id.toString())
   }
 }
   let setArray  = [...new Set(array)].sort((a, b) => {return a - b})  
@@ -205,7 +208,7 @@ function removeUnavailable(no_conflict_array, intersection_array){
         no_conflict_array.splice(index, 1)
       }
   }
-  console.log(no_conflict_array)
+  
   return no_conflict_array
 }
 
@@ -217,8 +220,7 @@ function matchAvailaleRoomIds(actual_available_rooms, rooms){
   //match reservation room_id's with room.id of all rooms
   let room_available = []
   for(let i = 0; i < actual_available_rooms.length; i++){
-      console.log(actual_available_rooms[i])
-      console.log(rooms[i].id)
+     
      for(let j = 0; j < actual_available_rooms.length; j++){
     
       if(actual_available_rooms[i] === rooms[j].id){
@@ -259,12 +261,12 @@ const mapStateToProps = state => {
   const mapDispatchToProps = dispatch => {
       return {
         getRooms: () => { dispatch(getRooms()) },
-        //setDates: () => { dispatch(setDates()) }
+        getReservations: () => { dispatch(getReservations()) }
       }
   }
 
 
-//export default BookNow
+
         
 export default connect(mapStateToProps, mapDispatchToProps)(BookNow)
 
