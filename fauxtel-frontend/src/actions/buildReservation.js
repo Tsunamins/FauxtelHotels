@@ -22,11 +22,12 @@ export const setUserReservations = resv => {
     }
 }
 
-// export const startOver = data => {
-//   return {
-//     type: "START_OVER"
-//   }
-// }
+export const clearBuild = () => {
+  return {
+    type: "CLEAR_ROOM"
+    }
+}
+
 
 export const getRoom = (room_id) => {
   
@@ -40,7 +41,7 @@ export const getRoom = (room_id) => {
           if(response.error){
               alert(response.error)
           } else {
-            console.log(response)
+          
             dispatch(buildReservation(response))
           }
           })
@@ -49,7 +50,7 @@ export const getRoom = (room_id) => {
 }
 
 export const getResv = (res_id) => {
-      console.log(res_id)
+  
   //return dispatch (built in) as an argument, a thunk function 
   return dispatch => {
 
@@ -59,13 +60,17 @@ export const getResv = (res_id) => {
         if(response.error){
             alert(response.error)
         } else {
-          console.log(response)
+         
           dispatch(modifyReservation(response.data))
         }
         })
         .catch(console.log)
       }
 }
+
+
+
+
 
 
 
