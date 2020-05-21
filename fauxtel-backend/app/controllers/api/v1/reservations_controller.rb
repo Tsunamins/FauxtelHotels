@@ -63,10 +63,16 @@ class Api::V1::ReservationsController < ApplicationController
 
   # PATCH/PUT /reservations/1
   def update
-    if @reservation.update(reservation_params)
-      render json: @reservation
+    @user = current_user
+    if @user.id == @reservation.user_id
+      
+      if @reservation.update(reservation_params)
+        render json:  ReservationSerializer.new(@reservation), status: :ok
+      end
     else
-      render json: @reservation.errors, status: :unprocessable_entity
+       render json: {
+          error: "not logged in", status: :unauthorized
+        }
     end
   end
 
