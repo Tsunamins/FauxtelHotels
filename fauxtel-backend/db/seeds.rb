@@ -270,3 +270,18 @@ short_range = (short_start..short_end).to_a
 # Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 15, location_id: 1)
 # Reservation.create(start_date: short_start, end_date: short_end, date_range: short_range, user_id: 1, room_id: 16, location_id: 1)
 
+prev_long_start = DateTime.new(2019,5,28)
+prev_long_end = DateTime.new(2019,5,31)
+prev_long_range = (prev_long_start..prev_long_end).to_a
+
+
+prev_short_start = DateTime.new(2019,5,29)
+prev_short_end = DateTime.new(2019,5,30)
+prev_short_range = (prev_short_start..prev_short_end).to_a
+
+
+Reservation.create(start_date: prev_long_start, end_date: prev_long_end, date_range: prev_long_range, user_id: 1, room_id: 13, location_id: 1)
+
+Reservation.create(start_date: prev_long_start, end_date: prev_long_end, date_range: prev_long_range, user_id: 1, room_id: 14, location_id: 1)
+
+
