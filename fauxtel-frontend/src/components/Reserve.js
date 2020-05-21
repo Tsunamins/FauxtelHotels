@@ -2,33 +2,26 @@ import React, { useState } from 'react';
 
 import {connect} from 'react-redux'
 import { createReservation } from '../actions/reservations.js'
+import {modifyReservation} from '../actions/reservations.js'
 //import { startOver } from '../actions/buildReservation.js'
 import currentUser from '../reducers/currentUser.js';
 import { getCurrentUser } from '../actions/currentUser.js'
 
 
 class Reserve extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.handleDetails = this.handleDetails.bind(this);
-    //this.resetRes = this.resetRes(this);
-    this.state = this.getInitialState();
-  }
+ 
 
-  getInitialState() {
-    return {    
-    start_date: "",
+  state = {
+      start_date: "",
     end_date: "",
     date_range: "",
     room_id: "",
     location_id: "",
     user_id: ""
-    }
   }
 
-handleDetails() {
- 
+handleDetails = () => {
+ console.log(this.props)
   const room = this.props.reserve.room[0]
   console.log(room)
   const user = this.props.currentUser
@@ -43,18 +36,12 @@ handleDetails() {
   })
 }
 
-// resetRes(){
-//   sessionStorage.clear();
-//  // startOver();
-
-// }
-
 
  
   
 handleSubmit = event => {
   event.preventDefault()
-  console.log(this.state)
+
   this.props.createReservation(this.state)
  
   this.setState({
@@ -73,6 +60,7 @@ handleSubmit = event => {
   render () {
   //if(currentUser !== null){
     console.log(this.props)
+    console.log(this.state)
     const currentUser = this.props.currentUser
     const room = this.props.reserve.room[0]
     if(this.props.loggedIn){
@@ -117,4 +105,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {createReservation})(Reserve)
-  
