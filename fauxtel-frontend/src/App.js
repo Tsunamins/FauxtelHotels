@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import UserNav from './containers/UserNav.js'
 import BookNav from './containers/BookNav.js'
 import { getCurrentUser } from './actions/currentUser.js'
+import HomeView from './containers/HomeView';
 
 
 
@@ -25,6 +26,10 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <p className="App-link"><UserNav /></p>  
         </header>
+
+        <div>
+          <HomeView />
+        </div>
 
         <div>
           <BookNav />
