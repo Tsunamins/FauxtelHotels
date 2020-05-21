@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import {connect} from 'react-redux'
 import { createReservation } from '../actions/reservations.js'
 import {modifyReservation} from '../actions/reservations.js'
-//import { startOver } from '../actions/buildReservation.js'
+
+import {clearBuild} from '../actions/buildReservation.js'
 import currentUser from '../reducers/currentUser.js';
 import { getCurrentUser } from '../actions/currentUser.js'
 
@@ -12,7 +13,7 @@ class Reserve extends React.Component {
  
 
   state = {
-      start_date: "",
+    start_date: "",
     end_date: "",
     date_range: "",
     room_id: "",
@@ -21,10 +22,11 @@ class Reserve extends React.Component {
   }
 
 handleDetails = () => {
- console.log(this.props)
+ 
   const room = this.props.reserve.room[0]
-  console.log(room)
+
   const user = this.props.currentUser
+ 
 
   this.setState({
     start_date: sessionStorage.start_date,
@@ -32,7 +34,8 @@ handleDetails = () => {
     date_range: sessionStorage.date_range,
     room_id: room.id,
     location_id: room.location_id,
-    user_id: user.id
+    user_id: user.id,
+   
   })
 }
 
@@ -42,7 +45,22 @@ handleDetails = () => {
 handleSubmit = event => {
   event.preventDefault()
 
-  this.props.createReservation(this.state)
+  const modifying = this.props.buildReservation.resv.length
+  const resv_id = modifying ? this.props.buildReservation.resv[0].id : null
+ 
+  if(modifying === 1){
+   
+    this.props.modifyReservation(resv_id, this.state)
+   
+  } else {
+     this.props.createReservation(this.state)
+  }
+
+
+  this.props.clearBuild()
+  this.props.history.push("/")
+
+
  
   this.setState({
         start_date: "",
@@ -50,19 +68,22 @@ handleSubmit = event => {
         date_range: "",
         room_id: "",
         location_id: "",
-        user_id: ""
+        user_id: "",
+        updating_id: null
         
   })
+  
 }
   
   
  
   render () {
-  //if(currentUser !== null){
+ 
     console.log(this.props)
     console.log(this.state)
     const currentUser = this.props.currentUser
     const room = this.props.reserve.room[0]
+    
     if(this.props.loggedIn){
 
       return(
@@ -84,7 +105,7 @@ handleSubmit = event => {
       )
  } else {
    return(
-     <div></div>
+     <div>Idea was here to incorporate a reservation confirmation code to allow user's to not have to login or have an acct to make a resv</div>
    )
  }
 }
@@ -96,12 +117,11 @@ const mapStateToProps = (state) => {
       currentUser: state.currentUser,
     
       loggedIn: !!currentUser,
+
+      buildReservation: state.buildReservation
       
    
   })
 }
 
-
-
-
-export default connect(mapStateToProps, {createReservation})(Reserve)
+export default connect(mapStateToProps, {createReservation, modifyReservation, clearBuild})(Reserve)
