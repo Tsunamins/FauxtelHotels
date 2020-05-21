@@ -23,7 +23,7 @@ class BookNav extends React.Component {
     }       
 
     render(){
-     console.log(this.props)
+  
      
     if(this.props.buildReservation.room.length > 0){
         const reserve = this.props.buildReservation
@@ -49,7 +49,7 @@ class BookNav extends React.Component {
 
 
 const mapStateToProps = state => {
-    console.log(state)
+   
     return {
       buildReservation: state.buildReservation,
       reservations: state.reservations,

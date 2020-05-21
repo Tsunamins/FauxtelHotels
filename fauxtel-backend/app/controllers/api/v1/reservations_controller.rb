@@ -22,6 +22,7 @@ class Api::V1::ReservationsController < ApplicationController
 
   # GET /reservations/1
   def show
+    
     @reservation = Reservation.find_by(id: params[:id]) 
     #render json: @user
     res_json = ReservationSerializer.new(@reservation).serialized_json
@@ -72,7 +73,9 @@ class Api::V1::ReservationsController < ApplicationController
   # DELETE /reservations/1
   def destroy
     #change later if using based on no login, but a reservation code generator, change based on incoming params, i.e. am_wine_reviewer/index
+    
      @user = current_user
+    
     
      if @user.id != @reservation.user_id
       render json: {

@@ -21,7 +21,7 @@ class UserNav extends React.Component {
     }
   
     render(){
-      console.log(this.props.reservations.reservations)
+    
       const { loggedIn, currentUser} = this.props
 
       //current serializer can either get all reservations.rooms passed to next component
@@ -31,7 +31,7 @@ class UserNav extends React.Component {
 
       const userReservations = loggedIn ? currentUser.attributes.reservations : []
 
-      console.log(userReservations[0])
+    
    
       return (
         <div className="App">
@@ -46,7 +46,7 @@ class UserNav extends React.Component {
                 const res = allReservations.find(element => element.id.toString() === props.match.params.id)
                 // userReservations.find(res => console.log(typeof res.id))
                 // console.log(typeof props.match.params.id)
-                console.log(res)
+              
                 return <UserResvView res={res} {...props}/>
               }
             }/>
