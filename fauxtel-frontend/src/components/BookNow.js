@@ -2,7 +2,7 @@ import React from 'react';
 import {Helmet} from 'react-helmet';
 import DayPicker, { DateUtils } from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import './booknow.css'
+import '../styles/booknow.css'
 import { connect } from 'react-redux'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'

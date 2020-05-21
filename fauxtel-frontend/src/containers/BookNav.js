@@ -1,7 +1,3 @@
-// going to display a link to Book Now
-// or going to change the route of the page to booking interface
-//going to have available - data regarding login? maybe not sure
-//links are going to be specific to reservation#create in backend
 import React from 'react';
 import { connect } from 'react-redux'
 import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom'
@@ -30,7 +26,7 @@ class BookNav extends React.Component {
         const history = this.props.history
         const currentUser = this.props.currentUser
      return (
-         <div>
+         <div className="Reserve">
             
            <Reserve reserve={reserve} history={history} />
              
@@ -39,8 +35,7 @@ class BookNav extends React.Component {
     } else {
     return (
         <div className="BookNav">
-                <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} >
-                </Route>
+                <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>
                 <BookNavLinks />
         </div>
     ) 

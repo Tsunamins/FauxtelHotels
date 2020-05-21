@@ -9,15 +9,10 @@ const UserResv = (props) => {
     const userResv = props.currentUser.attributes.reservations.map(r => 
           <li key={r.id}>
             <Link to={`/view-reservations/${r.id}`}>From: {r.start_date} To: {r.end_date}</Link>
-          
-            
           </li>
-          
-          
+   
         )
-  
 
-  
     return(
         <div className="UserResv">
        
@@ -26,7 +21,6 @@ const UserResv = (props) => {
          </div>
     )
  }
- 
 
  const mapStateToProps = (state) => {
     

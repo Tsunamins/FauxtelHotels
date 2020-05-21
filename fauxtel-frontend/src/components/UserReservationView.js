@@ -1,13 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link, Redirect} from 'react-router-dom'
-import ModifyReservation from './ModifyReservation.js'
 import {cancelReservation} from '../actions/reservations.js'
-import {modifyReservation} from '../actions/reservations.js'
 import BookNow from './BookNow.js'
-import { getReservations } from '../actions/reservations.js'
 import { getResv } from '../actions/buildReservation.js'
-import Reserve from './Reserve.js'
+
 
 
 
@@ -61,7 +57,7 @@ import Reserve from './Reserve.js'
                   <p>To: {res.attributes.end_date}</p>
                   { modify ? <BookNow reservations={this.props.reservations} /> :   
                       <div>
-                      {/* <Link to={`/modify-reservation/${res.id}/edit`}>Modify Reservation</Link> */}
+               
                       <button onClick={this.handleModify}>Modify Reservation</button>
                       <br></br>
                       <button onClick={this.handleCancel}>Cancel Reservation</button>

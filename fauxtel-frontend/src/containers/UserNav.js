@@ -10,7 +10,7 @@ import UserResv from '../components/UserReservations.js'
 import UserResvView from '../components/UserReservationView.js'
 import { getUserReservations } from '../actions/buildReservation.js'
 import { getCurrentUser } from '../actions/currentUser.js'
-import ModifyResv from '../components/ModifyReservation.js'
+
 
 
 
@@ -35,7 +35,7 @@ class UserNav extends React.Component {
     
    
       return (
-        <div className="App">
+        <div className="User">
           { loggedIn ? <UserNavLinks userReservations={this.props.currentUser.attributes.reservations}/> : <UserAuthLinks/> }
           <Switch>
             <Route exact path='/signup' component={SignUp}/>
@@ -51,13 +51,7 @@ class UserNav extends React.Component {
                 return <UserResvView res={res} {...props}/>
               }
             }/>
-            <Route exact path='/modify-reservation/:id/edit' render={props => {
-            
-            const res = allReservations.find(element => element.id.toString() === props.match.params.id)
          
-                return <ModifyResv res={res} {...props}/>
-              }
-            }/>
        
             
           </Switch>
