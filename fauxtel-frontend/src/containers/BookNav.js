@@ -4,7 +4,7 @@
 //links are going to be specific to reservation#create in backend
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link, NavLink, Route, Switch } from 'react-router-dom'
+import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom'
 import BookNavLinks from '../links/BookNavLinks.js'
 import BookNow from '../components/BookNow.js'
 import Reserve from '../components/Reserve.js'
@@ -23,16 +23,17 @@ class BookNav extends React.Component {
     }       
 
     render(){
-  
+        console.log(this.props)
      
     if(this.props.buildReservation.room.length > 0){
         const reserve = this.props.buildReservation
+        const history = this.props.history
         const currentUser = this.props.currentUser
      return (
          <div>
             
-           
-             <Reserve reserve={reserve} />
+           <Reserve reserve={reserve} history={history} />
+             
          </div>
      )       
     } else {
@@ -65,6 +66,6 @@ const mapStateToProps = state => {
       }
   }
   
-  export default connect(mapStateToProps, mapDispatchToProps)(BookNav)
+  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookNav))
   
 
