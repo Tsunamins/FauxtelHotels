@@ -33,13 +33,13 @@ function Rooms(props) {
         <div>
           <form onSubmit={handleSubmit}>
              {props.availRooms.map(room =>
-                   <> 
+                
                    <label className="each-room" key={room.id} onClick={handleStyle}>{room.attributes.room_type}<span className="checkSymbol"></span>
                         <input type="radio" key={room.id} name="room" value={room.id} onClick={handleSelect}>
                    
                         </input> 
                     </label>
-                   </>
+                 
                 
              )}
              <input type="submit" value="Reserve this Room"></input>

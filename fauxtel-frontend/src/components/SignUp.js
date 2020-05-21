@@ -44,11 +44,6 @@ class SignUp extends React.Component {
 }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//     signup: userInfo => dispatch(signup(userInfo))
-//   })
-  
-
 export default connect(null, {signup})(SignUp)
 
 

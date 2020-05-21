@@ -15,7 +15,7 @@ const UserResv = (props) => {
           
           
         )
-    console.log(props)
+  
 
   
     return(
@@ -29,7 +29,7 @@ const UserResv = (props) => {
  
 
  const mapStateToProps = (state) => {
-    console.log(state)
+    
     return ({
         currentUser: state.currentUser,
         loggedIn: !!state.currentUser,
