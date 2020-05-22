@@ -9,13 +9,15 @@ import {connect} from 'react-redux'
 function RoomDesc(props) {
 
  console.log(props)
-
-
- 
+console.log(props.roomDetails)
+const d = props.roomDetails
+        
       return(
         <div>
-            Some Rooms will go here, per locatin and (coming soon) location?
-            Goal to render into diff divs type of room per location and render one more component within each of those that will show the formated display of a room
+              <div key={d.id} className="roomdets" id={d.room_type}>
+                <p>{d.room_type}, but probably use id to set inner content to a better looking name presentation</p>
+                <p>{d.room_number}, later to be a description after adding from backend</p>
+            </div> 
         </div>
       )
 
@@ -24,7 +26,8 @@ function RoomDesc(props) {
 
 const mapStateToProps = state => {
     return({
-        rooms: state.rooms
+        rooms: state.rooms,
+        locations: state.locations
     })
 }
 
