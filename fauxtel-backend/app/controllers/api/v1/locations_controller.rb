@@ -5,7 +5,10 @@ class Api::V1::LocationsController < ApplicationController
   def index
     @locations = Location.all
 
-    render json: @locations
+    #options = {include: [:reservations]}
+    #render json: @rooms
+    locations_json = LocationSerializer.new(@locations)
+    render json: locations_json
   end
 
   # GET /locations/1
