@@ -1,5 +1,6 @@
 
-export const setLocs = locs => {    
+export const setLocs = locs => {   
+    console.log(locs) 
     return {
         type: "GET_LOCS",
         locs 
@@ -16,8 +17,8 @@ export const setLocs = locs => {
             if(response.error){
                 alert(response.error)
             } else {
-              //console.log(response)
-              dispatch(setLocs(response))
+              console.log(response)
+              dispatch(setLocs(response.data))
             }
             })
             .catch(console.log)

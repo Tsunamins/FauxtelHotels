@@ -5,7 +5,7 @@ import roomsReducer from './reducers/roomsReducer.js'
 import currentUser from './reducers/currentUser.js'
 import reservations from './reducers/reservations.js'
 import buildReservation from './reducers/buildReservation.js'
-import getLocations from './reducers/locationsReducer.js'
+import locsReducer from './reducers/locationsReducer.js'
 
 const reducer = combineReducers({
     //users: usersReducer, 
@@ -17,7 +17,11 @@ const reducer = combineReducers({
 
     reservations,
 
-    buildReservation
+    buildReservation,
+
+    locations: locsReducer,
+
+
 
 })
 

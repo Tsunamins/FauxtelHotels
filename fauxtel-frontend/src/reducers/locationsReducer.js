@@ -1,7 +1,8 @@
-export default function locsReducer(state = {locations: []}, action) {
+export default function locsReducer(state = [], action) {
+ 
     switch (action.type) {
       case 'GET_LOCS':
-        return {...state, locations:  action.locs}     
+        return action.locs     
         
         default:
             return state
