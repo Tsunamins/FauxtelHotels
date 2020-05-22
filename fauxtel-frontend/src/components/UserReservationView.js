@@ -66,7 +66,7 @@ import { getResv } from '../actions/buildReservation.js'
                 </div>
               </>
               :
-              <p>!Resv Display Issue</p>
+              <div>!Resv Display Issue</div>
           )
         }
       }
