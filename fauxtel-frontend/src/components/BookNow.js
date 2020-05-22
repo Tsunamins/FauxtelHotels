@@ -6,7 +6,7 @@ import '../styles/booknow.css'
 import { connect } from 'react-redux'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
-import Rooms from './Rooms.js'
+import BookRooms from './BookRooms.js'
 //import { setDates } from '../actions/buildReservation.js'
 
 
@@ -146,7 +146,7 @@ class BookNow extends React.Component {
                 )}
             </div>
            
-            <Rooms availRooms={this.state.rooms} />
+            <BookRooms availRooms={this.state.rooms} />
             <br></br>
 
             <Helmet>
