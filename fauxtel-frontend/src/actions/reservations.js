@@ -37,7 +37,7 @@ export const getReservations = () => {
             if(response.error){
                 alert(response.error)
             } else {
-              console.log(response.data)
+       
               dispatch(setAllReservations(response.data))
             }
             })
