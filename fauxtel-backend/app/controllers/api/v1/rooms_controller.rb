@@ -54,6 +54,6 @@ class Api::V1::RoomsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def room_params
-      params.require(:room).permit(:room_number, :room_type, :location_id, :occupied_dates, :status)
+      params.require(:room).permit(:room_number, :room_type, :location_id, :occupied_dates, :status, :description)
     end
 end

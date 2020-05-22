@@ -280,8 +280,23 @@ prev_short_end = DateTime.new(2019,5,30)
 prev_short_range = (prev_short_start..prev_short_end).to_a
 
 
-Reservation.create(start_date: prev_long_start, end_date: prev_long_end, date_range: prev_long_range, user_id: 1, room_id: 13, location_id: 1)
+# Reservation.create(start_date: prev_long_start, end_date: prev_long_end, date_range: prev_long_range, user_id: 1, room_id: 13, location_id: 1)
 
-Reservation.create(start_date: prev_long_start, end_date: prev_long_end, date_range: prev_long_range, user_id: 1, room_id: 14, location_id: 1)
+# Reservation.create(start_date: prev_long_start, end_date: prev_long_end, date_range: prev_long_range, user_id: 1, room_id: 14, location_id: 1)
 
+allRooms = Room.all
 
+allRooms.each do |match|
+
+    match = Room.where(:room_type => 'ocean-view')
+    match.each do |change|
+        
+       
+        
+        change.description = 'Ocean View room with a coffee maker and a yoga mat.'
+        change.save
+        
+       
+    end
+  
+end
