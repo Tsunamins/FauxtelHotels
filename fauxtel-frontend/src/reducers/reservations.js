@@ -1,4 +1,4 @@
-export default function reservations(state = {reservations: []}, action) {
+export default function reservations(state = [], action) {
    
     switch (action.type) {
       case 'GET_RESERVATIONS':  
