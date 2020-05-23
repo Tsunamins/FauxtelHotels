@@ -1,40 +1,95 @@
-.App {
-  text-align: center;
+
+
+.App-logo {
+  height: 25vmin;
+  pointer-events: none;
+  float: left;
+
+}
+
+
+
+
+
+.App-header {
+  color: #f2d2c2;
+  background-color: #1e1124;
+  min-height: 10vh;
+  display: inline-block;
+  width: 100%;
+  padding-top: 25px;
 }
 
 .App-logo {
-  height: 10vmin;
-  pointer-events: none;
+  animation: fadeIn 5s, slideIn 5s;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@keyframes fadeIn {
+  60% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@keyframes slideIn {
+  50% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
+@keyframes appLogoMove {
   from {
-    transform: rotate(0deg);
+     left: 50%;
   }
   to {
-    transform: rotate(360deg);
+    left: 0;
   }
+}
+
+
+.UserNav {
+  
+
+}
+
+.Wrapper {
+ 
+  float: right;
+}
+
+.SignUpLogin {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: 46%;
+  border: 1px solid #032b2b;
+}
+
+
+
+.UserLoggedIn {
+ 
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 25px;
+  border: 3px solid #283752;
+
+}
+
+.UserLinks {
+  display: inline-block;
+  list-style: none;
 }
 
 

@@ -1,3 +1,9 @@
+
+
+
+
+
+
 * {
     text-align: center;
 }
@@ -12,4 +18,34 @@
 div.DayPicker.Range{
     width: 100%;
     /* height: 20vh; */
+}
+
+
+/* specific to component display, before clicking as link, BookNav piece */
+.BookNav {
+   
+    border: 2px solid pink;
+    padding: 10px;
+   
+   
+}
+
+.BookNowWrapper {
+    z-index: 1;
+    border: 2px solid green;
+    padding: 10px;
+}
+
+.BookNav:active {
+  
+}
+
+.BookNavLink:hover {
+    color: green;
+}
+
+
+.SelectionText {
+    font-weight: bold;
+    font-size: 3vh;
 }

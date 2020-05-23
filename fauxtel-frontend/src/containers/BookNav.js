@@ -8,6 +8,7 @@ import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
 import { getRoom } from '../actions/buildReservation.js'
 import { getCurrentUser } from '../actions/currentUser.js'
+import '../styles/booknow.css'
 
 class BookNav extends React.Component {
 

@@ -25,7 +25,7 @@ class UserNav extends React.Component {
       const { loggedIn, currentUser} = this.props
 
       //current serializer can either get all reservations.rooms passed to next component
-     
+      console.log(this.props)
        const allReservations = this.props.reservations
       
   

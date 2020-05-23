@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {cancelReservation} from '../actions/reservations.js'
 import BookNow from './BookNow.js'
 import { getResv } from '../actions/buildReservation.js'
+import '../styles/modifying.css'
 
 
 
@@ -49,7 +50,7 @@ import { getResv } from '../actions/buildReservation.js'
 
             res ?
               <>
-                <div>
+                <div className="ModifyingReservation">
                   { modify ? <h3>You are Modifying </h3> : null}
                   <h3>Location: {res.attributes.location.name}</h3>
                   <p>Room Type: {res.attributes.room.room_type}</p>
@@ -58,9 +59,9 @@ import { getResv } from '../actions/buildReservation.js'
                   { modify ? <BookNow reservations={this.props.reservations} /> :   
                       <div>
                
-                      <button onClick={this.handleModify}>Modify Reservation</button>
+                      <button className="button" onClick={this.handleModify}>Modify Reservation</button>
                       <br></br>
-                      <button onClick={this.handleCancel}>Cancel Reservation</button>
+                      <button className="button" onClick={this.handleCancel}>Cancel Reservation</button>
                   </div>
                   }
                 </div>

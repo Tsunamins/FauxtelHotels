@@ -1,6 +1,7 @@
 import React from 'react';
-import logo from './fauxtellogo.svg';
+import logo from './fauxtellogo2.svg';
 import './App.css';
+import './styles/booknow.css'
 import { connect } from 'react-redux'
 import UserNav from './containers/UserNav.js'
 import BookNav from './containers/BookNav.js'
@@ -24,15 +25,15 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p className="App-link"><UserNav /></p>  
+          <span className="UserNav"><UserNav /></span>  
         </header>
 
-        <div>
-          <HomeView />
+        <div className="BookNowWrapper">
+        <BookNav />
         </div>
 
         <div>
-          <BookNav />
+        <HomeView />
         </div>      
       </div>
 

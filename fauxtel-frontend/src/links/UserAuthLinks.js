@@ -7,14 +7,13 @@ const UserAuthLinks = () => (
 
 
 
-    <div>
-        <span>
+    <div className="SignUpLogin">
+       
 
-        <Link to="/signup">Sign Up</Link> <br></br>
+        <li><Link to="/signup">Sign Up</Link></li> 
                             
-        <Link to="/login">Log In</Link>
+        <li><Link to="/login">Log In</Link></li>
 
-        </span>
      </div>
 
 );

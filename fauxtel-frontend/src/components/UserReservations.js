@@ -4,8 +4,12 @@ import {connect} from 'react-redux'
 import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom'
 import { getUserReservations } from '../actions/buildReservation.js'
 import UserResvView from './UserReservationView.js'
+import '../styles/userresv.css'
+
 
 const UserResv = (props) => {
+  console.log(props)
+  //sometimes error, maybe if currentUser === false use above getUserReservations call
     const userResv = props.currentUser.attributes.reservations.map(r => 
           <li key={r.id}>
             <Link to={`/view-reservations/${r.id}`}>From: {r.start_date} To: {r.end_date}</Link>

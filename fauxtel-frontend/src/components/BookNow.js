@@ -128,19 +128,19 @@ class BookNow extends React.Component {
           onDayClick={this.handleDayClick}
           onDayMouseEnter={this.handleDayMouseEnter}
         />
-            <div>
+            <div class="SelectionText">
                 {!from && !to && 'Please select the first day.'}
                 {from && !to && 'Please select the last day.'}
                 {from && to && `Selected from ${from.toLocaleDateString()} to ${to.toLocaleDateString()}`}{' '}
                
                 {from && to && (
-                    <button className="link" onClick={this.handleResetClick}>
+                    <button className="button" onClick={this.handleResetClick}>
                                                     Reset
                     </button>
                 )}
 
                 {from && to && (        //(from, to, reservations, rooms)
-                    <button className="link" onClick={this.handleShowRooms}> 
+                    <button className="button" onClick={this.handleShowRooms}> 
                                 Show Rooms
                     </button>
                 )}

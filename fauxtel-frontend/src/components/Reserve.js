@@ -93,12 +93,12 @@ handleSubmit = event => {
           <p>Location: {room.location_id}</p>
           <p>From: {sessionStorage.getItem('start_date')}  To: {sessionStorage.getItem('end_date')} </p>
           <p>Email Confirmation: {currentUser.attributes.email}</p>
-          <button onClick={this.handleDetails}>Confirm Details</button>
+          <button className="button" onClick={this.handleDetails}>Confirm Details</button>
           {/* <button onClick={this.resetRes}>Start Over</button> */}
           <form onClick={this.handleSubmit} >
          
 
-             <input type="submit" value="Confirm Reservation"></input>
+             <input className="button" type="submit" value="Confirm Reservation"></input>
            
            </form>
         </div>

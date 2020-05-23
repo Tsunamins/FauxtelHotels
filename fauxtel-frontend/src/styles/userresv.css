@@ -1,0 +1,9 @@
+.UserResv {
+    display: block;
+    z-index: 1;
+    float: right;
+}
+
+li {
+    padding: 10px;
+}

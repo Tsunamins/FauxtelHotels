@@ -32,17 +32,18 @@ function BookRooms(props) {
       return(
         <div>
           <form onSubmit={handleSubmit}>
+            
              {props.availRooms.map(room =>
-                
-                   <label className="each-room" key={room.id} onClick={handleStyle}>{room.attributes.room_type}<span className="checkSymbol"></span>
-                        <input type="radio" key={room.id} name="room" value={room.id} onClick={handleSelect}>
+                <div class="radios" key={room.id}>
+                   <label className="each-room"  onClick={handleStyle}>{room.attributes.room_type}
+                        <input type="radio" key={room.id} id={room.id} name="room" value={room.id} onClick={handleSelect}>
                    
                         </input> 
                     </label>
-                 
+                </div>
                 
              )}
-             <input type="submit" value="Reserve this Room"></input>
+             <input className="button" type="submit" value="Reserve this Room"></input>
            
            </form>
         </div>
