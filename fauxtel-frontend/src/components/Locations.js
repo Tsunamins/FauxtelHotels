@@ -18,17 +18,9 @@ function Locations(props) {
  
       return(
         <div>
-            May change how this is displayed, and adjust how it's navigated
+         
             {locationDetails}
-            <div>
-                Some locations will go here
-            </div>
-            <div>
-                Some locations will go here
-            </div>
-            <div>
-                Some locations will go here
-            </div>
+         
         </div>
       )
 

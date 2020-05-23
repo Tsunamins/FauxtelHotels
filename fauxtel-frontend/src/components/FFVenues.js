@@ -12,7 +12,7 @@ function FFVenues(props) {
  
       return(
         <div>
-          May be just a space filler
+          May be just a space filler, maybe I'll add a picture later reflective of a Restaurant
         </div>
       )
 

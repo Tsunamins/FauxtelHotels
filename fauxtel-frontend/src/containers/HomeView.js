@@ -9,6 +9,7 @@ import Rooms from '../components/Rooms.js'
 import Locations from '../components/Locations.js'
 import LocationDesc from '../components/LocationDesc.js'
 import FFVenues from '../components/FFVenues.js'
+import '../styles/home.css'
 
 
 
@@ -27,9 +28,7 @@ class HomeView extends React.Component {
    
       return (
         <div className="Home">
-            Home Page View Goals:
-            <br></br>
-            Room Types, Locations (some coming soon), and Hopefully something else like amenities page or restaurants/nightlife page
+         
             <HomeNavLinks />
           <Switch>
              <Route exact path='/room-types' component={Rooms}/>
