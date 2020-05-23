@@ -39,7 +39,7 @@ class Api::V1::ReservationsController < ApplicationController
        @user = User.find_by(id: u_id)
       
       
-       #ReservationMailer.with(reservation: @reservation, user: @user).reservation_confirmation.deliver_now
+       ReservationMailer.with(reservation: @reservation, user: @user).reservation_confirmation.deliver_now
       
       render json: @reservation, status: :created, reservation: @reservation
 
