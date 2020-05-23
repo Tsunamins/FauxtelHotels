@@ -18,8 +18,8 @@ function BookRooms(props) {
   }
 
   const handleStyle = event => {
-    event.target.style.backgroundColor = '#466eb8';
-    event.target.style.color = 'white';
+    // event.target.style.backgroundColor = '#466eb8';
+    // event.target.style.color = 'white';
   }
   
   const handleSubmit = event => {
