@@ -2,6 +2,8 @@
 A React Single Page Web Application, idealizing a hotel booking based app for a hotel brand.
 Associated blog post: https://tsunamins.github.io/fauxtel_hotels_-_the_final_project
 
+Video demo: https://youtu.be/G4u_KgDfBYI
+
 
 Starting backend:
 cd fauxtel-backend
