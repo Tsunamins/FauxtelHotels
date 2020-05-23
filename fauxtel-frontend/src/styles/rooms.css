@@ -14,7 +14,7 @@
 
   /* Hide the browser's default radio button */
 input[type="radio"]{
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 
