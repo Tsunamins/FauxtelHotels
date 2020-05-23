@@ -16,7 +16,7 @@ const d = props.roomDetails
         <div>
               <div key={d.id} className="roomdets" id={d.room_type}>
                 <p>{d.room_type}, but probably use id to set inner content to a better looking name presentation</p>
-                <p>{d.room_number}, later to be a description after adding from backend</p>
+                <p>{d.description}</p>
             </div> 
         </div>
       )
