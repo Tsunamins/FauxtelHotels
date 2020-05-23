@@ -36,13 +36,21 @@ class BookNav extends React.Component {
     } else {
     return (
         <div className="BookNav">
-                <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>
-                <BookNavLinks />
+            <BookNavLinks />
+                <div className="BookNowRoute">
+                    <span class="closeButton" onClick={off}>Close</span>
+                    <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>
+                </div>
+                
         </div>
     ) 
     }
 }
  }
+
+const off = () => {
+    document.querySelector(".BookNowRoute").style.display = "none";
+}
 
 
 const mapStateToProps = state => {

@@ -1,51 +1,154 @@
 
-
-
-
-
-
 * {
     text-align: center;
 }
 
+/* Calendar view specific styling */
+/* will change appearance of days in general */
+/* sizing is generally better acheived with font sizing based on container height */
+.DayPicker-Day {
+    color: rgb(81, 17, 94);
+    font-size: 4vmin;
+}
+
+
+.DayPicker-Day.DayPicker-Day--today {
+    color: green;
+}
+
+
+.DayPicker-Day.DayPicker-Day--disabled {
+    color: rgb(54, 48, 48);
+}
+
+.DayPicker-Caption {
+    font-size: 4vmin;
+
+}
+
+.DayPicker-Weekdays {
+    font-size: 5vmin;
+  
+
+}
+
+/* difficult to change weekday colors, but sort of done here */
+.DayPicker-Weekday abbr {
+   
+}
+
+/* surrounds numbers of calendar */
+.DayPicker-Body {
+   
+
+}
+
+div.DayPicker-Month {
+   
+  
+   
+}
+
+
+/* Months don't include navigation so setting width here will not alter postion of arrows properly  */
 .DayPicker-Months {
-    background-color: #817b8f;
-    border-radius: 25px;
+    background-color: #4b4743;
+    border-radius: 25px;  
+    width: 100%;
     
 }
 
-/* have to pre-fix with div where indicated */
-div.DayPicker.Range{
+.DayPicker-wrapper {
     width: 100%;
-    /* height: 20vh; */
+    
+    
 }
+
+/* range is like the whole calendar back ground, so setting width here will expand beyond calendar too much */
+div.DayPicker.Range{
+  
+
+
+}
+
+
 
 
 /* specific to component display, before clicking as link, BookNav piece */
-.BookNav {
-   
-    border: 2px solid pink;
-    padding: 10px;
-   
-   
-}
+
 
 .BookNowWrapper {
-    z-index: 1;
-    border: 2px solid green;
-    padding: 10px;
+ 
+  
 }
 
 .BookNav:active {
   
 }
 
-.BookNavLink:hover {
-    color: green;
+/* styling link as closed "off" */
+.BookNowLink {
+    padding: 50px;
+    border-radius: 50%;
+    z-index: 10;
+    position: fixed;
+    right: 0;
+    background-color: #edad6d;
+    display: block;
 }
+
+.BookNowLink:hover {
+    cursor: pointer; 
+    background-color: #3b7be3;
+    color: #f2d2c2;
+}
+
+.BookNowLink:hover a {
+    color: #f2d2c2;
+}
+
+/* styling link as open "on" */
+.BookNowRoute {
+  position: fixed;
+  /* display: none; */
+  width: 100%;
+  /* height: 100%; */
+  /* top: 0;
+  left: 0;
+  right: 0; */
+  bottom: 0;
+  background-color: rgb(32, 30, 30);
+  z-index: 20;
+  cursor: pointer;
+
+   
+}
+
+.closeButton{
+    color: white;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    
+}
+
+div.DayPicker-Day.DayPicker-Day--start.DayPicker-Day--selected {
+    background-color: rgb(81, 17, 94);
+}
+
+div.DayPicker-Day.DayPicker-Day--end.DayPicker-Day--selected {
+    background-color: rgb(81, 17, 94);
+}
+
+
+/* items related to Selecting days text and calendar selection views */
+
+
+
 
 
 .SelectionText {
     font-weight: bold;
     font-size: 3vh;
+    color: #f2d2c2;
 }
