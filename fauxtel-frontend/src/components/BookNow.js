@@ -153,8 +153,8 @@ class BookNow extends React.Component {
               <style>
                   {
                     `.Range .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-                          background-color: #f0f8ff !important;
-                          color: #4a90e2;
+                          background-color: #856d8a !important;
+                          color: #fbf2fc;
                       }
                       .Range .DayPicker-Day {
                           border-radius: 25 !important;
