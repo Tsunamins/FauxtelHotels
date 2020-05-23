@@ -16,8 +16,10 @@ class Login extends React.Component {
   
     handleSubmit = event => {
       event.preventDefault()
+      
 
       this.props.login(this.state)
+      this.props.history.push("/")
       this.setState({
             email: "",
             password: ""
@@ -29,9 +31,9 @@ class Login extends React.Component {
      
     return (
         <form onSubmit={this.handleSubmit}>
-            <input type="text" name="email"  placeholder="email" value={this.state.email} onChange={this.handleChange}></input>
-            <input type="password" name="password"  placeholder="password" value={this.state.password} onChange={this.handleChange}></input>
-            <input type="submit" value="Log In"></input>
+            <input className="form" type="text" name="email"  placeholder="email" value={this.state.email} onChange={this.handleChange}></input>
+            <input className="form" type="password" name="password"  placeholder="password" value={this.state.password} onChange={this.handleChange}></input>
+            <input className="button" type="submit" value="Log In"></input>
 
         </form>
     )
