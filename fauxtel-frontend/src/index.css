@@ -27,6 +27,10 @@ li {
   list-style: none;
 }
 
+body {
+  background-color: rgb(32, 28, 34);
+}
+
 .button {
   background-color: #335e5c5b; /* Green */
   border: 1px solid #335e5c;
