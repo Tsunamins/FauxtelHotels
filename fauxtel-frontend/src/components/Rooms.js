@@ -15,7 +15,7 @@ function Rooms(props) {
        
         <div key={l.id} className="showcaseRooms">
           <div className="RoomTypeList">Rooms Featured at {l.attributes.name} </div>
-            {room_types = [...new Set(l.attributes.rooms.map(r => r.room_type))].map(rt => <p id={rt}>{rt} <RoomDesc roomDetails={l.attributes.rooms.find(r => r.room_type === rt)} /></p>)}
+            {room_types = [...new Set(l.attributes.rooms.map(r => r.room_type))].map(rt => <div className="RoomTitle" id={rt}> <RoomDesc roomDetails={l.attributes.rooms.find(r => r.room_type === rt)} /></div>)}
             
         </div>
  
@@ -23,7 +23,7 @@ function Rooms(props) {
 
      return(
         <div>
-            <div>
+            <div className="LocationsRooms">
                 {location_divs}
                 
             </div>
@@ -34,6 +34,18 @@ function Rooms(props) {
 
  
 }
+
+//onPointerEnter={handleMouseEnter} onPointerLeave={handleMouseLeave}
+// const handleMouseEnter = () =>{
+//     document.querySelector(".RoomDetailedDisplay").style.display = "block";
+//     console.log("Mouse Has Entered")
+//   }
+  
+//   const handleMouseLeave = () =>{
+//     document.querySelector(".RoomDetailedDisplay").style.display = "none";
+//     console.log("Mouse has Left")
+  
+//   }
 
 const mapStateToProps = state => {
     return({
