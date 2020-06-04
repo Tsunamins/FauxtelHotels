@@ -7,6 +7,7 @@ export const setRooms = rooms => {
 }
 
 export const getRooms = () => {
+    console.log("c")
     //return dispatch (built in) as an argument, a thunk function 
     return dispatch => {
 
@@ -16,10 +17,12 @@ export const getRooms = () => {
           if(response.error){
               alert(response.error)
           } else {
+            console.log("d")
             //console.log(response)
             dispatch(setRooms(response.data))
-          }
-          })
+            }
+        })
           .catch(console.log)
-        }
+    }
+    console.log("e")
 }
