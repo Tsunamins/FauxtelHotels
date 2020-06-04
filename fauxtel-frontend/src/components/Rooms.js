@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import {connect} from 'react-redux'
 import RoomDesc from './RoomDescriptions.js'
 import '../styles/roomdesc.css'
+import LikeButton from './LikeButton.js'
 
 
 
@@ -15,7 +16,11 @@ function Rooms(props) {
        
         <div key={l.id} className="showcaseRooms">
           <div className="RoomTypeList">Rooms Featured at {l.attributes.name} </div>
-            {room_types = [...new Set(l.attributes.rooms.map(r => r.room_type))].map(rt => <div className="RoomTitle" id={rt}> <RoomDesc roomDetails={l.attributes.rooms.find(r => r.room_type === rt)} /></div>)}
+            {room_types = [...new Set(l.attributes.rooms.map(r => r.room_type))]
+            .map(rt => <div className="RoomTitle" id={rt}>
+                <LikeButton />
+
+                 <RoomDesc roomDetails={l.attributes.rooms.find(r => r.room_type === rt)} /></div>)}
             
         </div>
  
