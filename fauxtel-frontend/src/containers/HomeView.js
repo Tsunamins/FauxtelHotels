@@ -15,7 +15,10 @@ import '../styles/home.css'
 
 class HomeView extends React.Component {
     componentDidMount(){
+        console.log("a")
         this.props.getRooms()
+        console.log("b")
+      
         this.props.getLocs()
     }
 
