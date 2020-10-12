@@ -10,7 +10,6 @@ import HomeView from './containers/HomeView';
 
 
 
-//function App() {
 class App extends React.Component {
 
   componentDidMount =() => {
