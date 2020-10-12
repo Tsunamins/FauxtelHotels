@@ -15,7 +15,7 @@ class BookNav extends React.Component {
     componentDidMount() {
         this.props.getRoom()
         this.props.getCurrentUser()
-        this.props.getRooms()
+        //this.props.getRooms()
         this.props.getReservations()
     }       
 

@@ -16,9 +16,7 @@ export const logoutUser = () => {
   }
 
 export const login = credentials => {
-   
-    return dispatch => {
-
+       return dispatch => {
         fetch('http://localhost:3000/api/v1/login', {
             headers: {
                 "Content-Type": "application/json",
@@ -90,10 +88,7 @@ export const signup = credentials => {
         "Accept": 'application/json'
       },
       body: JSON.stringify(userInfo)
-      
     })
-    
-   
       .then(resp => resp.json())
       .then(response => {
         if (response.error) {
@@ -109,6 +104,8 @@ export const signup = credentials => {
       .catch(console.log)
   }
 }
+
+
 
 export const logout = event => {
     localStorage.removeItem("token")
