@@ -7,7 +7,7 @@ Video demo: https://youtu.be/G4u_KgDfBYI
 
 Starting backend:
 cd fauxtel-backend
-rail s
+rails s
 
 Starting frontend:
 cd fauxtel-frontend
