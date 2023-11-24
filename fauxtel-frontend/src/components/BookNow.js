@@ -1,7 +1,7 @@
 import React from 'react';
-import {Helmet} from 'react-helmet';
-import DayPicker, { DateUtils } from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import { Helmet } from 'react-helmet';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 import '../styles/booknow.css'
 import { connect } from 'react-redux'
 import { getRooms } from '../actions/getRooms.js'
@@ -39,9 +39,11 @@ class BookNow extends React.Component {
   }
 
   isSelectingFirstDay(from, to, day) {
-    const isBeforeFirstDay = from && DateUtils.isDayBefore(day, from);
+    // todo DateUtils not found in latest react day picker
+    // const isBeforeFirstDay = from && DateUtils.isDayBefore(day, from);
     const isRangeSelected = from && to;
-    return !from || isBeforeFirstDay || isRangeSelected;
+    // return !from || isBeforeFirstDay || isRangeSelected;
+    return !from || isRangeSelected
   }
 
   handleDayClick(day) {

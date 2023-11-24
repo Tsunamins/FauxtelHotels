@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {connect} from 'react-redux'
-import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom'
-import { getUserReservations } from '../actions/buildReservation.js'
-import UserResvView from './UserReservationView.js'
-import '../styles/userresv.css'
+import {connect} from 'react-redux';
+import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom';
+import { getUserReservations } from '../actions/buildReservation.js';
+import UserResvView from './UserReservationView.js';
+import '../styles/userresv.css';
 
 
 const UserResv = (props) => {

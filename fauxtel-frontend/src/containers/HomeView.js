@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom'
+import { Link, NavLink, Route, Routes } from 'react-router-dom'
 import HomeNavLinks from '../links/HomeNavLinks.js'
 import { getRooms } from '../actions/getRooms.js'
 import { getLocs } from '../actions/getLocations.js'
@@ -33,7 +33,7 @@ class HomeView extends React.Component {
         <div className="Home">
          
             <HomeNavLinks />
-          <Switch>
+          <Routes>
              <Route exact path='/room-types' component={Rooms}/>
              <Route exact path='/locations' component={Locations}/>
              <Route exact path='/locations/:id' render={props => {
@@ -49,7 +49,7 @@ class HomeView extends React.Component {
          
        
             
-          </Switch>
+          </Routes>
         </div>
       );
   
@@ -65,4 +65,4 @@ class HomeView extends React.Component {
   }
   
   
-  export default withRouter(connect(mapStateToProps, {getRooms, getLocs})(HomeView))
+  export default connect(mapStateToProps, {getRooms, getLocs})(HomeView);

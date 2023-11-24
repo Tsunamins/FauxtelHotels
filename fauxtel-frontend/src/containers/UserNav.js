@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom'
+import { Link, NavLink, Route, Routes } from 'react-router-dom'
 import UserNavLinks from '../links/UserNavLinks.js'
 import UserAuthLinks from '../links/UserAuthLinks.js'
 import Logout from '../components/Logout.js'
@@ -37,7 +37,7 @@ class UserNav extends React.Component {
       return (
         <div className="User">
           { loggedIn ? <UserNavLinks userReservations={this.props.currentUser.attributes.reservations}/> : <UserAuthLinks/> }
-          <Switch>
+          <Routes>
             <Route exact path='/signup' component={SignUp}/>
             <Route exact path='/login' component={Login}/>
 
@@ -51,10 +51,7 @@ class UserNav extends React.Component {
                 return <UserResvView res={res} {...props}/>
               }
             }/>
-         
-       
-            
-          </Switch>
+          </Routes>
         </div>
       );
   
@@ -71,7 +68,9 @@ class UserNav extends React.Component {
     })
   }
   
-  export default withRouter(connect(mapStateToProps, { getCurrentUser })(UserNav));
+  // export default withRouter(connect(mapStateToProps, { getCurrentUser })(UserNav));
+  export default connect(mapStateToProps, { getCurrentUser })(UserNav);
+
 
 
 

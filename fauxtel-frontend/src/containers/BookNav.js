@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom'
+import { Link, NavLink, Route, Routes } from 'react-router-dom'
 import BookNavLinks from '../links/BookNavLinks.js'
 import BookNow from '../components/BookNow.js'
 import Reserve from '../components/Reserve.js'
@@ -39,7 +39,9 @@ class BookNav extends React.Component {
             <BookNavLinks />
                 <div className="BookNowRoute">
                     <span class="closeButton" onClick={off}>Close</span>
-                    <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>
+                    <Routes>
+                        <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>
+                    </Routes>
                 </div>
                 
         </div>
@@ -70,6 +72,6 @@ const mapStateToProps = state => {
       }
   }
   
-  export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BookNav))
+  export default connect(mapStateToProps, mapDispatchToProps)(BookNav);
   
 
