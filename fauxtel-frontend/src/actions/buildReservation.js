@@ -1,4 +1,4 @@
-export const buildReservation = room => {
+export const buildReservation = (room) => {
     
     return {
       type: "SET_ROOM_SELECTION",
@@ -6,7 +6,7 @@ export const buildReservation = room => {
     }
   }
 
-export const modifyReservation = resv => {
+export const modifyReservation = (resv) => {
 
   return {
     type: "SET_MODIFY_RESV",
@@ -14,7 +14,7 @@ export const modifyReservation = resv => {
   }
 }
 
-export const setUserReservations = resv => {
+export const setUserReservations = (resv) => {
 
     return {
       type: "SET_USER_RESERVATIONS",

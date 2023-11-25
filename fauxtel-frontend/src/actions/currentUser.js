@@ -1,7 +1,7 @@
 
 
 
-export const loginUser = user => {    
+export const loginUser = (user) => {    
     return {
         type: "LOGIN_USER",
         user 
@@ -15,7 +15,7 @@ export const logoutUser = () => {
     }
   }
 
-export const login = credentials => {
+export const login = (credentials) => {
        return dispatch => {
         fetch('http://localhost:3000/api/v1/login', {
             headers: {
@@ -74,7 +74,7 @@ export const getCurrentUser = () => {
 
 }
 
-export const signup = credentials => {
+export const signup = (credentials) => {
   return dispatch => {
     const userInfo = {
       user: credentials//added bc has to be wrapped in user object
@@ -107,7 +107,7 @@ export const signup = credentials => {
 
 
 
-export const logout = event => {
+export const logout = (event) => {
     localStorage.removeItem("token")
     console.log(localStorage.token)
     console.log("logged out")

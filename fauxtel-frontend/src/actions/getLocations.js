@@ -1,5 +1,5 @@
 
-export const setLocs = locs => {   
+export const setLocs = (locs) => {   
     console.log(locs) 
     return {
         type: "GET_LOCS",

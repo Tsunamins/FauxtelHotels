@@ -1,5 +1,5 @@
 
-export const setRooms = rooms => {    
+export const setRooms = (rooms) => {    
   return {
       type: "GET_ROOMS",
       rooms 

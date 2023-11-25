@@ -1,18 +1,18 @@
-export const setAllReservations = reservations => {    
+export const setAllReservations = (reservations) => {    
     return {
         type: "GET_RESERVATIONS",
         reservations 
     }
   }
 
-export const addReservation = res => {
+export const addReservation = (res) => {
   return {
     type: "ADD_RES",
     res
   }
 }
 
-export const deleteReservation = res => {
+export const deleteReservation = (res) => {
 
   return {
     type: "DELETE_RES",
@@ -20,7 +20,7 @@ export const deleteReservation = res => {
   }
 }
 
-export const updateReservation = res => {
+export const updateReservation = (res) => {
 
   console.log(res)
   return {
