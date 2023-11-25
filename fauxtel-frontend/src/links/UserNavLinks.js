@@ -9,7 +9,7 @@ const UserNavLinks = ({ currentUser, loggedIn }) => (
     <div className="UserLoggedIn">
       { loggedIn ? <><li id="loggedin">Logged in as {currentUser.attributes.first_name} </li><li><Logout/></li></> : null}
     </div>
-    <div class="UserLinks">
+    <div className="UserLinks">
       <li><NavLink to="/view-reservations">View My Reservations</NavLink></li> 
       
         {/* next would also want a view user info link */}

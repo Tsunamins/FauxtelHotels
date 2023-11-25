@@ -34,7 +34,7 @@ function BookRooms(props) {
           <form onSubmit={handleSubmit}>
             
              {props.availRooms.map(room =>
-                <div class="radios" key={room.id}>
+                <div className="radios" key={room.id}>
                    <label className="each-room"  onClick={handleStyle}>{room.attributes.room_type}
                         <input type="radio" key={room.id} id={room.id} name="room" value={room.id} onClick={handleSelect}>
                    

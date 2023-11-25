@@ -15,10 +15,7 @@ import '../styles/home.css'
 
 class HomeView extends React.Component {
     componentDidMount(){
-        console.log("a")
         this.props.getRooms()
-        console.log("b")
-      
         this.props.getLocs()
     }
 
@@ -33,23 +30,7 @@ class HomeView extends React.Component {
         <div className="Home">
          
             <HomeNavLinks />
-          <Routes>
-             <Route exact path='/room-types' component={Rooms}/>
-             <Route exact path='/locations' component={Locations}/>
-             <Route exact path='/locations/:id' render={props => {
-              
-              const loc = this.props.locations.find(element => element.id.toString() === props.match.params.id)
-              // userReservations.find(res => console.log(typeof res.id))
-              // console.log(typeof props.match.params.id)
-            
-              return <LocationDesc loc={loc} {...props}/>
-            }
-          }/>
-             <Route exact path='/venues' component={FFVenues}/>
-         
-       
-            
-          </Routes>
+
         </div>
       );
   

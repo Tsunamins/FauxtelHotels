@@ -3,11 +3,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Link, NavLink, Route, Switch, withRouter } from 'react-router-dom';
 import { getUserReservations } from '../actions/buildReservation.js';
-import UserResvView from './UserReservationView.js';
 import '../styles/userresv.css';
 
 
-const UserResv = (props) => {
+const UserReservations = (props) => {
   console.log(props)
   //sometimes error, maybe if currentUser === false use above getUserReservations call
     const userResv = props.currentUser.attributes.reservations.map(r => 
@@ -34,4 +33,4 @@ const UserResv = (props) => {
 
     })
   }
- export default connect(mapStateToProps)(UserResv)
+ export default connect(mapStateToProps)(UserReservations)

@@ -9,7 +9,7 @@ import '../styles/modifying.css'
 
 
 
-  class UserResvView extends React.Component {  
+  class UserReservationsView extends React.Component {  
     // componentDidMount(){
     //   this.props.getReservations()
     // }
@@ -93,4 +93,4 @@ const mapStateToProps = state => {
 //   }
 // }
 
-export default connect(mapStateToProps, {cancelReservation, getResv})(UserResvView)
+export default connect(mapStateToProps, {cancelReservation, getResv})(UserReservationsView)

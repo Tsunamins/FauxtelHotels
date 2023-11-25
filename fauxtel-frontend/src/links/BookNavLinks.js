@@ -8,7 +8,7 @@ const BookNavLinks = () => (
 
   
 
-    <div class="BookNowLink" onClick={on}>
+    <div className="BookNowLink" onClick={on}>
       <span>
         <Link to="/booknow">Book Now</Link>
       </span>

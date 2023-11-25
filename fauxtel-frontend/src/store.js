@@ -9,21 +9,12 @@ import locsReducer from './reducers/locationsReducer.js'
 
 const reducer = combineReducers({
     //users: usersReducer, 
-   
     currentUser,
-
-
     rooms: roomsReducer,
-
     reservations,
-
     buildReservation,
-
     locations: locsReducer,
-
-
-
-})
+});
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

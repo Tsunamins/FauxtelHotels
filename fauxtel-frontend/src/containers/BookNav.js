@@ -38,12 +38,8 @@ class BookNav extends React.Component {
         <div className="BookNav">
             <BookNavLinks />
                 <div className="BookNowRoute">
-                    <span class="closeButton" onClick={off}>Close</span>
-                    <Routes>
-                        <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>
-                    </Routes>
+                    <span className="closeButton" onClick={off}>Close</span>
                 </div>
-                
         </div>
     ) 
     }

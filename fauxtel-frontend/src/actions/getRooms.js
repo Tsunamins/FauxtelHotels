@@ -7,7 +7,6 @@ export const setRooms = rooms => {
 }
 
 export const getRooms = () => {
-    console.log("c")
     //return dispatch (built in) as an argument, a thunk function 
     return dispatch => {
 
@@ -15,14 +14,14 @@ export const getRooms = () => {
       .then(resp => resp.json())
       .then(response => {
           if(response.error){
+              console.log('resp error rooms: ', response.error)
               alert(response.error)
           } else {
-            console.log("d")
+            console.log("dispatch rooms")
             //console.log(response)
             dispatch(setRooms(response.data))
             }
         })
           .catch(console.log)
     }
-    console.log("e")
 }

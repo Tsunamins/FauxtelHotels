@@ -6,8 +6,6 @@ import UserAuthLinks from '../links/UserAuthLinks.js'
 import Logout from '../components/Logout.js'
 import SignUp from '../components/SignUp.js'
 import Login from '../components/Login.js'
-import UserResv from '../components/UserReservations.js'
-import UserResvView from '../components/UserReservationView.js'
 import { getUserReservations } from '../actions/buildReservation.js'
 import { getCurrentUser } from '../actions/currentUser.js'
 
@@ -36,22 +34,11 @@ class UserNav extends React.Component {
    
       return (
         <div className="User">
-          { loggedIn ? <UserNavLinks userReservations={this.props.currentUser.attributes.reservations}/> : <UserAuthLinks/> }
-          <Routes>
-            <Route exact path='/signup' component={SignUp}/>
-            <Route exact path='/login' component={Login}/>
+          { loggedIn 
+            ? <UserNavLinks userReservations={this.props.currentUser.attributes.reservations}/> 
+            : <UserAuthLinks/> 
+          }
 
-            <Route exact path='/view-reservations' component={UserResv}/>
-            <Route exact path='/view-reservations/:id' render={props => {
-              
-                const res = allReservations.find(element => element.id.toString() === props.match.params.id)
-                // userReservations.find(res => console.log(typeof res.id))
-                // console.log(typeof props.match.params.id)
-              
-                return <UserResvView res={res} {...props}/>
-              }
-            }/>
-          </Routes>
         </div>
       );
   
@@ -70,76 +57,3 @@ class UserNav extends React.Component {
   
   // export default withRouter(connect(mapStateToProps, { getCurrentUser })(UserNav));
   export default connect(mapStateToProps, { getCurrentUser })(UserNav);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//style of navigation works, but does not get a match of url id with specific reservation id
-// const UserNav = ({currentUser, loggedIn}) => {
- 
-//     return (
-//         <div className="UserNav">
-//             <Switch>
-//                 <Route path="/login">
-//                     <Login />
-//                 </Route>
-//                 <Route path="/signup">
-//                     <SignUp />
-//                 </Route>
-//             </Switch>
-            
-//             <h2>{ loggedIn ? 
-//                     <>
-//                         <p>Logged in as {currentUser.attributes.first_name}</p>
-//                         <Logout />
-//                         <div>
-//                             <UserNavLinks />
-//                         </div>
-//                         <Switch>  
-//                             {/* <Route exact path='/view-reservations/:id' render={currentUser => {
-//                                 const res = currentUser.attributes.reservations.find(res => res.id === currentUser.match.params.id)
-//                                 return <UserResvView res={res} {...currentUser}/>
-//                             }
-//                             }/> */}
-
-//                             <Route path="/view-reservations/:id"><UserResvView /></Route> 
-//                             <Route path="/view-reservations" > <UserResv /> </Route>
-//                         </Switch>   
-                      
-//                     </> 
-//                 : 
-//                     "Not logged in"}</h2>    
-//         </div>
-//     )
-// }
-
-
-// const mapStateToProps = ({currentUser}) => {
-//     return ({
-//         currentUser,
-//       loggedIn: !!currentUser
-//     })
-//   }
-// export default connect(mapStateToProps)(UserNav);
-

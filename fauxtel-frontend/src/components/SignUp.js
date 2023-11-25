@@ -1,55 +1,51 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { signup } from '../actions/currentUser.js'
 
-class SignUp extends React.Component {
-    state = {
-        first_name: "",
-        last_name: "",  
+// class SignUp extends React.Component {
+const SignUp = () => {
+    const initialState = {
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
-      
-    }
-  
-    handleChange = event => {
-      this.setState({
-        [event.target.name]: event.target.value
-      });
-    }
-  
-    handleSubmit = event => {
-      event.preventDefault()
 
-      this.props.signup(this.state)
-      this.props.history.push("/")
-      this.setState({
-            first_name: "",
-            last_name: "",
-            email: "",
-            password: ""
-            
-      })
     }
 
-    render() {
+    const [signUpInfo, setSignUpInfo] = useState(initialState);
+
+    const handleChange = (event) => {
+        setSignUpInfo({ [event.target.name]: event.target.value })
+    }
+
+    const handleSubmit = event => {
+        event.preventDefault()
+        // todo this is prob to update state as in store? and exit out of the sign up component
+        // maybe make a modal instead
+        // props.signup(this.state)
+        // props.history.push("/")
+        setSignUpInfo(initialState);
+    }
+
     return (
-      <div className="SignUp">
-        <form onSubmit={this.handleSubmit}>
-            <input className="form" type="text" name="first_name"  placeholder="first_name" value={this.state.first_name} onChange={this.handleChange}></input>
-            <input className="form" type="text" name="last_name"  placeholder="last_name" value={this.state.last_name} onChange={this.handleChange}></input>
-            <br></br>
-            <input className="form" type="text" name="email"  placeholder="email" value={this.state.email} onChange={this.handleChange}></input>
-            <input className="form" type="password" name="password"  placeholder="password" value={this.state.password} onChange={this.handleChange}></input>
-            <br></br>
-            <input className="button" type="submit" value="Sign Up"></input>
+        <div className="SignUp">
+            <form onSubmit={handleSubmit}>
+                <input className="form" type="text" name="first_name" placeholder="first_name" value={signUpInfo.firstName} onChange={handleChange}></input>
+                <input className="form" type="text" name="last_name" placeholder="last_name" value={signUpInfo.lastName} onChange={handleChange}></input>
+                <br></br>
+                <input className="form" type="text" name="email" placeholder="email" value={signUpInfo.email} onChange={handleChange}></input>
+                <input className="form" type="password" name="password" placeholder="password" value={signUpInfo.password} onChange={handleChange}></input>
+                <br></br>
+                <input className="button" type="submit" value="Sign Up"></input>
 
-        </form>
+            </form>
         </div>
     )
 }
-}
 
-export default connect(null, {signup})(SignUp)
+// todo find newer react/redux/thunk docs on not using export default
+// or similar
+export default connect(null, { signup })(SignUp)
 
 
 
