@@ -25,3 +25,5 @@ export const setLocs = (locs) => {
             .catch(console.log)
           }
   }
+
+  
