@@ -1,63 +1,46 @@
-import React from 'react';
-import { Link, Route } from 'react-router-dom'
-import {connect} from 'react-redux'
-import RoomDesc from './RoomDescriptions.js'
-import '../styles/roomdesc.css'
+import React, { useEffect } from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import LikeButton from './LikeButton.js'
+import { getLocs } from '../actions/getLocations.js';
+
+
+export function Rooms({ locations }) {
+    const dispatch = useDispatch();
+    const locationsOfRooms = useSelector(state => state.locations);
+
+
+    // todo can prob move each of these general get reqs to an App use effect and then get through props again
+    useEffect(() => {
+        dispatch(getLocs());
+    }, []);
 
 
 
-
-function Rooms(props) {
-    console.log(props)
-    const locs = props.locations
-    let room_types = []
-    const location_divs = locs.map(l => 
-       
-        <div key={l.id} className="showcaseRooms">
-          <div className="RoomTypeList">Rooms Featured at {l.attributes.name} </div>
-            {room_types = [...new Set(l.attributes.rooms.map(r => r.room_type))]
-            .map(rt => <div className="RoomTitle" id={rt}>
-                <LikeButton />
-
-                 <RoomDesc roomDetails={l.attributes.rooms.find(r => r.room_type === rt)} /></div>)}
-            
+    return (
+        <div className="LocationsRooms roomsList">
+            <h1 className="PageTitle">Rooms</h1>
+            {locationsOfRooms.map(l =>
+                <div key={l.attributes.name} className="showcaseRooms">
+                    <div className="roomTypeList">Rooms Featured at {l.attributes.name} </div>
+                    {l.attributes.rooms.map(room =>
+                            <div className="RoomTitle" id={room.room_type}>
+                                <div className='roomDetails'>{room.room_type}</div>
+                                <div className='roomDetails'>{room.description}</div>
+                                <LikeButton />
+                            </div>
+                    )}
+                </div>
+            )}
         </div>
- 
-      )
-
-     return(
-        <div>
-            <div className="LocationsRooms">
-                {location_divs}
-                
-            </div>
-        
-        </div>
-
-      )
-
- 
+    )
 }
 
-//onPointerEnter={handleMouseEnter} onPointerLeave={handleMouseLeave}
-// const handleMouseEnter = () =>{
-//     document.querySelector(".RoomDetailedDisplay").style.display = "block";
-//     console.log("Mouse Has Entered")
-//   }
-  
-//   const handleMouseLeave = () =>{
-//     document.querySelector(".RoomDetailedDisplay").style.display = "none";
-//     console.log("Mouse has Left")
-  
-//   }
-
 const mapStateToProps = state => {
-    return({
+    return ({
         rooms: state.rooms,
         locations: state.locations
     })
 }
 
 
-export default connect(mapStateToProps)(Rooms)
+// export default connect(mapStateToProps)(Rooms)

@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 function LocationDesc(props) {
 
-    //  console.log(loc)
     const { loc } = useParams();
 
 

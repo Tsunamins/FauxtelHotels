@@ -19,14 +19,12 @@ import '../styles/modifying.css'
     }
 
   handleCancel = () => {
-    console.log(this.props.res.id)
     this.props.cancelReservation(this.props.res.id)
     this.props.history.push("/")
   }
 
   handleModify = () => {
-    console.log(this.state)
-    console.log(this.props.res)
+
     this.props.getResv(this.props.res.id)
     this.setState({
       renderModify: true

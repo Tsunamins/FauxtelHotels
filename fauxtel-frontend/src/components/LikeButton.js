@@ -13,7 +13,6 @@ class LikeButton extends React.Component {
     //   });
 
     handleOnClick = () => {
-       console.log("Like room button clicked")
      
             // this.setState({
             //     likes: !this.state.likes
@@ -29,15 +28,9 @@ class LikeButton extends React.Component {
 
     render(){
         return(
-            <div>
-                <button onClick={this.handleOnClick}>
+                <button className='likeButton' onClick={this.handleOnClick}>
                     {this.state.likes ? "I like this Room" : "Like Room" }
                 </button>
-            </div>
-
-           
-
-
         )
     }
 

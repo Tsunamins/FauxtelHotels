@@ -1,35 +1,26 @@
-import React from 'react';
-import { Link, Route } from 'react-router-dom'
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { connect, useDispatch, useSelector } from 'react-redux';
+import '../styles/Locations.css';
+import { getLocs } from '../actions/getLocations';
 
 
+export function Locations(props) {
+    const dispatch = useDispatch();
+    const locations = useSelector(state => state.locations)
 
-
-function Locations(props) {
-
-    console.log(props)
-    const locationDetails = props.locations.map(l =>
-        <li key={l.id}>
-            <Link to={`/locations/${l.id}`}>Hotel: {l.attributes.name} To: {l.attributes.city}</Link>
-        </li>
-
-    )
-
+    useEffect(() => {
+        dispatch(getLocs())
+    }, [])
 
     return (
-        <div>
-            {locationDetails}
+        <div className='LocationsList'>
+            <h1 className='LocationsTitle'>Locations</h1>
+            {locations.map(l =>
+                <li key={l.id}>
+                    <Link to={`/locations/${l.id}`}>{l.attributes.name} - {l.attributes.city}</Link>
+                </li>
+            )}
         </div>
     )
-
-
 }
-
-const mapStateToProps = state => {
-    return ({
-        locations: state.locations
-    })
-}
-
-
-export default connect(mapStateToProps)(Locations)

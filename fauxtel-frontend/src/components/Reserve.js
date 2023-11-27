@@ -78,9 +78,6 @@ handleSubmit = event => {
   
  
   render () {
- 
-    console.log(this.props)
-    console.log(this.state)
     const currentUser = this.props.currentUser
     const room = this.props.reserve.room[0]
     

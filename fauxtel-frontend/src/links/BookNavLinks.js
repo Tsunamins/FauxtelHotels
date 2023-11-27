@@ -4,21 +4,16 @@ import '../styles/booknow.css'
 
 
 const BookNavLinks = () => (
-
-
-  
-
     <div className="BookNowLink" onClick={on}>
-      <span>
-        <Link to="/booknow">Book Now</Link>
-      </span>
+        <span>
+            <Link to="/booknow">Book Now</Link>
+        </span>
     </div>
-  
-  );
-  
-  const on = () => {
-    document.querySelector(".BookNowRoute").style.display = "block";
-    console.log("On Click is calling on function")
-  }
 
-  export default BookNavLinks;
+);
+
+const on = () => {
+    document.querySelector(".BookNowRoute").style.display = "block";
+}
+
+export default BookNavLinks;

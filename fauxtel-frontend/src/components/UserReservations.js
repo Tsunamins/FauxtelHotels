@@ -7,7 +7,6 @@ import '../styles/userresv.css';
 
 
 const UserReservations = (props) => {
-  console.log(props)
   //sometimes error, maybe if currentUser === false use above getUserReservations call
     const userResv = props.currentUser.attributes.reservations.map(r => 
           <li key={r.id}>

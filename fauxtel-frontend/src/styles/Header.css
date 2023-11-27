@@ -1,0 +1,82 @@
+.FauxtelHeader {
+    justify-content: space-between;
+    align-items: center;
+    color: #f2d2c2;
+    background-color: #1e1124;
+    display: flex;
+    flex-direction: row;
+    height: 25vh;
+    width: 100%;
+    padding-top: 25px;
+}
+
+.FauxtelLogo {
+    animation: fadeIn 5s, slideIn 5s;
+    display: flex;
+    /* flex-direction: column; */
+    width: 25vh;
+    height: 25vh;
+    pointer-events: none;
+    margin-top: -20px;
+}
+
+@keyframes fadeIn {
+    60% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    50% {
+        transform: translateX(50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.NavWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.SignUpLogin {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 46%;
+    border: 1px solid #032b2b;
+}
+
+
+
+.UserLoggedIn {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 25px;
+    border: 3px solid #283752;
+
+}
+
+.UserLinks {
+    display: inline-block;
+    list-style: none;
+}
+
+
+.SiteNav {
+    background-color: rgb(32, 28, 34);
+    color: white;
+    display: flex;
+    flex-direction: row;
+}

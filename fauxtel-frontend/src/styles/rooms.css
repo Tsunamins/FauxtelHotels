@@ -10,24 +10,55 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
+}
 
-  /* Hide the browser's default radio button */
-input[type="radio"]{
+/* Hide the browser's default radio button */
+input[type="radio"] {
     /* visibility: hidden; */
 }
 
-
-
-
-  /* On mouse-over, add a grey background color */
+/* On mouse-over, add a grey background color */
 label:hover {
     background-color: #37445c;
     color: white;
-  }
+}
 
 
+/* Room List components */
+.likeButton {
+    background-color: transparent;
+    border: 1px solid #c9dcb3;
+    margin-top: 10px;
+    padding: 10px;
+    color: #c9dcb3;
+}
+
+.roomsList {
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.showcaseRooms {
+    margin-bottom: 50px;
+}
+
+.roomTypeList {
+    color: #C9E4CA;
+}
+
+.PageTitle {
+    color: #c6ca53;
+}
 
 
-
-
+.roomDetails {
+    color: #55828B;
+}
+.RoomDetailedDisplay {
+    /* visibility: hidden; */
+ }
+ 
+ .RoomDetailedDisplay:hover {
+     color: #87bba2;
+     /* visibility: visible; */
+ }

@@ -21,8 +21,6 @@ export const deleteReservation = (res) => {
 }
 
 export const updateReservation = (res) => {
-
-  console.log(res)
   return {
     type: "UPDATE_RES",
     res
@@ -36,9 +34,8 @@ export const getReservations = () => {
         .then(response => {
             if(response.error){
                 alert(response.error)
-                console.log('response error resv: ', response.error)
+
             } else {
-              console.log('dispatch resv')
               dispatch(setAllReservations(response.data))
             }
             })
