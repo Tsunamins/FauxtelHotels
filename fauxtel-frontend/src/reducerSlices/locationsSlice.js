@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+// todo work with new redux toolkit examples to complete this
 const initialState = []
 
 const locationsSlice = createSlice({

@@ -1,29 +1,40 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect } from 'react';
+
 import './styles/booknow.css'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import BookNav from './containers/BookNav.js'
 import { getCurrentUser } from './actions/currentUser.js'
-import SignUp from './components/SignUp.js';
+import { SignUp } from './components/SignUp.js';
 import { Route, Routes } from 'react-router-dom';
-import Login from './components/Login.js';
+import { Login } from './components/Login.js';
 import UserReservationView from './components/UserReservationView.js';
 import UserReservations from './components/UserReservations.js';
-import LocationDesc from './components/LocationDesc.js';
+import { LocationDesc } from './components/LocationDesc.js';
 import { Rooms } from './components/Rooms.js';
 import { Locations } from './components/Locations.js';
 import BookNow from './components/BookNow.js';
 import FauxVenues from './components/FauxVenues.js';
 import { Header } from './containers/Header.js';
+import { getLocs } from './actions/getLocations.js';
 
 
 
-class App extends React.Component {
+function App(){
+    const currentUser = useSelector(state => state.currentUser)
+    console.log('current user from app: ', currentUser)
 
-    componentDidMount = () => {
-        this.props.getCurrentUser()
-    }
+    const dispatch = useDispatch();
+    const locations = useSelector(state => state.locations)
+    console.log('locations here?? in app: ', locations)
+
+    useEffect(() => {
+        dispatch(getLocs())
+        dispatch(getCurrentUser())
+    }, [])
+    // componentDidMount = () => {
+    //     this.props.getCurrentUser()
+    // }
 
 //     <Routes>
 //     {/* todo error page isn't working in this setup */}
@@ -41,12 +52,12 @@ class App extends React.Component {
 //   </Routes>
 
 
-
-    render() {
-        const { loggedIn } = this.props
-        let currentUser = this.state
-       const allReservations = this.props.reservations
+    // render() {
+        // const { loggedIn } = this.props
+        // let currentUser = this.state
+    //    const allReservations = this.props.reservations
     //    console.log('process: ', process.env)
+    // console.log('props in app: ', this.props)
 
 
         return (
@@ -57,19 +68,17 @@ class App extends React.Component {
                     <Route exact path='/signup' element={<SignUp />}/>
                     <Route exact path='/login' element={<Login />}/>
 
-                    <Route exact path='/view-reservations' element={<UserReservations />}/>
+                    {/* <Route exact path='/view-reservations' element={<UserReservations />}/>
                     <Route exact path='/view-reservations/:id' render={props => {
                             const res = allReservations.find(element => element.id.toString() === props.match.params.id)
                             return <UserReservationView res={res} {...props}/>
                         }
-                    }/>
+                    }/> */}
                     <Route exact path='/room-types' element={<Rooms/>}/>
                     <Route exact path='/locations' element={<Locations />}/>
-                    <Route exact path='/locations/:id' render={props => {   
-                            const loc = this.props.locations.find(element => element.id.toString() === props.match.params.id)
-                            return <LocationDesc loc={loc} {...props}/>
-                        }
-                    }/>
+                    {locations.map((loc, i) => 
+                        <Route key={`${loc.id}`} path={`/locations/${loc.id}`} element={<LocationDesc loc={loc}/>}/>
+                    )}
                     <Route exact path='/venues' element={<FauxVenues />}/>
                     <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>        
                 </Routes>
@@ -85,14 +94,14 @@ class App extends React.Component {
         );
 
     }
-}
+// }
 
-const mapStateToProps = state => {
-    return ({
+// const mapStateToProps = state => {
+//     return ({
 
-        loggedIn: !!state.currentUser
+//         loggedIn: !!state.currentUser
 
-    })
-}
+//     })
+// }
 
-export default connect(mapStateToProps, { getCurrentUser })(App);
+export default App;

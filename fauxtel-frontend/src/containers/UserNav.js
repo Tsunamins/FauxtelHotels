@@ -1,59 +1,38 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { Link, NavLink, Route, Routes } from 'react-router-dom'
-import UserNavLinks from '../links/UserNavLinks.js'
-import UserAuthLinks from '../links/UserAuthLinks.js'
-import Logout from '../components/Logout.js'
-import SignUp from '../components/SignUp.js'
-import Login from '../components/Login.js'
-import { getUserReservations } from '../actions/buildReservation.js'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { UserNavLinks } from '../links/UserNavLinks.js'
+import { UserAuthLinks } from '../links/UserAuthLinks.js'
 import { getCurrentUser } from '../actions/currentUser.js'
+import { getReservations } from '../actions/reservations.js'
 
 
+export const UserNav = () => {
+    const dispatch = useDispatch();
+    const [isLoggedIn, setUserIsLoggedIn] = useState(false);
+    const currentUser = useSelector(state => state.currentUser);
+    const reservations = useSelector(state => state.reservations);
 
+    // todo if this only deals with user reservations may not need all reservations until booking
+    useEffect(() => {
+        dispatch(getReservations())
+        dispatch(getCurrentUser())
+    }, [])
 
-class UserNav extends React.Component {
+    useEffect(() => {
+        setUserIsLoggedIn(!!currentUser)
+    }, [currentUser])
 
-    componentDidMount() {
-      this.props.getCurrentUser()
-    }
-  
-    render(){
-    
-      const { loggedIn, currentUser} = this.props
+    const userReservations = isLoggedIn ? currentUser.attributes.reservations : []
 
-      //current serializer can either get all reservations.rooms passed to next component
-
-       const allReservations = this.props.reservations
-      
-  
-
-      const userReservations = loggedIn ? currentUser.attributes.reservations : []
-
-    
-   
-      return (
+    // todo tech no prop for userReservations and this info should really be provided to the component that renders reservations of a user
+    // some enhancement like an admin mode would show all so only need users once again
+    return (
         <div className="User UserNav">
-          { loggedIn 
-            ? <UserNavLinks userReservations={this.props.currentUser.attributes.reservations}/> 
-            : <UserAuthLinks/> 
-          }
-
+            {isLoggedIn
+                ? <UserNavLinks isLoggedIn={isLoggedIn} currentUser={currentUser} userReservations={userReservations} />
+                : <UserAuthLinks />
+            }
         </div>
-      );
-  
-    }
-  }
-  
-  const mapStateToProps = state => {
-   
-    return ({
-        reservations: state.reservations,
-        currentUser: state.currentUser,
-      loggedIn: !!state.currentUser,
-      //userReservations: state.currentUser.attributes.reservations
-    })
-  }
-  
-  // export default withRouter(connect(mapStateToProps, { getCurrentUser })(UserNav));
-  export default connect(mapStateToProps, { getCurrentUser })(UserNav);
+    );
+
+}

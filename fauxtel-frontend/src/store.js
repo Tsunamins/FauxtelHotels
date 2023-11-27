@@ -1,8 +1,4 @@
-// import { createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import { configureStore } from '@reduxjs/toolkit'
-
-// import thunk from 'redux-thunk';
-// import usersReducer from './reducers/usersReducer.js'
 import roomsReducer from './reducers/roomsReducer.js'
 import currentUser from './reducers/currentUser.js'
 import reservations from './reducers/reservations.js'
@@ -21,19 +17,7 @@ const store = configureStore({
         locations: locsReducer,
     }
   })
-// const reducer = combineReducers({
-//     //users: usersReducer, 
-//     currentUser,
-//     rooms: roomsReducer,
-//     reservations,
-//     buildReservation,
-//     locations: locsReducer,
-// });
 
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-// const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
-// todo is this needed?
-// todo next need to work with new technique from toolkit in all of the actual reducers and actions etc
-// also maybe move this file store, actions folder and reducers folder into a store or other named file
+  // todo - move all store, reducers, actions, later slices and related into a store or reducer folder, maybe separate out the 
+  // fetch functions into a services or similar folder
 export default store

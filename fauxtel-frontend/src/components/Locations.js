@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../styles/Locations.css';
 import { getLocs } from '../actions/getLocations';
 
@@ -12,6 +12,7 @@ export function Locations(props) {
     useEffect(() => {
         dispatch(getLocs())
     }, [])
+    console.log('props in locations: ', props)
 
     return (
         <div className='LocationsList'>

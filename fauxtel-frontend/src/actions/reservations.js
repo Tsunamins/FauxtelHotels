@@ -1,155 +1,114 @@
-export const setAllReservations = (reservations) => {    
+export const setAllReservations = (reservations) => {
     return {
         type: "GET_RESERVATIONS",
-        reservations 
+        reservations
     }
-  }
+}
 
 export const addReservation = (res) => {
-  return {
-    type: "ADD_RES",
-    res
-  }
+    return {
+        type: "ADD_RES",
+        res
+    }
 }
 
 export const deleteReservation = (res) => {
-
-  return {
-    type: "DELETE_RES",
-    res
-  }
+    return {
+        type: "DELETE_RES",
+        res
+    }
 }
 
 export const updateReservation = (res) => {
-  return {
-    type: "UPDATE_RES",
-    res
-  }
+    return {
+        type: "UPDATE_RES",
+        res
+    }
 }
-  
-export const getReservations = () => {  
-    return dispatch => {
-       return fetch('http://localhost:3000/api/v1/reservations')
-        .then(resp => resp.json())
-        .then(response => {
-            if(response.error){
-                alert(response.error)
 
-            } else {
-              dispatch(setAllReservations(response.data))
-            }
+export const getReservations = () => {
+    return dispatch => {
+        return fetch('http://localhost:3000/api/v1/reservations')
+            .then(resp => resp.json())
+            .then(response => {
+                if (response.error) {
+                    // alert(response.error)
+
+                } else {
+                    dispatch(setAllReservations(response.data))
+                }
             })
             .catch(console.log)
-          }
-  }
+    }
+}
 
 export const createReservation = (res_info) => {
-
     return dispatch => {
-      return fetch('http://localhost:3000/api/v1/reservations', {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(res_info)
-      })
-        .then(resp => resp.json())
-        .then(response => {
-          if(response.error){
-            alert(response.error)
-          } else {
-            dispatch(addReservation(response))
-          }
+        return fetch('http://localhost:3000/api/v1/reservations', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(res_info)
         })
-        .catch(console.log)
+            .then(resp => resp.json())
+            .then(response => {
+                if (response.error) {
+                    // alert(response.error)
+                } else {
+                    dispatch(addReservation(response))
+                }
+            })
+            .catch(console.log)
     }
 }
 
 export const cancelReservation = (res_id) => {
-
-  const token = localStorage.getItem("token")
-  if(token){
-     return dispatch => {
-    
-      return fetch(`http://localhost:3000/api/v1/reservations/${res_id}`, {
-    
-      method: "DELETE",
-      headers: {
-        "Authorization": token
-      }
-    })
-      .then(resp => {
-        if (resp.error){
-          alert(resp.error)
-        }else {
-     
-           dispatch(deleteReservation(res_id))
-           alert("Reservation Cancelled")
-      
-   
-      
+    const token = localStorage.getItem("token")
+    if (token) {
+        return dispatch => {
+            return fetch(`http://localhost:3000/api/v1/reservations/${res_id}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": token
+                }
+            })
+                .then(resp => {
+                    if (resp.error) {
+                    } else {
+                        dispatch(deleteReservation(res_id))
+                    }
+                })
+                .catch(error => console.log(error))
+        }
     }
-  })
-      .catch(error => console.log(error))
-
-  }
-}
 }
 
 
 export const modifyReservation = (resv_id, resv_data) => {
-  console.log(resv_id)
-  console.log(resv_data)
-  const token = localStorage.getItem("token")
-  if(token){
-     return dispatch => {
-    
-      return fetch(`http://localhost:3000/api/v1/reservations/${resv_id}`, {
-    
-      method: "PATCH",
-      headers: {
-        "Authorization": token,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(resv_data)
-    })
-      .then(resp => resp.json())
-      .then(response => {
-        if (response.error){
-          alert(response.error)
-        }else {
-          console.log(response.data)
-           dispatch(updateReservation(response.data))
-           alert("Reservation Updated")
-      
-   
-      
+    console.log(resv_id)
+    console.log(resv_data)
+    const token = localStorage.getItem("token")
+    if (token) {
+        return dispatch => {
+            return fetch(`http://localhost:3000/api/v1/reservations/${resv_id}`, {
+                method: "PATCH",
+                headers: {
+                    "Authorization": token,
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(resv_data)
+            })
+                .then(resp => resp.json())
+                .then(response => {
+                    if (response.error) {
+
+                    } else {
+                        console.log(response.data)
+                        dispatch(updateReservation(response.data))
+                    }
+                })
+                .catch(error => console.log(error))
+        }
     }
-  })
-      .catch(error => console.log(error))
-
-  }
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

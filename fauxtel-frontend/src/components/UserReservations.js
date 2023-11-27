@@ -12,14 +12,11 @@ const UserReservations = (props) => {
           <li key={r.id}>
             <Link to={`/view-reservations/${r.id}`}>From: {r.start_date} To: {r.end_date}</Link>
           </li>
-   
         )
 
     return(
         <div className="UserResv">
-       
              {userResv}
-             
          </div>
     )
  }

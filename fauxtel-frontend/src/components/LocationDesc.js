@@ -1,17 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom'
-import { connect } from 'react-redux'
 
 
-function LocationDesc(props) {
-
-    const { loc } = useParams();
-
-
+export function LocationDesc({ loc }) {
     return (
         loc ?
-            <div>
-                <p>{loc.attributes.name} </p>
+            <div className='LocationWrapper'>
+                <h1>{loc.attributes.name} </h1>
                 <p>{loc.attributes.city}, {loc.attributes.state}   </p>
                 <p>{loc.attributes.description}  </p>
                 <p>Number of Rooms: {loc.attributes.rooms.length} </p>
@@ -21,12 +15,3 @@ function LocationDesc(props) {
 
 
 }
-
-const mapStateToProps = state => {
-    return ({
-        locations: state.locations
-    })
-}
-
-
-export default connect(mapStateToProps)(LocationDesc)
