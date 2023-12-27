@@ -86,8 +86,6 @@ export const cancelReservation = (res_id) => {
 
 
 export const modifyReservation = (resv_id, resv_data) => {
-    console.log(resv_id)
-    console.log(resv_data)
     const token = localStorage.getItem("token")
     if (token) {
         return dispatch => {

@@ -12,7 +12,6 @@ export function Locations(props) {
     useEffect(() => {
         dispatch(getLocs())
     }, [])
-    console.log('props in locations: ', props)
 
     return (
         <div className='LocationsList'>

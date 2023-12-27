@@ -30,7 +30,7 @@ function BookRooms(props) {
 
   if(props.availRooms.length > 0){
       return(
-        <div>
+        <div  id='BookableRooms'>
           <form onSubmit={handleSubmit}>
             
              {props.availRooms.map(room =>

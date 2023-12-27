@@ -24,10 +24,10 @@ export const login = (credentials) => {
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
-                    // alert(response.error)
+                    alert(response.error)
 
                 } else {
-                    console.log(response)
+                    console.log('!!!!! response: ', response)
                     console.log(response.data)
                     console.log(response.user.data)
                     console.log(response.jwt)

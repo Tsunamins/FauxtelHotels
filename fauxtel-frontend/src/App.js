@@ -13,7 +13,7 @@ import UserReservations from './components/UserReservations.js';
 import { LocationDesc } from './components/LocationDesc.js';
 import { Rooms } from './components/Rooms.js';
 import { Locations } from './components/Locations.js';
-import BookNow from './components/BookNow.js';
+import { BookNow } from './components/BookNow.js';
 import FauxVenues from './components/FauxVenues.js';
 import { Header } from './containers/Header.js';
 import { getLocs } from './actions/getLocations.js';
@@ -26,12 +26,11 @@ function App(){
 
     const dispatch = useDispatch();
     const locations = useSelector(state => state.locations)
-    console.log('locations here?? in app: ', locations)
 
     useEffect(() => {
         dispatch(getLocs())
         dispatch(getCurrentUser())
-    }, [])
+    }, []);
     // componentDidMount = () => {
     //     this.props.getCurrentUser()
     // }
@@ -56,9 +55,6 @@ function App(){
         // const { loggedIn } = this.props
         // let currentUser = this.state
     //    const allReservations = this.props.reservations
-    //    console.log('process: ', process.env)
-    // console.log('props in app: ', this.props)
-
 
         return (
             <div className="App"> 
@@ -80,7 +76,7 @@ function App(){
                         <Route key={`${loc.id}`} path={`/locations/${loc.id}`} element={<LocationDesc loc={loc}/>}/>
                     )}
                     <Route exact path='/venues' element={<FauxVenues />}/>
-                    <Route exact path="/booknow" render={(routerProps) => <BookNow {...routerProps} reservations={this.props.reservations}  />} ></Route>        
+                    <Route exact path='/booknow' element={<BookNow />}/>
                 </Routes>
 
                 <div className="BookNowWrapper">

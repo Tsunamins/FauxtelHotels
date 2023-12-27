@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {cancelReservation} from '../actions/reservations.js'
-import BookNow from './BookNow.js'
+import { BookNow } from './BookNow.js'
 import { getResv } from '../actions/buildReservation.js'
 import '../styles/modifying.css'
 

@@ -14,7 +14,6 @@ export const getRooms = () => {
                     console.log('resp error rooms: ', response.error)
                     // alert(response.error)
                 } else {
-                    console.log("dispatch rooms")
                     //console.log(response)
                     dispatch(setRooms(response.data))
                 }

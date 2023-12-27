@@ -11,7 +11,6 @@ export const getLocs = () => {
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
-                    console.log('resp err locations: ', response.error)
                     // alert(response.error)
                 } else {
                     console.log('dispatch locs', response)

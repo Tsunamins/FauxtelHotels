@@ -22,7 +22,7 @@ export const Login = () => {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         dispatch(login(loginInfo))
         // todo use react dom router to go back to index or similar, or turn into modals
         // this.props.history.push("/")
