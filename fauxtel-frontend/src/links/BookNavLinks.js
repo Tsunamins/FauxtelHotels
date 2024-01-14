@@ -4,16 +4,12 @@ import '../styles/booknow.css'
 
 
 const BookNavLinks = () => (
-    <div className="BookNowLink" onClick={on}>
+    <div className="BookNowOval">
         <span>
-            <Link to="/booknow">Book Now</Link>
+            <Link id='BookNowOvalLink' to="/booknow">Book Now</Link>
         </span>
     </div>
 
 );
-
-const on = () => {
-    document.querySelector(".BookNowRoute").style.display = "block";
-}
 
 export default BookNavLinks;

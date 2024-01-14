@@ -30,6 +30,7 @@ function App(){
     useEffect(() => {
         dispatch(getLocs())
         dispatch(getCurrentUser())
+        console.log('current user from use effect: ', currentUser)
     }, []);
     // componentDidMount = () => {
     //     this.props.getCurrentUser()
@@ -77,11 +78,10 @@ function App(){
                     )}
                     <Route exact path='/venues' element={<FauxVenues />}/>
                     <Route exact path='/booknow' element={<BookNow />}/>
+                    <Route exact path='/view-reservations' element={<UserReservations />}/>
+                    
                 </Routes>
 
-                <div className="BookNowWrapper">
-                    <BookNav />
-                </div>
 
                 {/* <div>Test section</div>
                 <SignUp /> */}

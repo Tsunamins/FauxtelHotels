@@ -1,26 +1,28 @@
+/* darker teal for some was 255957 */
+
 a:link {
   text-decoration: none;
   padding: 10px;
-  color: #255957;
+  color: #6aeee9;
   
 }
 
 a:visited {
   text-decoration: none;
-  color: #255957;
+  color: #6aeee9;
 }
 
 a:hover {
   text-decoration: none;
-  border: 1px solid black;
+  border: 1px solid rgb(250, 142, 106);
   border-radius: 25px;
-  color: #255957;
+  color: #6aeee9;
 }
 
 a:active {
  color: #f79360;
  text-decoration: none;
- color: #255957;
+ color: #6aeee9;
 }
 
 li {

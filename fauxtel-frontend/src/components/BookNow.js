@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-day-picker/dist/style.css';
-import '../styles/booknow.css';
+import '../styles/DayPicker.css';
+// import 'react-day-picker/dist/style.css';
+// import './day-picker.css';
 import { getRooms } from '../actions/getRooms.js';
 import { getReservations } from '../actions/reservations.js';
 import BookRooms from './BookRooms.js'
@@ -35,6 +37,7 @@ export const BookNow = (props) => {
     const { from, to } = range;
     let dateRange = toDateRange(from, to)
     // todo also based on new day picker implementatikon is this needed???
+    // or I had this maybe to persist dates someone was looking at recently???
     sessionStorage.setItem("date_range", dateRange)
     sessionStorage.setItem("start_date", from)
     sessionStorage.setItem("end_date", to)

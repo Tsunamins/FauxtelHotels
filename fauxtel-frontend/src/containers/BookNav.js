@@ -37,9 +37,6 @@ class BookNav extends React.Component {
     return (
         <div className="BookNav">
             <BookNavLinks />
-            <div className="BookNowRoute">
-                <span className="closeButton" onClick={off}>Close</span>
-            </div>
         </div>
     ) 
     }

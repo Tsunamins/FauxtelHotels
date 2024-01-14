@@ -12,6 +12,7 @@ export const logoutUser = () => {
 }
 
 export const login = (credentials) => {
+    console.log('credentials: ', credentials)
     return dispatch => {
         fetch('http://localhost:3000/api/v1/login', {
             headers: {
@@ -42,7 +43,8 @@ export const login = (credentials) => {
 export const getCurrentUser = () => {
     //new
     return dispatch => {
-        const token = localStorage.getItem("token")
+        const token = localStorage.getItem("token");
+        console.log('token???? ', token)
         if (token) {
 
             return fetch("http://localhost:3000/api/v1/get_current_user", {
@@ -57,6 +59,7 @@ export const getCurrentUser = () => {
                 .then(response => {
                     if (response.error) {
                         // alert(response.error)
+                        console.log('!!!! resp error getting user: ', response.error)
                     } else {
                         dispatch(loginUser(response.user.data))
 
