@@ -22,3 +22,10 @@
   .rdp-months {
     justify-content: center;
   }
+
+
+  /* Selection Text Special Div (not day picker footer */
+  .SelectionText {
+    color: pink;
+    font-size: 30px;
+  }

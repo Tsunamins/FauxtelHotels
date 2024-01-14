@@ -33,7 +33,6 @@ export const getRoom = (room_id) => {
                 if (response.error) {
                     alert(response.error)
                 } else {
-
                     dispatch(buildReservation(response))
                 }
             })

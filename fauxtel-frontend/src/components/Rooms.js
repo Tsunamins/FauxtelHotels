@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import LikeButton from './LikeButton.js'
+import { LikeButton } from './LikeButton.js'
 import { getLocs } from '../actions/getLocations.js';
 
 

@@ -14,7 +14,7 @@ import { LocationDesc } from './components/LocationDesc.js';
 import { Rooms } from './components/Rooms.js';
 import { Locations } from './components/Locations.js';
 import { BookNow } from './components/BookNow.js';
-import FauxVenues from './components/FauxVenues.js';
+import { FauxVenues } from './components/FauxVenues.js';
 import { Header } from './containers/Header.js';
 import { getLocs } from './actions/getLocations.js';
 

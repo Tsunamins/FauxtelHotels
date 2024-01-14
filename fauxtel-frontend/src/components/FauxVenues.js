@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/FauxVenues.css';
 
-const FauxVenues = () => {
+export const FauxVenues = () => {
     return (
         <div className='fauxVenues'>
             <h1>Fauxtel Venues</h1>
@@ -9,5 +9,3 @@ const FauxVenues = () => {
         </div>
     )
 }
-
-export default FauxVenues

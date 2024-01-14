@@ -60,8 +60,6 @@ handleSubmit = event => {
   this.props.clearBuild()
   this.props.history.push("/")
 
-
- 
   this.setState({
         start_date: "",
         end_date: "",

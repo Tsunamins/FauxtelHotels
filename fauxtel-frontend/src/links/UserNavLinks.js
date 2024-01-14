@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Logout from '../components/Logout';
+import { Logout } from '../components/Logout';
 
 // todo same here after simplifying some
 export const UserNavLinks = ({ currentUser, isLoggedIn }) => (

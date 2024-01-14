@@ -28,7 +28,7 @@ export const UserNav = () => {
     // some enhancement like an admin mode would show all so only need users once again
     return (
         <div className="User UserNav">
-            {isLoggedIn
+            {isLoggedIn && currentUser
                 ? <UserNavLinks isLoggedIn={isLoggedIn} currentUser={currentUser} userReservations={userReservations} />
                 : <UserAuthLinks />
             }

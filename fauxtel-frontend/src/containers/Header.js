@@ -10,14 +10,9 @@ export const Header = () => {
         <header className="HeaderWrapper">
             <div className='FauxtelHeader'>
                 <Link to="/"><img className="FauxtelLogo" src='fauxtellogo2.svg' alt="fauxtel hotel logo" /></Link>
-                <div className="BookNowWrapper">
-                    <BookNav />
-                </div>  
+                <BookNav />
                 <UserNav />
             </div>
-
-
-
 
             <div className="NavWrapper">
                 <hr className='headerDivider' />

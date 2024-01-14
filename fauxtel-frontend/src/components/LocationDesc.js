@@ -12,6 +12,4 @@ export function LocationDesc({ loc }) {
             </div> :
             <div>Loc display issue</div>
     )
-
-
 }

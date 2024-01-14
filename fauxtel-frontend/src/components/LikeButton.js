@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const LikeButton = () => {
+export const LikeButton = () => {
     const [hasLikedRoom, setHasLikedRoom] = useState(false);
     const handleOnClick = () => {
         setHasLikedRoom(!hasLikedRoom);
@@ -13,6 +13,3 @@ const LikeButton = () => {
         </button>
     )
 }
-
-
-export default LikeButton
