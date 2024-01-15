@@ -1,4 +1,5 @@
 export const loginUser = (user) => {
+    console.log('login user action obj: ', user)
     return {
         type: "LOGIN_USER",
         user
@@ -12,7 +13,7 @@ export const logoutUser = () => {
 }
 
 export const login = (credentials) => {
-    console.log('credentials: ', credentials)
+    console.log('@@@@!!!!!credentials: ', credentials)
     return dispatch => {
         fetch('http://localhost:3000/api/v1/login', {
             headers: {
@@ -32,8 +33,9 @@ export const login = (credentials) => {
                     console.log(response.data)
                     console.log(response.user.data)
                     console.log(response.jwt)
+                    sessionStorage.setItem('token', response.jwt)
                     dispatch(loginUser(response.user.data))
-                    localStorage.setItem('token', response.jwt)
+                    
                 }
             })
             .catch(console.log)
@@ -42,15 +44,11 @@ export const login = (credentials) => {
 
 export const getCurrentUser = () => {
     //new
+    const token = sessionStorage.getItem("token");
+    if (token) {
     return dispatch => {
-        const token = localStorage.getItem("token");
-        console.log('token???? ', token)
-        if (token) {
-
-            return fetch("http://localhost:3000/api/v1/get_current_user", {
-
+         fetch("http://localhost:3000/api/v1/get_current_user", {
                 headers: {
-
                     "Authorization": token
                 },
             })
@@ -59,10 +57,8 @@ export const getCurrentUser = () => {
                 .then(response => {
                     if (response.error) {
                         // alert(response.error)
-                        console.log('!!!! resp error getting user: ', response.error)
                     } else {
                         dispatch(loginUser(response.user.data))
-
                     }
                 })
                 .catch(console.log)
@@ -76,7 +72,6 @@ export const signup = (credentials) => {
         const userInfo = {
             user: credentials // added bc has to be wrapped in user object
         }
-        console.log(credentials)
         return fetch("http://localhost:3000/api/v1/signup", {
             method: "POST",
             headers: {
@@ -90,11 +85,8 @@ export const signup = (credentials) => {
                 if (response.error) {
                     // alert(response.error)
                 } else {
-                    console.log(response)
-                    console.log(response.user.data)
-                    console.log(response.jwt)
                     dispatch(loginUser(response.user.data))
-                    localStorage.setItem('token', response.jwt)
+                    sessionStorage.setItem('token', response.jwt)
                 }
             })
             .catch(console.log)
@@ -102,10 +94,7 @@ export const signup = (credentials) => {
 }
 
 export const logout = (event) => {
-    localStorage.removeItem("token")
-    console.log(localStorage.token)
-    console.log("logged out")
-    event.preventDefault()
+    sessionStorage.removeItem("token")
     return dispatch => {
         dispatch(logoutUser())
 

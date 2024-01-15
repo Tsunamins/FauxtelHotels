@@ -9,7 +9,6 @@ function BookRooms(props) {
     const [room, setRoom] = useState(null);
 
     const handleSelect = event => {
-        console.log('event target value: ', event.target.value)
         setRoom(event.target.value);
     }
 

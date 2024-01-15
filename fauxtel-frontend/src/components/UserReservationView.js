@@ -1,5 +1,7 @@
-import React from 'react'
-import {connect} from 'react-redux'
+import React, { useState } from 'react'
+import {connect, useDispatch, useSelector} from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+
 import {cancelReservation} from '../actions/reservations.js'
 import { BookNow } from './BookNow.js'
 import { getResv } from '../actions/buildReservation.js'
@@ -8,87 +10,43 @@ import '../styles/modifying.css'
 
 
 
+export const UserReservationView = ({reservation, userReservations}) => {
+    const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.currentUser)
+    console.log('current user in resv view: ', currentUser)
+    const navigate = useNavigate();
+    const [isModing, setIsModing] = useState(false);
+    console.log('reservation id: ', reservation.id)
 
-  class UserReservationsView extends React.Component {  
-    // componentDidMount(){
-    //   this.props.getReservations()
-    // }
-
-    state = {
-      renderModify: false
-    }
-
-  handleCancel = () => {
-    this.props.cancelReservation(this.props.res.id)
-    this.props.history.push("/")
+  const handleCancel = () => {
+    dispatch(cancelReservation(reservation.id));
+    navigate('/');
   }
 
-  handleModify = () => {
 
-    this.props.getResv(this.props.res.id)
-    this.setState({
-      renderModify: true
-    })
-   
-  }
-    
-  render(){
-   
-    const modify = this.state.renderModify
-    const res = this.props.res
-    const roomChosen = this.props.buildReservation.room.length
-    const resvChosen = this.props.buildReservation.resv.length
-   
-    
-     if(roomChosen === 1){
-       //Could maybe add a modifying statement here, or a resv changes statement
-      return(<div></div>)
-      } else {
-          return (
-
-            res ?
-              <>
-                <div className="ModifyingReservation">
-                  { modify ? <h3>You are Modifying </h3> : null}
-                  <h3>Location: {res.attributes.location.name}</h3>
-                  <p>Room Type: {res.attributes.room.room_type}</p>
-                  <p>From: {res.attributes.start_date}</p>
-                  <p>To: {res.attributes.end_date}</p>
-                  { modify ? <BookNow reservations={this.props.reservations} /> :   
-                      <div>
-               
-                      <button className="button" onClick={this.handleModify}>Modify Reservation</button>
-                      <br></br>
-                      <button className="button" onClick={this.handleCancel}>Cancel Reservation</button>
-                  </div>
-                  }
-                </div>
-              </>
-              :
-              <div>!Resv Display Issue</div>
-          )
+  // todo need to match user reservation id with reservations ids from all reservations to get name and room type
+  // instead of using ids, can match with an object things like location name, but types would be more numerous so may as well 
+  // also want to do an 'are you sure you want to cancel' 
+  return (
+    <div>
+        <div>Reservation ---</div>
+        {reservation && 
+            <div className="ModifyingReservation">
+                { isModing ? <h3>You are Modifying </h3> : null }
+                <h3>Location: {reservation.location_id}</h3>
+                <p>Room Type: {reservation.room_id}</p>
+                <p>From: {reservation.start_date}</p>
+                <p>To: {reservation.end_date}</p>
+                { isModing ? <BookNow reservations={userReservations} /> 
+                    :   
+                    <div>  
+                        <button className="button" onClick={() => setIsModing(true)}>Modify Reservation</button>
+                        <br/>
+                        <button className="button" onClick={handleCancel}>Cancel Reservation</button>
+                    </div>
+                }
+          </div>
         }
-      }
-    }   
-
-const mapStateToProps = state => {
- 
-  return {
-    rooms: state.rooms,
-    reservations: state.reservations,
-    buildReservation: state.buildReservation
-  
-  }
-}
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       modifyReservation: () => { dispatch(modifyReservation()) },
-//       cancelReservation: () => { dispatch(cancelReservation()) },
-//       //getReservations: () => { dispatch(getReservations()) },
-//       getResv: () => { dispatch(getResv()) }
-      
-//   }
-// }
-
-export default connect(mapStateToProps, {cancelReservation, getResv})(UserReservationsView)
+    </div>
+  )
+}   

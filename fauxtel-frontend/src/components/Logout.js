@@ -2,7 +2,7 @@ import React from 'react'
 import { connect, useDispatch } from 'react-redux'
 import { logout } from "../actions/currentUser.js"
 
-export const Logout = ({ logout }) => {
+export const Logout = () => {
     const dispatch = useDispatch();
 
     return (

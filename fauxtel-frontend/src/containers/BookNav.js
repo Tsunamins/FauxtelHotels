@@ -14,7 +14,7 @@ class BookNav extends React.Component {
 
     componentDidMount() {
         this.props.getRoom()
-        this.props.getCurrentUser()
+        // this.props.getCurrentUser()
         //this.props.getRooms()
         this.props.getReservations()
     }       
@@ -61,7 +61,7 @@ const mapStateToProps = state => {
           getRooms: () => { dispatch(getRooms()) },
           getReservations: () => { dispatch(getReservations()) },
           getRoom: () => { dispatch(getRoom())}, 
-          getCurrentUser: () => { dispatch(getCurrentUser())}
+        //   getCurrentUser: () => { dispatch(getCurrentUser())}
       }
   }
   

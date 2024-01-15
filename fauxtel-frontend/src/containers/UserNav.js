@@ -8,28 +8,28 @@ import { getReservations } from '../actions/reservations.js'
 
 export const UserNav = () => {
     const dispatch = useDispatch();
-    const [isLoggedIn, setUserIsLoggedIn] = useState(false);
     const currentUser = useSelector(state => state.currentUser);
     const reservations = useSelector(state => state.reservations);
+    const [loggedInUser, setLoggedInUser] = useState(currentUser);
+
 
     // todo if this only deals with user reservations may not need all reservations until booking
     useEffect(() => {
         dispatch(getReservations())
-        dispatch(getCurrentUser())
     }, [])
 
-    useEffect(() => {
-        setUserIsLoggedIn(!!currentUser)
+    useEffect(() => { 
+        currentUser && setLoggedInUser(currentUser)
     }, [currentUser])
 
-    const userReservations = isLoggedIn ? currentUser.attributes.reservations : []
+    const userReservations = loggedInUser ? currentUser?.attributes.reservations : []
 
     // todo tech no prop for userReservations and this info should really be provided to the component that renders reservations of a user
     // some enhancement like an admin mode would show all so only need users once again
     return (
         <div className="User UserNav">
-            {isLoggedIn && currentUser
-                ? <UserNavLinks isLoggedIn={isLoggedIn} currentUser={currentUser} userReservations={userReservations} />
+            {loggedInUser
+                ? <UserNavLinks loggedInUser={loggedInUser} currentUser={currentUser || ''} userReservations={userReservations} />
                 : <UserAuthLinks />
             }
         </div>

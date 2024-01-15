@@ -36,9 +36,5 @@ class Api::V1::AuthsController < ApplicationController
         else
             render json: {error: "No current user"}
         end
-    end
-
-
-    
-    
+    end  
 end

@@ -22,20 +22,17 @@ export const BookNow = (props) => {
     const [range, setRange] = useState(defaultSelected);
     const [roomsMatch, setRoomsMatch] = useState(rooms);
 
-    console.log('!!!!!! rooms !!!!!!: ', rooms)
-
-    // have to have this until replacing with use effect
     useEffect(() => {
         dispatch(getRooms())
         dispatch(getReservations())
-        dispatch(getCurrentUser())
+        // dispatch(getCurrentUser())
     }, []);
 
     const handleShowRooms = () => {
 
         const { from, to } = range;
         let dateRange = toDateRange(from, to)
-        // todo also based on new day picker implementatikon is this needed???
+        // todo also based on new day picker implementation is this needed???
         // or I had this maybe to persist dates someone was looking at recently???
         sessionStorage.setItem("date_range", dateRange)
         sessionStorage.setItem("start_date", from)
@@ -79,7 +76,7 @@ export const BookNow = (props) => {
                 selected={range}
                 onSelect={setRange}
             />
-            <div class="SelectionText Instructions">
+            <div className="SelectionText Instructions">
                 {!range.from && !range.to && 'Please select the first day.'}
                 {range.from && !range.to && 'Please select the last day.'}
                 {range.from && range.to && `Selected from ${range.from.toLocaleDateString()} to ${range.to.toLocaleDateString()}`}{' '}

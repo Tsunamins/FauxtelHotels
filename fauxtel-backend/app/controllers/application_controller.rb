@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
 
     def decode_token_and_get_user_id
         JWT.decode(request.headers["Authorization"], ENV['JWT_TOKEN_SECRET'])[0]["id"]
-
+          
     end
 
     def current_user
@@ -29,10 +29,4 @@ class ApplicationController < ActionController::API
       def authorized
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
       end
-
-
-
-
-
-
 end

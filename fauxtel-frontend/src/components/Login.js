@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../actions/currentUser.js';
 import '../styles/Forms.css';
@@ -10,6 +11,7 @@ export const Login = () => {
         password: "",
     }
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const [loginInfo, setLoginInfo] = useState(initialState);
     
@@ -20,12 +22,12 @@ export const Login = () => {
             }
         })
     }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(login(loginInfo))
         // todo use react dom router to go back to index or similar, or turn into modals
         // this.props.history.push("/")
+        navigate('/')
         setLoginInfo(initialState)
     }
 

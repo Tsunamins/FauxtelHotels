@@ -13,7 +13,6 @@ export const getLocs = () => {
                 if (response.error) {
                     // alert(response.error)
                 } else {
-                    console.log('dispatch locs', response)
                     dispatch(setLocs(response.data))
                 }
             })

@@ -79,18 +79,19 @@ class Api::V1::ReservationsController < ApplicationController
   # DELETE /reservations/1
   def destroy
     #change later if using based on no login, but a reservation code generator, change based on incoming params, i.e. am_wine_reviewer/index
+    # using for now to debug frontend to backend issues 
+    @reservation.destroy
+    #  @user = current_user
     
-     @user = current_user
     
-    
-     if @user.id != @reservation.user_id
-      render json: {
-        error: "not logged in", status: :unauthorized
-      }
-     else
-      @reservation.destroy
-      render json: { data: "Reservation cancelled" }, status: :ok
-     end
+    #  if @user.id != @reservation.user_id
+    #   render json: {
+    #     error: "not logged in", status: :unauthorized
+    #   }
+    #  else
+    #   @reservation.destroy
+    #   render json: { data: "Reservation cancelled" }, status: :ok
+    #  end
   end
 
   private

@@ -70,7 +70,6 @@ export const getUserReservations = (user_id) => {
                 if (response.error) {
                     alert("Not authorized - user reservations")
                 } else {
-                    console.log(response.data.attributes.reservations)
                     dispatch(setUserReservations(response.data.attributes.reservations))
                 }
             })
