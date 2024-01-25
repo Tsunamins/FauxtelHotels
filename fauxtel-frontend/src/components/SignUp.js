@@ -9,8 +9,7 @@ export const SignUp = () => {
         last_name: "",
         email: "",
         password: "",
-
-    }
+    };
     const dispatch = useDispatch();
     const [signUpInfo, setSignUpInfo] = useState(initialState);
 
@@ -18,13 +17,13 @@ export const SignUp = () => {
         setSignUpInfo(prevState => {
             return {
                 ...prevState, [event.target.name]: event.target.value
-            }
-        })
-    }
+            };
+        });
+    };
 
     const handleSubmit = event => {
-        event.preventDefault()
-        dispatch(signup(signUpInfo))
+        event.preventDefault();
+        dispatch(signup(signUpInfo));
         // todo use react dom router to go back to index or similar, or turn into modals
         // props.history.push("/")
         setSignUpInfo(initialState);
@@ -42,5 +41,5 @@ export const SignUp = () => {
                 <input className="button" type="submit" value="Sign Up"></input>
             </form>
         </div>
-    )
-}
+    );
+};

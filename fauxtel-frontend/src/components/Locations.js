@@ -5,22 +5,22 @@ import '../styles/Locations.css';
 import { getLocs } from '../actions/getLocations';
 
 
-export function Locations(props) {
+export function Locations() {
     const dispatch = useDispatch();
-    const locations = useSelector(state => state.locations)
+    const locations = useSelector(state => state.locations);
 
     useEffect(() => {
-        dispatch(getLocs())
-    }, [])
+        dispatch(getLocs());
+    }, []);
 
     return (
         <div className='LocationsList'>
-            <h1 className='LocationsTitle'>Locations</h1>
+            <h1 className='pageTitle'>Locations</h1>
             {locations.map(l =>
                 <li key={l.id}>
                     <Link to={`/locations/${l.id}`}>{l.attributes.name} - {l.attributes.city}</Link>
                 </li>
             )}
         </div>
-    )
-}
+    );
+};

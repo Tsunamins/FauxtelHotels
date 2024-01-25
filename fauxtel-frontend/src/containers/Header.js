@@ -1,5 +1,5 @@
-import { SiteNav } from "./SiteNav"
-import { UserNav } from "./UserNav"
+import { SiteNav } from './SiteNav';
+import { UserNav } from './UserNav';
 import '../styles/Header.css';
 import { Link } from "react-router-dom";
 import BookNav from "./BookNav";
@@ -19,5 +19,5 @@ export const Header = () => {
                 <SiteNav />
             </div>
         </header>
-    )
-}
+    );
+};

@@ -1,19 +1,17 @@
 export const loginUser = (user) => {
-    console.log('login user action obj: ', user)
     return {
         type: "LOGIN_USER",
         user
-    }
-}
+    };
+};
 
 export const logoutUser = () => {
     return {
         type: "LOGOUT_USER"
-    }
-}
+    };
+};
 
 export const login = (credentials) => {
-    console.log('@@@@!!!!!credentials: ', credentials)
     return dispatch => {
         fetch('http://localhost:3000/api/v1/login', {
             headers: {
@@ -26,20 +24,20 @@ export const login = (credentials) => {
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
-                    alert(response.error)
+                    alert(response.error);
 
                 } else {
-                    console.log('!!!!! response: ', response)
-                    console.log(response.data)
-                    console.log(response.user.data)
-                    console.log(response.jwt)
-                    sessionStorage.setItem('token', response.jwt)
-                    dispatch(loginUser(response.user.data))
+                    console.log('!!!!! response: ', response);
+                    console.log(response.data);
+                    console.log(response.user.data);
+                    console.log(response.jwt);
+                    sessionStorage.setItem('token', response.jwt);
+                    dispatch(loginUser(response.user.data));
                     
                 }
             })
-            .catch(console.log)
-    }
+            .catch(console.log);
+    };
 }
 
 export const getCurrentUser = () => {

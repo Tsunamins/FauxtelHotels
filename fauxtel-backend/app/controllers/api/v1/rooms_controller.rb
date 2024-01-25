@@ -4,6 +4,21 @@ class Api::V1::RoomsController < ApplicationController
   # GET /rooms
   def index
     @rooms = Room.all
+    occupied = []
+
+    # return occupied dates information
+    # todo - remove dates that have passed already
+    for r in @rooms do 
+        for res in r.reservations do
+          occupied.push((res.start_date..res.end_date).to_a)
+        end
+        r.occupied_dates = occupied.flatten.uniq.sort
+        puts(occupied)
+    end
+
+
+
+
 
     #options = {include: [:reservations]}
     #render json: @rooms

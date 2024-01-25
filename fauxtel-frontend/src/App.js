@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import './styles/booknow.css'
+import './styles/BookNow.css';
 import { useDispatch, useSelector } from 'react-redux'
 
 import BookNav from './containers/BookNav.js'
@@ -9,7 +9,7 @@ import { SignUp } from './components/SignUp.js';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './components/Login.js';
 // import { UserReservationView } from './components/UserReservationView.js';
-import UserReservations from './components/UserReservations.js';
+import { UserReservations } from './components/UserReservations.js';
 import { LocationDesc } from './components/LocationDesc.js';
 import { Rooms } from './components/Rooms.js';
 import { Locations } from './components/Locations.js';
@@ -45,13 +45,6 @@ function App() {
                 <Route exact path='/' element={<Welcome />}/>
                 <Route exact path='/signup' element={<SignUp />} />
                 <Route exact path='/login' element={<Login />} />
-
-                {/* <Route exact path='/view-reservations' element={<UserReservations />}/>
-                    <Route exact path='/view-reservations/:id' render={props => {
-                            const res = allReservations.find(element => element.id.toString() === props.match.params.id)
-                            return <UserReservationView res={res} {...props}/>
-                        }
-                    }/> */}
                 <Route exact path='/room-types' element={<Rooms />} />
                 <Route exact path='/locations' element={<Locations />} />
                 {locations.map((loc, i) =>
@@ -59,7 +52,7 @@ function App() {
                 )}
                 <Route exact path='/venues' element={<FauxVenues />} />
                 <Route exact path='/booknow' element={<BookNow />} />
-                <Route exact path='/view-reservations' element={<UserReservations />} />
+                <Route exact path='/view-reservations' element={<UserReservations currentUser={currentUser} />} />
                 {userReservations && userReservations.map((res, i) =>
                     <Route 
                         key={`${res.id}`} 

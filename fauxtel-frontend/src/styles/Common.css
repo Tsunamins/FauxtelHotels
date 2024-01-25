@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,400;0,700;0,900;1,200;1,400;1,900&family=Montserrat:ital,wght@0,400;0,700;1,400&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* darker teal for some was 255957 */
+/* general links and lists */
+a:link {
+    text-decoration: none;
+    padding: 10px;
+    color: #6aeee9;
+
+}
+
+a:visited {
+    text-decoration: none;
+    color: #6aeee9;
+}
+
+a:hover {
+    text-decoration: none;
+    border: 1px solid rgb(250, 142, 106);
+    border-radius: 25px;
+    color: #6aeee9;
+}
+
+a:active {
+    color: #f79360;
+    text-decoration: none;
+    color: #6aeee9;
+}
+
+li {
+    list-style: none;
+}
+
+body {
+    background-color: #262929;
+}
+
+.pageTitle {
+    font-size: 50px;
+    color: teal;
+}
+
+.topicDetails {
+    color: #55828B;
+}
+
+.topicTitle {
+    color: #C9E4CA;
+}

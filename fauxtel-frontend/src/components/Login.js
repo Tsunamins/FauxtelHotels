@@ -9,7 +9,7 @@ export const Login = () => {
     const initialState = {
         email: "",
         password: "",
-    }
+    };
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -24,11 +24,11 @@ export const Login = () => {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(login(loginInfo))
+        dispatch(login(loginInfo));
         // todo use react dom router to go back to index or similar, or turn into modals
         // this.props.history.push("/")
-        navigate('/')
-        setLoginInfo(initialState)
+        navigate('/');
+        setLoginInfo(initialState);
     }
 
     return (
@@ -38,5 +38,5 @@ export const Login = () => {
             <br />
             <input className="button" type="submit" value="Log In"></input>
         </form>
-    )
-}
+    );
+};

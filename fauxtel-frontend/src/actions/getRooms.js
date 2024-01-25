@@ -2,8 +2,8 @@ export const setRooms = (rooms) => {
     return {
         type: "GET_ROOMS",
         rooms
-    }
-}
+    };
+};
 
 export const getRooms = () => {
     return dispatch => {
@@ -11,11 +11,11 @@ export const getRooms = () => {
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
-                    // alert(response.error)
+                    // alert(response.error);
                 } else {
-                    dispatch(setRooms(response.data))
+                    dispatch(setRooms(response.data));
                 }
             })
-            .catch(console.log)
-    }
-}
+            .catch(console.log);
+    };
+};

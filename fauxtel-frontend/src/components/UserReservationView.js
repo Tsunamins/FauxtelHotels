@@ -1,13 +1,11 @@
-import React, { useState } from 'react'
-import {connect, useDispatch, useSelector} from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-import {cancelReservation} from '../actions/reservations.js'
-import { BookNow } from './BookNow.js'
-import { getResv } from '../actions/buildReservation.js'
-import '../styles/modifying.css'
-
-
+import { cancelReservation } from '../actions/reservations.js';
+import { BookNow } from './BookNow.js';
+import { getResv } from '../actions/buildReservation.js';
+import { locationMap, roomMap } from '../constants.js';
+import '../styles/modifying.css';
 
 
 export const UserReservationView = ({reservation, userReservations}) => {
@@ -22,31 +20,28 @@ export const UserReservationView = ({reservation, userReservations}) => {
     dispatch(cancelReservation(reservation.id));
     navigate('/');
   }
-
-
-  // todo need to match user reservation id with reservations ids from all reservations to get name and room type
-  // instead of using ids, can match with an object things like location name, but types would be more numerous so may as well 
+ 
   // also want to do an 'are you sure you want to cancel' 
   return (
     <div>
-        <div>Reservation ---</div>
+        <h1 className='pageTitle'>Reservation</h1>
         {reservation && 
-            <div className="ModifyingReservation">
+            <div className='ModifyingReservation'>
                 { isModing ? <h3>You are Modifying </h3> : null }
-                <h3>Location: {reservation.location_id}</h3>
-                <p>Room Type: {reservation.room_id}</p>
-                <p>From: {reservation.start_date}</p>
-                <p>To: {reservation.end_date}</p>
+                <h3 className='topicTitle'>Location: {locationMap[reservation.location_id]}</h3>
+                <p className='topicDetails'>Room Type: {roomMap[reservation.room_id]}</p>
+                <p className='topicDetails'>From: {reservation.start_date}</p>
+                <p className='topicDetails'>To: {reservation.end_date}</p>
                 { isModing ? <BookNow reservations={userReservations} /> 
                     :   
                     <div>  
-                        <button className="button" onClick={() => setIsModing(true)}>Modify Reservation</button>
+                        <button className='button' onClick={() => setIsModing(true)}>Modify Reservation</button>
                         <br/>
-                        <button className="button" onClick={handleCancel}>Cancel Reservation</button>
+                        <button className='button' onClick={handleCancel}>Cancel Reservation</button>
                     </div>
                 }
           </div>
         }
     </div>
-  )
-}   
+  );
+};

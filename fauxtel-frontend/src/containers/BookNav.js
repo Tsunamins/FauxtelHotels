@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Link, NavLink, Route, Routes } from 'react-router-dom'
-import BookNavLinks from '../links/BookNavLinks.js'
+import { BookNavLinks } from '../links/BookNavLinks.js'
 import BookNow from '../components/BookNow.js'
 import Reserve from '../components/Reserve.js'
 import { getRooms } from '../actions/getRooms.js'
 import { getReservations } from '../actions/reservations.js'
 import { getRoom } from '../actions/buildReservation.js'
 import { getCurrentUser } from '../actions/currentUser.js'
-import '../styles/booknow.css'
+import '../styles/BookNow.css'
 
 class BookNav extends React.Component {
 

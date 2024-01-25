@@ -11,5 +11,5 @@ export const LikeButton = () => {
         <button className='likeButton' onClick={handleOnClick}>
             {hasLikedRoom ? "I like this Room" : "Like Room"}
         </button>
-    )
-}
+    );
+};
