@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :locations
       resources :rooms
       post '/login', to: 'auths#login'
-      #resources :auths
+            #resources :auths
     end
   end
 

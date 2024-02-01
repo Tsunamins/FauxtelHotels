@@ -2,7 +2,6 @@ import { SiteNav } from './SiteNav';
 import { UserNav } from './UserNav';
 import '../styles/Header.css';
 import { Link } from "react-router-dom";
-import BookNav from "./BookNav";
 
 
 export const Header = () => {
@@ -10,7 +9,9 @@ export const Header = () => {
         <header className="HeaderWrapper">
             <div className='FauxtelHeader'>
                 <Link to="/"><img className="FauxtelLogo" src='fauxtellogo2.svg' alt="fauxtel hotel logo" /></Link>
-                <BookNav />
+                <div className="BookNowOval">
+                    <Link id='BookNowOvalLink' to="/booknow">Book Now</Link>
+                </div>
                 <UserNav />
             </div>
 

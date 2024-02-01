@@ -64,7 +64,7 @@ export const createReservation = (res_info) => {
 };
 
 export const cancelReservation = (res_id) => {
-    const token = sessionStorage.getItem("token")
+    const token = localStorage.getItem("token")
     if (token) {
         return dispatch => {
             return fetch(`http://localhost:3000/api/v1/reservations/${res_id}`, {
@@ -85,7 +85,9 @@ export const cancelReservation = (res_id) => {
 };
 
 export const modifyReservation = (resv_id, resv_data) => {
-    const token = sessionStorage.getItem("token");
+    console.log('modify reservation data: ', resv_data)
+    console.log('id: ', resv_id)
+    const token = localStorage.getItem("token");
     if (token) {
         return dispatch => {
             return fetch(`http://localhost:3000/api/v1/reservations/${resv_id}`, {

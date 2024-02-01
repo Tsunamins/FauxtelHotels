@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserNavLinks } from '../links/UserNavLinks.js';
-import { UserAuthLinks } from '../links/UserAuthLinks.js';
 import { getCurrentUser } from '../actions/currentUser.js';
 import { getReservations } from '../actions/reservations.js';
+import { Link, NavLink } from 'react-router-dom';
+import { Logout } from '../components/Logout.js';
 
 
 export const UserNav = () => {
@@ -15,22 +16,34 @@ export const UserNav = () => {
 
     // todo if this only deals with user reservations may not need all reservations until booking
     useEffect(() => {
-        dispatch(getReservations())
+        dispatch(getReservations());
+        dispatch(getCurrentUser());
     }, [])
 
     useEffect(() => { 
-        currentUser && setLoggedInUser(currentUser)
+        currentUser ? setLoggedInUser(currentUser) : setLoggedInUser(null)
     }, [currentUser])
 
-    const userReservations = loggedInUser ? currentUser?.attributes.reservations : []
-
-    // todo tech no prop for userReservations and this info should really be provided to the component that renders reservations of a user
-    // some enhancement like an admin mode would show all so only need users once again
     return (
         <div className="User UserNav">
             {loggedInUser
-                ? <UserNavLinks loggedInUser={loggedInUser} currentUser={currentUser || ''} userReservations={userReservations} />
-                : <UserAuthLinks />
+                ?
+                <div className="AuthedUserWrapper">
+                    {/* todo update styling and html on this */}
+                    <div className="UserLoggedIn">
+                        <li id="loggedin">Logged in as {currentUser.attributes.first_name} </li><li><Logout /></li>
+                    </div>
+                    <div className="UserLinks">
+                        {/* todo this should maybe be /user/view-reservations // or /view-reservations/userid */}
+                        <li><NavLink to="/view-reservations">View My Reservations</NavLink></li>
+                        {/* todo would also want a view user info link at some point to view/edit etc */}
+                    </div>
+                </div>
+                :     
+                <ul className="SignUpLogin">
+                    <li><Link to="/signup">Sign Up</Link></li>
+                    <li><Link to="/login">Log In</Link></li>
+                </ul>
             }
         </div>
     );

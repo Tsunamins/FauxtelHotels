@@ -1,32 +1,33 @@
 class ApplicationController < ActionController::API
-  #before_action :authorized
-    # def user_object(user)
-    #     UserSerializer.new(user)
-    # end
-
     def encode_token(payload)
         JWT.encode(payload, ENV['JWT_TOKEN_SECRET'])
     end
 
     def decode_token_and_get_user_id
-        JWT.decode(request.headers["Authorization"], ENV['JWT_TOKEN_SECRET'])[0]["id"]
+        token = ''
+        if request.headers["Authorization"].include? 'Bearer'
+            token = request.headers["Authorization"].split(' ')[1]
+        else
+            token = request.headers["Authorization"]
+        end
+
+        JWT.decode(token, ENV['JWT_TOKEN_SECRET'])[0]["id"]
           
     end
 
     def current_user
-        begin
-        
-          @current_user ||= User.find(decode_token_and_get_user_id)
+        begin    
+          User.find(decode_token_and_get_user_id)
         rescue
-          return nil
-        end
-      end
-    
-      def logged_in?
-        !!current_user
-      end
+            return nil
+        end 
+    end 
 
-      def authorized
+    def logged_in?
+        !!current_user
+    end 
+
+    def authorized
         render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
-      end
+    end
 end

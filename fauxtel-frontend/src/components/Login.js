@@ -25,8 +25,6 @@ export const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(login(loginInfo));
-        // todo use react dom router to go back to index or similar, or turn into modals
-        // this.props.history.push("/")
         navigate('/');
         setLoginInfo(initialState);
     }
@@ -36,7 +34,7 @@ export const Login = () => {
             <input className="form" type="text" name="email" placeholder="Email" value={loginInfo.email} onChange={handleChange}></input>
             <input className="form" type="password" name="password" placeholder="Password" value={loginInfo.password} onChange={handleChange}></input>
             <br />
-            <input className="button" type="submit" value="Log In"></input>
+            <input className="authsButtons" type="submit" value="Log In"></input>
         </form>
     );
 };

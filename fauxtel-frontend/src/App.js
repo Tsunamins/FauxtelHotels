@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import './styles/BookNow.css';
 import { useDispatch, useSelector } from 'react-redux'
 
-import BookNav from './containers/BookNav.js'
 import { getCurrentUser } from './actions/currentUser.js'
 import { SignUp } from './components/SignUp.js';
 import { Route, Routes } from 'react-router-dom';
@@ -28,9 +27,9 @@ function App() {
     const locations = useSelector(state => state.locations);
     const [isLoggedIn, setIsLoggedIn]  = useState(currentUser);
     const [userReservations, setUserReservations] = useState(currentUser && currentUser.attributes.reservations || [])
-
     useEffect(() => {
         dispatch(getLocs())
+        dispatch(getCurrentUser())
     }, []);
 
     useEffect(() => {
@@ -51,7 +50,7 @@ function App() {
                     <Route key={`${loc.id}`} path={`/locations/${loc.id}`} element={<LocationDesc loc={loc} />} />
                 )}
                 <Route exact path='/venues' element={<FauxVenues />} />
-                <Route exact path='/booknow' element={<BookNow />} />
+                <Route exact path='/booknow' element={<BookNow flowType='new' />} />
                 <Route exact path='/view-reservations' element={<UserReservations currentUser={currentUser} />} />
                 {userReservations && userReservations.map((res, i) =>
                     <Route 

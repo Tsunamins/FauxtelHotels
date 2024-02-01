@@ -8,15 +8,18 @@ import { getReservations } from '../actions/reservations.js';
 import { getCurrentUser } from '../actions/currentUser.js';
 import { checkAvailableRooms, generateDateRange } from './utils/BookingUtils.js';
 import BookRooms from './BookRooms.js';
+import { ReserveDetailsModal } from './ReserveDetailsModal.js';
+import { getRoom } from '../actions/buildReservation.js';
 
-
-export const BookNow = () => {
+// todo, flow type can prob be nixed due to data need if modifying existing reservation
+export const BookNow = ({ flowType, modifyingReservation }) => {
     const dispatch = useDispatch();
     const { rooms } = useSelector(state => state.rooms);
     const currentUser = useSelector(state => state.currentUser);
     const reservations = useSelector(state => state.reservations);
+    const buildReservationRoom = useSelector(state => state.buildReservation);
+    console.log('mod resv id: ', modifyingReservation)
 
-    // new per latest docs
     const defaultSelected = {
         from: null,
         to: null
@@ -24,12 +27,20 @@ export const BookNow = () => {
     const [availableRooms, setAvailableRooms] = useState();
     const [filledRange, setFilledRange] = useState([]);
     const [range, setRange] = useState(defaultSelected);
+    const [isConfirmingDetails, setConfirmingDetails] = useState(false);
+    const [roomSelected, setRoomSelected] = useState();
+    console.log('room selected in book now: ', roomSelected)
+
 
     useEffect(() => {
         dispatch(getRooms());
         dispatch(getReservations());
-        // dispatch(getCurrentUser());
+        dispatch(getCurrentUser());
     }, []);
+
+    // useEffect(() => {
+    //     dispatch(getRoom(roomSelected));
+    // }, [roomSelected]);
 
     useEffect(() => {
         setFilledRange(generateDateRange(range.from, range.to));
@@ -44,6 +55,7 @@ export const BookNow = () => {
     };
 
     const today = new Date();
+    // todo remember to fix this for any days before
     // const disabledDays = { before: datesToRooms.from, before: today  };
 
     return (
@@ -69,8 +81,20 @@ export const BookNow = () => {
                     <button className="reservationButtons" onClick={handleShowRooms}>Show Rooms</button>
                 )}
             </div>
-
-            <BookRooms availableRooms={availableRooms} />
+            {/* list out the available rooms that have availability on these dates */}
+            <BookRooms availableRooms={availableRooms} setConfirmingDetails={setConfirmingDetails} setRoomSelected={setRoomSelected} />
+            {isConfirmingDetails && 
+                <ReserveDetailsModal 
+                    currentUser={currentUser} 
+                    range={range} 
+                    flowType={flowType}
+                    // todo create a creatingReservation object instead to coincide with this, nix flowType
+                    // but remember that modifying can have a different room and location
+                    modifyingReservation={modifyingReservation}
+                    room={buildReservationRoom.room[0]} 
+                />
+            }
         </div>
+
     );
 }

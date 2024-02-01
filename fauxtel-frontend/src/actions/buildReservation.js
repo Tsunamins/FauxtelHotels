@@ -26,13 +26,16 @@ export const clearBuild = () => {
 };
 
 export const getRoom = (room_id) => {
+    console.log('!!!!! get room room id ??? ', room_id)
     return dispatch => {
         return fetch(`http://localhost:3000/api/v1/rooms/${room_id}`)
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
                     alert(response.error);
+                    console.log('room error??? ', response.error)
                 } else {;
+                    console.log('room response??? ', response)
                     dispatch(buildReservation(response))
                 }
             })

@@ -1,0 +1,59 @@
+import { useDispatch } from 'react-redux';
+import '../styles/Reservations.css';
+import { locationMap } from '../constants';
+import { createReservation } from '../actions/reservations';
+import { modifyReservation } from '../actions/reservations';
+import { useNavigate } from 'react-router-dom';
+
+export const ReserveDetailsModal = ({ currentUser, flowType, range, room, modifyingReservation }) => {
+    console.log('modify reservation data in modal: ', modifyingReservation)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    // todo, maybe package object before this component and send as one variable
+    const handleSubmit = () => {
+        if (flowType === 'new') {
+            dispatch(createReservation(
+                {
+                    start_date: range.from, 
+                    end_date: range.to, 
+                    room_id: room.id, 
+                    location_id: room.location_id, 
+                    user_id: currentUser.id
+                }
+            ))
+        } else {
+
+            dispatch(modifyReservation(
+                modifyingReservation,                 
+                {
+                    start_date: range.from, 
+                    end_date: range.to, 
+                    room_id: room.id, 
+                    location_id: room.location_id, 
+                    user_id: currentUser.id
+                }
+            ))
+        }
+        navigate('/view-reservations');
+
+    }
+
+    // todo need to do close button and escape to exit modal
+    return (
+        <div id='BackgroundBlur'>
+            {currentUser && room && range &&
+                <div id='ReservationDetails'>
+                    <h3>Reservation Details for: {currentUser.attributes.first_name}</h3>
+                    <p>Room Type: {room.room_type}</p>
+                    <p>Location: {locationMap[room.location_id]}</p>
+                    <p>From: {range.from.toLocaleDateString()}  To: {range.to.toLocaleDateString()} </p>
+                    <p>Email Confirmation: {currentUser.attributes.email}</p>
+                    {/* todo incorporate this, this way or a different way */}
+                    {/* <button onClick={this.resetRes}>Start Over</button> */}
+                    <button className="reservationButtons" type="submit" onClick={handleSubmit} value="Confirm Reservation">Confirm Reservation</button>
+                </div>
+            }
+        </div>
+    )
+}

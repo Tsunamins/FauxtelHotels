@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signup } from '../actions/currentUser.js';
+import { useNavigate } from 'react-router-dom';
 
 
 export const SignUp = () => {
@@ -11,6 +12,7 @@ export const SignUp = () => {
         password: "",
     };
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [signUpInfo, setSignUpInfo] = useState(initialState);
 
     const handleChange = (event) => {
@@ -24,8 +26,7 @@ export const SignUp = () => {
     const handleSubmit = event => {
         event.preventDefault();
         dispatch(signup(signUpInfo));
-        // todo use react dom router to go back to index or similar, or turn into modals
-        // props.history.push("/")
+        navigate('/');
         setSignUpInfo(initialState);
     }
 
@@ -38,7 +39,7 @@ export const SignUp = () => {
                 <input className="form" type="text" name="email" placeholder="Email" value={signUpInfo.email} onChange={handleChange}></input>
                 <input className="form" type="password" name="password" placeholder="Password" value={signUpInfo.password} onChange={handleChange}></input>
                 <br />
-                <input className="button" type="submit" value="Sign Up"></input>
+                <input className="authsButtons" type="submit" value="Sign Up"></input>
             </form>
         </div>
     );

@@ -1,89 +1,55 @@
 class Api::V1::ReservationsController < ApplicationController
-  before_action :set_reservation, only: [:show, :update, :destroy]
+    before_action :set_reservation, only: [:show, :update, :destroy]
 
-  # GET /reservations
-  def index
+    # GET /reservations
+    def index
+        @reservations = Reservation.all 
+        res_json = ReservationSerializer.new(@reservations).serialized_json
+        render json: res_json
+    end
 
-    @reservations = Reservation.all 
-    #render json: @reservations
-
-    res_json = ReservationSerializer.new(@reservations).serialized_json
-    render json: res_json
-    # if logged_in?
-    #   @reservations = current_user.reservations
-
-    #   render json: @reservations, status: : ok
-    # else
-    #   render json: {
-    #     error: "not logged in", status: :unauthorized
-    #   }
-   
-  end
-
-  # GET /reservations/1
-  def show
-    
-    @reservation = Reservation.find_by(id: params[:id]) 
-    #render json: @user
-    res_json = ReservationSerializer.new(@reservation).serialized_json
-    render json: res_json
-  end
+    # GET /reservations/1
+    def show   
+        @reservation = Reservation.find_by(id: params[:id]) 
+        res_json = ReservationSerializer.new(@reservation).serialized_json
+        render json: res_json
+    end
 
   # POST /reservations
   def create
     @reservation = Reservation.new(reservation_params)
 
     if @reservation.save
-       u_id = @reservation.user_id
-      
-       @user = User.find_by(id: u_id)
-      
-      
-       ReservationMailer.with(reservation: @reservation, user: @user).reservation_confirmation.deliver_now
-      
-      render json: @reservation, status: :created, reservation: @reservation
-
-
+        u_id = @reservation.user_id
+        @user = User.find_by(id: u_id)
+        ReservationMailer.with(reservation: @reservation, user: @user).reservation_confirmation.deliver_now
+        render json: @reservation, status: :created, reservation: @reservation
     else
       render json: @reservation.errors, status: :unprocessable_entity
     end
-    # binding.pry
-    # if logged_in?
-     
-    #   @reservation = current_user.reservations.build(reservation_params)
-     
-    #     if @reservation.save
-    #       render json: @reservation, status: :created, location: @reservation
-    #     else
-    #       render json: @reservation.errors, status: :unprocessable_entity
-    #     end
-     
-    #   end
   end
 
-  # PATCH/PUT /reservations/1
-  def update
-    @user = current_user
-    if @user.id == @reservation.user_id
+    # PATCH/PUT /reservations/1
+    def update
+        @user = current_user
+        if @user.id == @reservation.user_id
       
-      if @reservation.update(reservation_params)
-        render json:  ReservationSerializer.new(@reservation), status: :ok
-      end
-    else
-       render json: {
-          error: "not logged in", status: :unauthorized
-        }
+            if @reservation.update(reservation_params)
+                render json:  ReservationSerializer.new(@reservation), status: :ok
+            end
+        else
+            render json: {
+                error: "not logged in", status: :unauthorized
+            }
+        end
     end
-  end
 
   # DELETE /reservations/1
   def destroy
-    #change later if using based on no login, but a reservation code generator, change based on incoming params, i.e. am_wine_reviewer/index
-    # using for now to debug frontend to backend issues 
+    # todo, using basic delete reservation for now, later change to the current user, maybe add on an admin layer, also 
+    # considering a email based login that will allow user to be automatically logged in and view/update/cancel their reserv
     @reservation.destroy
     #  @user = current_user
-    
-    
     #  if @user.id != @reservation.user_id
     #   render json: {
     #     error: "not logged in", status: :unauthorized

@@ -24,14 +24,9 @@ export const login = (credentials) => {
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
-                    alert(response.error);
-
+                    // alert(response.error);
                 } else {
-                    console.log('!!!!! response: ', response);
-                    console.log(response.data);
-                    console.log(response.user.data);
-                    console.log(response.jwt);
-                    sessionStorage.setItem('token', response.jwt);
+                    localStorage.setItem('token', response.jwt)
                     dispatch(loginUser(response.user.data));
                     
                 }
@@ -41,28 +36,23 @@ export const login = (credentials) => {
 }
 
 export const getCurrentUser = () => {
-    //new
-    const token = sessionStorage.getItem("token");
-    if (token) {
+    const token = localStorage.getItem("token");
     return dispatch => {
          fetch("http://localhost:3000/api/v1/get_current_user", {
                 headers: {
-                    "Authorization": token
+                    "Authorization": `${token}`
                 },
             })
                 .then(resp => resp.json())
-
                 .then(response => {
                     if (response.error) {
-                        // alert(response.error)
+                        console.log('error in get user: ', response.error)
                     } else {
                         dispatch(loginUser(response.user.data))
                     }
                 })
                 .catch(console.log)
         }
-    }
-
 }
 
 export const signup = (credentials) => {
@@ -91,10 +81,8 @@ export const signup = (credentials) => {
     }
 }
 
-export const logout = (event) => {
-    sessionStorage.removeItem("token")
+export const logout = () => {
     return dispatch => {
         dispatch(logoutUser())
-
     }
 }
