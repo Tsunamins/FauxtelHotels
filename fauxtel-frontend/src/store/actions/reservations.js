@@ -28,7 +28,7 @@ export const updateReservation = (res) => {
 
 export const getReservations = () => {
     return dispatch => {
-        return fetch('http://localhost:3000/api/v1/reservations')
+        return fetch('http://localhost:3003/api/v1/reservations')
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
@@ -44,7 +44,7 @@ export const getReservations = () => {
 
 export const createReservation = (res_info) => {
     return dispatch => {
-        return fetch('http://localhost:3000/api/v1/reservations', {
+        return fetch('http://localhost:3003/api/v1/reservations', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -67,7 +67,7 @@ export const cancelReservation = (res_id) => {
     const token = localStorage.getItem("token")
     if (token) {
         return dispatch => {
-            return fetch(`http://localhost:3000/api/v1/reservations/${res_id}`, {
+            return fetch(`http://localhost:3003/api/v1/reservations/${res_id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": token
@@ -85,12 +85,10 @@ export const cancelReservation = (res_id) => {
 };
 
 export const modifyReservation = (resv_id, resv_data) => {
-    console.log('modify reservation data: ', resv_data)
-    console.log('id: ', resv_id)
     const token = localStorage.getItem("token");
     if (token) {
         return dispatch => {
-            return fetch(`http://localhost:3000/api/v1/reservations/${resv_id}`, {
+            return fetch(`http://localhost:3003/api/v1/reservations/${resv_id}`, {
                 method: "PATCH",
                 headers: {
                     "Authorization": token,

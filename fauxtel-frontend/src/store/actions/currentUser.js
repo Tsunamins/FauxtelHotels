@@ -13,7 +13,7 @@ export const logoutUser = () => {
 
 export const login = (credentials) => {
     return dispatch => {
-        fetch('http://localhost:3000/api/v1/login', {
+        fetch('http://localhost:3003/api/v1/login', {
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json"
@@ -38,7 +38,7 @@ export const login = (credentials) => {
 export const getCurrentUser = () => {
     const token = localStorage.getItem("token");
     return dispatch => {
-         fetch("http://localhost:3000/api/v1/get_current_user", {
+         fetch("http://localhost:3003/api/v1/get_current_user", {
                 headers: {
                     "Authorization": `${token}`
                 },
@@ -60,7 +60,7 @@ export const signup = (credentials) => {
         const userInfo = {
             user: credentials // added bc has to be wrapped in user object
         }
-        return fetch("http://localhost:3000/api/v1/signup", {
+        return fetch("http://localhost:3003/api/v1/signup", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

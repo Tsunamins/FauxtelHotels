@@ -26,9 +26,8 @@ export const clearBuild = () => {
 };
 
 export const getRoom = (room_id) => {
-    console.log('!!!!! get room room id ??? ', room_id)
     return dispatch => {
-        return fetch(`http://localhost:3000/api/v1/rooms/${room_id}`)
+        return fetch(`http://localhost:3003/api/v1/rooms/${room_id}`)
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
@@ -45,7 +44,7 @@ export const getRoom = (room_id) => {
 
 export const getResv = (res_id) => {
     return dispatch => {
-        return fetch(`http://localhost:3000/api/v1/reservations/${res_id}`)
+        return fetch(`http://localhost:3003/api/v1/reservations/${res_id}`)
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
@@ -62,7 +61,7 @@ export const getResv = (res_id) => {
 export const getUserReservations = (user_id) => {
     return dispatch => {
         const token = localStorage.getItem("token")
-        fetch(`http://localhost:3000/api/v1/users/${user_id}`, {
+        fetch(`http://localhost:3003/api/v1/users/${user_id}`, {
             headers: {
                 "Authorization": token
             }

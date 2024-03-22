@@ -7,7 +7,7 @@ export const setRooms = (rooms) => {
 
 export const getRooms = () => {
     return dispatch => {
-        return fetch('http://localhost:3000/api/v1/rooms')
+        return fetch('http://localhost:3003/api/v1/rooms')
             .then(resp => resp.json())
             .then(response => {
                 if (response.error) {
