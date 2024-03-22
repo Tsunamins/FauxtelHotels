@@ -56,7 +56,8 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
 
     const today = new Date();
     // todo remember to fix this for any days before
-    // const disabledDays = { before: datesToRooms.from, before: today  };
+    // const disabledDays = { before: datesToRooms.from, before: today  };j
+    // also todo, something is off with selecting a new range after initial selection in the calendar itself
 
     return (
         <div>
@@ -68,7 +69,7 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
                 selected={range}
                 onSelect={setRange}
             />
-            <div className="SelectionText Instructions">
+            <div className="SelectionText">
                 {!range.from && !range.to && 'Please select the first day.'}
                 {range.from && !range.to && 'Please select the last day.'}
                 {range.from && range.to && `Selected from ${range.from.toLocaleDateString()} to ${range.to.toLocaleDateString()}`}{' '}

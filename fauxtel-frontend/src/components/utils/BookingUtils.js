@@ -22,5 +22,4 @@ export const checkAvailableRooms = (rooms, filledRange) => {
         }
     })
     return currentMatches;
-
 };

@@ -3,9 +3,11 @@ import '../styles/FauxVenues.css';
 
 export const FauxVenues = () => {
     return (
-        <div className='pageTitle'>
-            <h1>Fauxtel Venues</h1>
-            Coming Soon!!
+        <div >
+            <h1 className='pageTitle'>Fauxtel Venues</h1>
+            <div className='fauxVenuesContent'>
+                Coming Soon!!
+            </div>
         </div>
     );
 };
