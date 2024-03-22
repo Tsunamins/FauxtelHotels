@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux';
 import '../styles/Reservations.css';
 import { locationMap } from '../constants';
-import { createReservation } from '../actions/reservations';
-import { modifyReservation } from '../actions/reservations';
+import { createReservation } from '../store/actions/reservations';
+import { modifyReservation } from '../store/actions/reservations';
 import { useNavigate } from 'react-router-dom';
+import { ReservationButton } from './baseComponents/ReservationButton';
 
 export const ReserveDetailsModal = ({ currentUser, flowType, range, room, modifyingReservation }) => {
     console.log('modify reservation data in modal: ', modifyingReservation)
@@ -51,7 +52,7 @@ export const ReserveDetailsModal = ({ currentUser, flowType, range, room, modify
                     <p>Email Confirmation: {currentUser.attributes.email}</p>
                     {/* todo incorporate this, this way or a different way */}
                     {/* <button onClick={this.resetRes}>Start Over</button> */}
-                    <button className="reservationButtons" type="submit" onClick={handleSubmit} value="Confirm Reservation">Confirm Reservation</button>
+                    <ReservationButton displayText='Confirm Reservation' onClick={handleSubmit} type='submit'/>
                 </div>
             }
         </div>

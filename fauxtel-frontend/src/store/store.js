@@ -1,9 +1,9 @@
-import { configureStore } from '@reduxjs/toolkit'
-import roomsReducer from './store/reducers/roomsReducer.js'
-import currentUser from './store/reducers/currentUser.js'
-import reservations from './store/reducers/reservations.js'
-import buildReservation from './store/reducers/buildReservation.js'
-import locsReducer from './store/reducers/locationsReducer.js'
+import { configureStore } from '@reduxjs/toolkit';
+import roomsReducer from './reducers/roomsReducer.js';
+import currentUser from './reducers/currentUser.js';
+import reservations from './reducers/reservations.js';
+import buildReservation from './reducers/buildReservation.js';
+import locsReducer from './reducers/locationsReducer.js';
 
 
 // Automatically adds the thunk middleware and the Redux DevTools extension

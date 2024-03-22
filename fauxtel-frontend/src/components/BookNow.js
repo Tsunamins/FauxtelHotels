@@ -3,13 +3,14 @@ import { DayPicker } from 'react-day-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-day-picker/dist/style.css';
 import '../styles/DayPicker.css';
-import { getRooms } from '../actions/getRooms.js';
-import { getReservations } from '../actions/reservations.js';
-import { getCurrentUser } from '../actions/currentUser.js';
+import { getRooms } from '../store/actions/getRooms.js';
+import { getReservations } from '../store/actions/reservations.js';
+import { getCurrentUser } from '../store/actions/currentUser.js';
 import { checkAvailableRooms, generateDateRange } from './utils/BookingUtils.js';
 import BookRooms from './BookRooms.js';
 import { ReserveDetailsModal } from './ReserveDetailsModal.js';
-import { getRoom } from '../actions/buildReservation.js';
+import { getRoom } from '../store/actions/buildReservation.js';
+import { ReservationButton } from './baseComponents/ReservationButton.js';
 
 // todo, flow type can prob be nixed due to data need if modifying existing reservation
 export const BookNow = ({ flowType, modifyingReservation }) => {
@@ -75,11 +76,11 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
                 {range.from && range.to && `Selected from ${range.from.toLocaleDateString()} to ${range.to.toLocaleDateString()}`}{' '}
 
                 {range.from && range.to && (
-                    <button className="reservationButtons" onClick={handleResetClick}>Reset</button>
+                    <ReservationButton displayText='Reset' onClick={handleResetClick} />
                 )}
 
                 {range.from && range.to && (
-                    <button className="reservationButtons" onClick={handleShowRooms}>Show Rooms</button>
+                    <ReservationButton displayText='Show Rooms' onClick={handleShowRooms} />
                 )}
             </div>
             {/* list out the available rooms that have availability on these dates */}

@@ -1,21 +1,25 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../actions/currentUser.js';
+import { login } from '../store/actions/currentUser.js';
 import '../styles/Forms.css';
+import { AuthButton } from './baseComponents/AuthButton.js';
+import { InputField } from './baseComponents/InputField.js';
 
 
 export const Login = () => {
     const initialState = {
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const [loginInfo, setLoginInfo] = useState(initialState);
+    console.log('login info changing?? ', loginInfo)
     
     const handleChange = (event) => {
+        console.log('handle change')
         setLoginInfo(prevState => {
             return {
                 ...prevState, [event.target.name]: event.target.value
@@ -31,10 +35,10 @@ export const Login = () => {
 
     return (
         <form className='formDisplay' onSubmit={handleSubmit}>
-            <input className="form" type="text" name="email" placeholder="Email" value={loginInfo.email} onChange={handleChange}></input>
-            <input className="form" type="password" name="password" placeholder="Password" value={loginInfo.password} onChange={handleChange}></input>
+            <input className='form' type='text' name='email' placeholder='Email' value={loginInfo.email} onChange={handleChange}/>
+            <input className='form' type='password' name='password' placeholder='Password' value={loginInfo.password} onChange={handleChange}/>
             <br />
-            <input className="authsButtons" type="submit" value="Log In"></input>
+            <AuthButton displayText='Log In' type='submit' />
         </form>
     );
 };

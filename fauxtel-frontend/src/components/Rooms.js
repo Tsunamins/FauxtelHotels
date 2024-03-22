@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { LikeButton } from './LikeButton.js'
-import { getLocs } from '../actions/getLocations.js';
+import { LikeButton } from './baseComponents/LikeButton.js'
+import { getLocs } from '../store/actions/getLocations.js';
 
 
 export function Rooms() {

@@ -12,7 +12,8 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import store from './store.js'
+import store from './store/store';
+
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(

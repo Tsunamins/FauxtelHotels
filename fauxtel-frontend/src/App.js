@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
-import './styles/BookNow.css';
 import { useDispatch, useSelector } from 'react-redux'
-
-import { getCurrentUser } from './actions/currentUser.js'
+import { getCurrentUser } from './store/actions/currentUser.js'
 import { SignUp } from './components/SignUp.js';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './components/Login.js';
-// import { UserReservationView } from './components/UserReservationView.js';
 import { UserReservations } from './components/UserReservations.js';
 import { LocationDesc } from './components/LocationDesc.js';
 import { Rooms } from './components/Rooms.js';
@@ -15,9 +11,10 @@ import { Locations } from './components/Locations.js';
 import { BookNow } from './components/BookNow.js';
 import { FauxVenues } from './components/FauxVenues.js';
 import { Header } from './containers/Header.js';
-import { getLocs } from './actions/getLocations.js';
+import { getLocs } from './store/actions/getLocations.js';
 import { Welcome } from './containers/Welcome.js';
 import { UserReservationView } from './components/UserReservationView.js';
+import './styles/BookNow.css';
 
 
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getRoom } from '../actions/buildReservation.js';
+import { getRoom } from '../store/actions/buildReservation.js';
 import '../styles/Rooms.css';
 import '../styles/Common.css';
 import '../styles/DayPicker.css'
+import { ReservationButton } from './baseComponents/ReservationButton.js';
 
 
 function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
@@ -29,7 +30,7 @@ function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
                         </label>
                     </div>
                 )}
-                {room && <input className='reservationButtons' type='submit' value='Reserve this Room'/>}
+                {room && <ReservationButton displayText='Reserve this Room' type='submit'/>}
             </form>
         </div>
     )

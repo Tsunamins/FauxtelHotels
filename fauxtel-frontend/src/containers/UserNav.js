@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserNavLinks } from '../links/UserNavLinks.js';
-import { getCurrentUser } from '../actions/currentUser.js';
-import { getReservations } from '../actions/reservations.js';
+import { getCurrentUser } from '../store/actions/currentUser.js';
+import { getReservations } from '../store/actions/reservations.js';
 import { Link, NavLink } from 'react-router-dom';
 import { Logout } from '../components/Logout.js';
 
