@@ -9,18 +9,14 @@ import { Logout } from '../components/Logout.js';
 export const UserNav = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.currentUser);
-    const reservations = useSelector(state => state.reservations);
-    const [loggedInUser, setLoggedInUser] = useState(currentUser);
+    const [loggedInUser, setLoggedInUser] = useState(!!currentUser);
 
-
-    // todo if this only deals with user reservations may not need all reservations until booking
     useEffect(() => {
-        dispatch(getReservations());
         dispatch(getCurrentUser());
     }, [])
 
     useEffect(() => { 
-        currentUser ? setLoggedInUser(currentUser) : setLoggedInUser(null)
+        currentUser ? setLoggedInUser(currentUser) : setLoggedInUser(false)
     }, [currentUser])
 
     return (
@@ -28,9 +24,9 @@ export const UserNav = () => {
             {loggedInUser
                 ?
                 <div className="AuthedUserWrapper">
-                    {/* todo update styling and html on this */}
-                    <div className="UserLoggedIn">
-                        <li id="loggedin">Logged in as {currentUser.attributes.first_name} </li><li><Logout /></li>
+                    <div className="UserDisplay">
+                        <div id="UserName">Logged in as {currentUser.attributes.first_name} </div>
+                        <Logout setLoggedInUser={setLoggedInUser} />
                     </div>
                     <div className="UserLinks">
                         {/* todo this should maybe be /user/view-reservations // or /view-reservations/userid */}

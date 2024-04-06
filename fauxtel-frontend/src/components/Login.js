@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/actions/currentUser.js';
 import '../styles/Forms.css';
 import { AuthButton } from './baseComponents/AuthButton.js';
-import { InputField } from './baseComponents/InputField.js';
 
 
 export const Login = () => {
@@ -16,7 +15,6 @@ export const Login = () => {
     const navigate = useNavigate();
     
     const [loginInfo, setLoginInfo] = useState(initialState);
-    console.log('login info changing?? ', loginInfo)
     
     const handleChange = (event) => {
         console.log('handle change')

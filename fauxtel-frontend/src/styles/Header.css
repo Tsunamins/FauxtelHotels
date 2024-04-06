@@ -62,9 +62,16 @@
     font-size: 20px;
 }
 
+.AuthedUserWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-bottom: 25px;
+}
 
-
-.UserLoggedIn {
+.UserDisplay {
+    align-items: center;
+    column-gap: 15px;
     display: flex;
     flex-direction: row;
     list-style: none;
@@ -95,10 +102,7 @@
 }
 
 
-.AuthedUserWrapper {
-    margin-top: 40px;
-    margin-bottom: 25px;
-}
+
 
 .headerDivider {
     width: 100%;

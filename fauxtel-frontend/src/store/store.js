@@ -18,6 +18,4 @@ const store = configureStore({
     }
   })
 
-  // todo - move all store, reducers, actions, later slices and related into a store or reducer folder, maybe separate out the 
-  // fetch functions into a services or similar folder
 export default store

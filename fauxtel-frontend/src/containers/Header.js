@@ -1,4 +1,3 @@
-import { SiteNav } from './SiteNav';
 import { UserNav } from './UserNav';
 import '../styles/Header.css';
 import { Link } from "react-router-dom";
@@ -17,7 +16,12 @@ export const Header = () => {
 
             <div className="NavWrapper">
                 <hr className='headerDivider' />
-                <SiteNav />
+                {/* todo find opportunities like this to not hard code and map over */}
+                <ul className="SiteNav">
+                    <li><Link to="/room-types">View Room Types</Link></li>
+                    <li><Link to="/locations">All Fauxtel Locations</Link></li>
+                    <li><Link to="/venues">Fauxtel Venues</Link></li>
+                </ul>
             </div>
         </header>
     );

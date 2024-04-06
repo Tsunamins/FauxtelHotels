@@ -4,16 +4,15 @@ import { logout } from '../store/actions/currentUser.js';
 import { useNavigate } from 'react-router-dom';
 import { AuthButton } from './baseComponents/AuthButton.js';
 
-export const Logout = () => {
+export const Logout = ({ setLoggedInUser }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        // todo logout isn't changng back to sign up login 
-        // todo also not logging someone out after a certain time (address front end and back end)
+        // todo, expire token after some time, front and back
+        setLoggedInUser(false);
         dispatch(logout);
         localStorage.removeItem('token');
-        navigate('/');
     };
     return (
         <div className='Logout'>

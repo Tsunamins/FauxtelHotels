@@ -19,7 +19,6 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
     const currentUser = useSelector(state => state.currentUser);
     const reservations = useSelector(state => state.reservations);
     const buildReservationRoom = useSelector(state => state.buildReservation);
-    console.log('mod resv id: ', modifyingReservation)
 
     const defaultSelected = {
         from: null,
@@ -30,7 +29,6 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
     const [range, setRange] = useState(defaultSelected);
     const [isConfirmingDetails, setConfirmingDetails] = useState(false);
     const [roomSelected, setRoomSelected] = useState();
-    console.log('room selected in book now: ', roomSelected)
 
 
     useEffect(() => {
@@ -44,21 +42,35 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
     // }, [roomSelected]);
 
     useEffect(() => {
-        setFilledRange(generateDateRange(range.from, range.to));
-    }, [range]);
+        if(range.from && range.to) {
+            setFilledRange(generateDateRange(range.from, range.to));
+        } else {
+            setFilledRange([])
+        }
+    }, [range, range.from, range.to]);
 
     const handleShowRooms = () => {
         setAvailableRooms(checkAvailableRooms(rooms, filledRange));
     }
+    // todo this can get the day and modifiers if applied
+    const handleDayClick = (day) => {
 
-    const handleResetClick = () => {
-        setRange(defaultSelected);
-    };
+        // in range mode this specifies the from day, initially
+        // so day.from
+        console.log('day???: ', day)
+    }
 
     const today = new Date();
     // todo remember to fix this for any days before
     // const disabledDays = { before: datesToRooms.from, before: today  };j
     // also todo, something is off with selecting a new range after initial selection in the calendar itself
+    // when clicking back on the first day of the range says range is undefined
+    // make an handleDateSelection function to pass in/debug
+    // can only do custom non state function with onDayClick prop
+    // should maybe restart if clicking on a same day, or a 3rd click will reset all
+    // maybe a few different scenarios that have an intuitive feel like calendar pickers often do (or they try to)
+    // maybe a long term todo - re-envision or provide an alternative date selection interface - maybe not a calendar range selection but some type of pop-ups
+    
 
     return (
         <div>
@@ -68,7 +80,9 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
                 numberOfMonths={2}
                 // disabled={disabledDays}
                 selected={range}
-                onSelect={setRange}
+                // onSelect={setRange}
+                onSelect={handleDayClick}
+
             />
             <div className="SelectionText">
                 {!range.from && !range.to && 'Please select the first day.'}
@@ -76,7 +90,7 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
                 {range.from && range.to && `Selected from ${range.from.toLocaleDateString()} to ${range.to.toLocaleDateString()}`}{' '}
 
                 {range.from && range.to && (
-                    <ReservationButton displayText='Reset' onClick={handleResetClick} />
+                    <ReservationButton displayText='Reset' onClick={() => setRange(defaultSelected)} />
                 )}
 
                 {range.from && range.to && (

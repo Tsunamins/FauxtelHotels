@@ -1,3 +1,4 @@
+// todo separate out fetch into services folder/files
 export const buildReservation = (room) => {
     return {
         type: "SET_ROOM_SELECTION",
