@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../store/actions/currentUser.js';
 import '../styles/Forms.css';
 import { AuthButton } from './baseComponents/AuthButton.js';
+import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice.js';
 
 
 export const Login = () => {
@@ -26,7 +27,8 @@ export const Login = () => {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        dispatch(login(loginInfo));
+        dispatch(loginCurrentUser(loginInfo))
+        // dispatch(login(loginInfo));
         navigate('/');
         setLoginInfo(initialState);
     }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LikeButton } from './baseComponents/LikeButton.js'
-import { getLocs } from '../store/actions/getLocations.js';
+import { getLocations } from '../store/services/locationsService.js';
 
 
 export function Rooms() {
@@ -9,7 +9,7 @@ export function Rooms() {
     const locationsOfRooms = useSelector(state => state.locations);
 
     useEffect(() => {
-        dispatch(getLocs());
+        dispatch(getLocations());
     }, []);
 
     return (

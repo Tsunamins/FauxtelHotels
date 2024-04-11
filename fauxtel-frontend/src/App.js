@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getCurrentUser } from './store/actions/currentUser.js'
 import { SignUp } from './components/SignUp.js';
 import { Route, Routes } from 'react-router-dom';
 import { Login } from './components/Login.js';
@@ -11,28 +10,40 @@ import { Locations } from './components/Locations.js';
 import { BookNow } from './components/BookNow.js';
 import { FauxVenues } from './components/FauxVenues.js';
 import { Header } from './containers/Header.js';
-import { getLocs } from './store/actions/getLocations.js';
 import { Welcome } from './containers/Welcome.js';
 import { UserReservationView } from './components/UserReservationView.js';
 import './styles/BookNow.css';
+import { fetchLocations, selectAllLocations } from './store/reducerSlices/locationsSlice.js';
+import { fetchCurrentUser, selectCurrentUser } from './store/reducerSlices/currentUserSlice.js';
 
 
 
 function App() {
-    const currentUser = useSelector(state => state.currentUser)
     const dispatch = useDispatch();
-    const locations = useSelector(state => state.locations);
+    const locations = useSelector(selectAllLocations);
+    const locationsStatus = useSelector((state) => state.locations.status)
+    const currentUser = useSelector(selectCurrentUser);
+    const currentUserStatus = useSelector((state) => state.currentUser.status)
+
     const [isLoggedIn, setIsLoggedIn]  = useState(currentUser);
     const [userReservations, setUserReservations] = useState(currentUser && currentUser.attributes.reservations || [])
     useEffect(() => {
-        dispatch(getLocs())
-        dispatch(getCurrentUser())
-    }, []);
+        if (currentUserStatus === 'idle'){
+            dispatch(fetchCurrentUser())
+        }
+    }, [currentUserStatus]);
 
     useEffect(() => {
-        currentUser && setUserReservations(currentUser.attributes.reservations)
-    }, [currentUser]);
+        if (currentUserStatus === 'successful') {
+            currentUser && setUserReservations(currentUser.attributes.reservations)
+        }
+    }, [currentUser, currentUserStatus]);
 
+    useEffect(() => {
+        if (locationsStatus === 'idle' && locations < 1) {
+            dispatch(fetchLocations());
+        }
+    }, [locationsStatus, locations]);
 
     return (
         <div className="App">
@@ -42,8 +53,8 @@ function App() {
                 <Route exact path='/signup' element={<SignUp />} />
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/room-types' element={<Rooms />} />
-                <Route exact path='/locations' element={<Locations />} />
-                {locations.map((loc, i) =>
+                <Route exact path='/locations' element={<Locations locations={locations} />} />
+                {locationsStatus === 'successful' && locations.map((loc, i) => 
                     <Route key={`${loc.id}`} path={`/locations/${loc.id}`} element={<LocationDesc loc={loc} />} />
                 )}
                 <Route exact path='/venues' element={<FauxVenues />} />
@@ -56,8 +67,6 @@ function App() {
                         element={<UserReservationView reservation={res} userReservations={userReservations}/>} 
                     />
                 )}
-
-
             </Routes>
         </div>
 

@@ -1,22 +1,6 @@
-export const setLocs = (locs) => {
+export const setLocations = (locations) => {
     return {
         type: "GET_LOCS",
-        locs
+        locations
     };
 };
-
-export const getLocs = () => {
-    return dispatch => {
-        return fetch('http://localhost:3003/api/v1/locations')
-            .then(resp => resp.json())
-            .then(response => {
-                if (response.error) {
-                    // alert(response.error);
-                } else {
-                    dispatch(setLocs(response.data));
-                }
-            })
-            .catch(console.log);
-    };
-};
-

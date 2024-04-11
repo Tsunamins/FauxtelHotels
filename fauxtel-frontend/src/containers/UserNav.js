@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentUser } from '../store/actions/currentUser.js';
+// import { getCurrentUser } from '../store/actions/currentUser.js';
+
 import { getReservations } from '../store/actions/reservations.js';
 import { Link, NavLink } from 'react-router-dom';
 import { Logout } from '../components/Logout.js';
+import { fetchCurrentUser, selectCurrentUser } from '../store/reducerSlices/currentUserSlice.js';
 
 
 export const UserNav = () => {
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.currentUser);
+    const currentUser = useSelector(selectCurrentUser);
     const [loggedInUser, setLoggedInUser] = useState(!!currentUser);
 
+
     useEffect(() => {
-        dispatch(getCurrentUser());
+        dispatch(fetchCurrentUser());
     }, [])
 
     useEffect(() => { 
-        currentUser ? setLoggedInUser(currentUser) : setLoggedInUser(false)
+        currentUser && currentUser.currentUser !== null ? setLoggedInUser(!!currentUser) : setLoggedInUser(false)
     }, [currentUser])
 
     return (
