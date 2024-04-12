@@ -4,7 +4,6 @@ export default function reservations(state = [], action) {
         case 'GET_RESERVATIONS':
             return action.reservations
         case 'ADD_RES':
-
             return state.concat(action.res)
         case 'DELETE_RES':
             return state.filter(res => res.id === action.res ? false : true)

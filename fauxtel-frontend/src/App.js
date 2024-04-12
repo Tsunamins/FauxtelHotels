@@ -24,7 +24,6 @@ function App() {
     const locationsStatus = useSelector((state) => state.locations.status)
     const currentUser = useSelector(selectCurrentUser);
     const currentUserStatus = useSelector((state) => state.currentUser.status)
-
     const [isLoggedIn, setIsLoggedIn]  = useState(currentUser);
     const [userReservations, setUserReservations] = useState(currentUser && currentUser.attributes.reservations || [])
     useEffect(() => {
@@ -34,9 +33,7 @@ function App() {
     }, [currentUserStatus]);
 
     useEffect(() => {
-        if (currentUserStatus === 'successful') {
-            currentUser && setUserReservations(currentUser.attributes.reservations)
-        }
+        currentUser && setUserReservations(currentUser.attributes.reservations)
     }, [currentUser, currentUserStatus]);
 
     useEffect(() => {

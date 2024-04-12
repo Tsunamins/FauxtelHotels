@@ -1,21 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LikeButton } from './baseComponents/LikeButton.js'
-import { getLocations } from '../store/services/locationsService.js';
+import { selectAllLocations } from '../store/reducerSlices/locationsSlice.js';
 
 
 export function Rooms() {
     const dispatch = useDispatch();
-    const locationsOfRooms = useSelector(state => state.locations);
-
-    useEffect(() => {
-        dispatch(getLocations());
-    }, []);
+    const locations = useSelector(selectAllLocations);
 
     return (
         <div className="LocationsRooms roomsList">
             <h1 className="pageTitle">Rooms</h1>
-            {locationsOfRooms.map(l =>
+            {locations.map(l =>
                 <div key={l.attributes.name} className="showcaseRooms">
                     <div className="roomTypeList">Rooms Featured at {l.attributes.name} </div>
                     {l.attributes.rooms.map(room =>
