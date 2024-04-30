@@ -11,11 +11,16 @@ import BookRooms from './BookRooms.js';
 import { ReserveDetailsModal } from './ReserveDetailsModal.js';
 import { getRoom } from '../store/actions/buildReservation.js';
 import { ReservationButton } from './baseComponents/ReservationButton.js';
+import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.js';
+import { DateSelection } from './baseComponents/DateSelection.js';
+import { CalendarSelection } from './baseComponents/CalendarSelection.js';
 
 // todo, flow type can prob be nixed due to data need if modifying existing reservation
 export const BookNow = ({ flowType, modifyingReservation }) => {
     const dispatch = useDispatch();
-    const { rooms } = useSelector(state => state.rooms);
+    // const {rooms} = useSelector(state => state.rooms);
+    const rooms = useSelector(selectAllRooms);
+    const roomsStatus = useSelector((state) => state.rooms.status);
     const currentUser = useSelector(state => state.currentUser);
     const reservations = useSelector(state => state.reservations);
     const buildReservationRoom = useSelector(state => state.buildReservation);
@@ -29,13 +34,20 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
     const [range, setRange] = useState(defaultSelected);
     const [isConfirmingDetails, setConfirmingDetails] = useState(false);
     const [roomSelected, setRoomSelected] = useState();
-
+    const [showStartCalendar, setShowStartCalendar] = useState(false);
+    const [showEndCalendar, setShowEndCalendar] = useState(false);
 
     useEffect(() => {
         dispatch(getRooms());
         dispatch(getReservations());
         dispatch(getCurrentUser());
     }, []);
+
+    useEffect(() => {
+        if (roomsStatus === 'idle' && rooms < 1) {
+            dispatch(fetchRooms());
+        }
+    }, [roomsStatus, rooms]);
 
     // useEffect(() => {
     //     dispatch(getRoom(roomSelected));
@@ -52,47 +64,26 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
     const handleShowRooms = () => {
         setAvailableRooms(checkAvailableRooms(rooms, filledRange));
     }
-    // todo this can get the day and modifiers if applied
-    const handleDayClick = (day) => {
-
-        // in range mode this specifies the from day, initially
-        // so day.from
-        console.log('day???: ', day)
-    }
 
     const today = new Date();
-    // todo remember to fix this for any days before
-    // const disabledDays = { before: datesToRooms.from, before: today  };j
-    // also todo, something is off with selecting a new range after initial selection in the calendar itself
-    // when clicking back on the first day of the range says range is undefined
-    // make an handleDateSelection function to pass in/debug
-    // can only do custom non state function with onDayClick prop
-    // should maybe restart if clicking on a same day, or a 3rd click will reset all
-    // maybe a few different scenarios that have an intuitive feel like calendar pickers often do (or they try to)
-    // maybe a long term todo - re-envision or provide an alternative date selection interface - maybe not a calendar range selection but some type of pop-ups
-    
-
     return (
-        <div>
-            <DayPicker
-                className="Range"
-                mode='range'
-                numberOfMonths={2}
-                // disabled={disabledDays}
-                selected={range}
-                // onSelect={setRange}
-                onSelect={handleDayClick}
-
-            />
-            <div className="SelectionText">
-                {!range.from && !range.to && 'Please select the first day.'}
-                {range.from && !range.to && 'Please select the last day.'}
-                {range.from && range.to && `Selected from ${range.from.toLocaleDateString()} to ${range.to.toLocaleDateString()}`}{' '}
-
+        <div id="BookingInteraction">
+            <div className="">
                 {range.from && range.to && (
                     <ReservationButton displayText='Reset' onClick={() => setRange(defaultSelected)} />
                 )}
 
+                {/* todo work on close/cancel button and calendar buttons styling */}
+                {/* check more reservation conditions and make sure finding correct matches */}
+                {/* work on styling more overall */}
+                {/* disabled dates for end date need to exclude at least the first day selected */}
+                {/* also todo, maybe combine these */}
+                <div id='DateRangeSelection'>
+                    <DateSelection setShowCalendar={setShowStartCalendar} showCalendar={showStartCalendar} dateSelected={range.from} dateRangePoint='Begin' />
+                    <DateSelection setShowCalendar={setShowEndCalendar} showCalendar={showEndCalendar} dateSelected={range.to} dateRangePoint='Conclude' />
+                </div>
+                {showStartCalendar && <CalendarSelection dateRangePoint='Start' setShowCalendar={setShowStartCalendar} setRange={setRange} range={range} />}
+                {showEndCalendar && <CalendarSelection dateRangePoint='End' setShowCalendar={setShowEndCalendar} setRange={setRange} range={range} />}
                 {range.from && range.to && (
                     <ReservationButton displayText='Show Rooms' onClick={handleShowRooms} />
                 )}

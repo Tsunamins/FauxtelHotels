@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { SignUp } from './components/SignUp.js';
 import { Route, Routes } from 'react-router-dom';
@@ -17,11 +17,10 @@ import { fetchLocations, selectAllLocations } from './store/reducerSlices/locati
 import { fetchCurrentUser, selectCurrentUser } from './store/reducerSlices/currentUserSlice.js';
 
 
-
 function App() {
     const dispatch = useDispatch();
     const locations = useSelector(selectAllLocations);
-    const locationsStatus = useSelector((state) => state.locations.status)
+    const locationsStatus = useSelector((state) => state.locations.status);
     const currentUser = useSelector(selectCurrentUser);
     const currentUserStatus = useSelector((state) => state.currentUser.status)
     const [isLoggedIn, setIsLoggedIn]  = useState(currentUser);
@@ -51,7 +50,7 @@ function App() {
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/room-types' element={<Rooms />} />
                 <Route exact path='/locations' element={<Locations locations={locations} />} />
-                {locationsStatus === 'successful' && locations.map((loc, i) => 
+                {locations.length > 0 && locations.map((loc, i) => 
                     <Route key={`${loc.id}`} path={`/locations/${loc.id}`} element={<LocationDesc loc={loc} />} />
                 )}
                 <Route exact path='/venues' element={<FauxVenues />} />

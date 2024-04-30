@@ -7,7 +7,6 @@ export const generateDateRange = (startDate, endDate) => {
         dates.push(new Date(date).toISOString("default", { year: "numeric", month: "2-digit", day: "2-digit" }).split(/[T ]/i, 1)[0]);
         date.setDate(date.getDate() + 1);
     }
-
     return dates;
 };
 
