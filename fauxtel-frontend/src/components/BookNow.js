@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { DayPicker } from 'react-day-picker';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-day-picker/dist/style.css';
 import '../styles/DayPicker.css';
