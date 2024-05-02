@@ -39,11 +39,12 @@
     justify-content: center;
     column-gap: 50px;
     cursor: pointer;
+    margin-bottom: 25px;
 }
 
 
 #BookingInteraction {
-    margin-top: 10%;
+    margin-top: 25px;
 }
 
 
@@ -62,6 +63,9 @@
     border: 1px solid #f2d2c2;
     display: flex;
     flex-direction: column;
+    width: 200px;
+    height: 200px;
+
 
 }
 
@@ -69,21 +73,33 @@
     color: white;
     display: flex;
     flex-direction: column;
-    font-size: 40px;
+    align-items: center;
 }
 
 .monthDisplay {
     font-size: 16px;
     border-bottom: 1px solid #f2d2c2;
+    padding: 10px;
+    width: 90%;
+
 }
 
 .dayDisplay {
-    font-size: 12px;
+    font-size: 20px;
 }
 
 .stayDisplay {
     display: flex;
-    /* font-size: 20px; */
+    
+}
+
+.selectionSize {
+    font-size: 40px;
+}
+
+.staySize {
+    font-size: 60px;
+    margin-top: 15%;
 }
 
 .indent {
@@ -99,7 +115,21 @@
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(104, 78, 50, 0.764); /* Black w/ opacity */
+}
+
+.calendarFooter {
+    font-size: 23px;
+    color: rgb(55, 35, 4);
+}
+
+.calendarButton {
+    background-color: pink;
+    font-size: 25px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+
 }
 
 .dateConfirm {
@@ -107,5 +137,5 @@
 }
 
 .calendarCentered {
-    margin-top: 25%;
+    margin-top: 10%;
 }

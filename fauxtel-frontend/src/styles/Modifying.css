@@ -5,7 +5,8 @@
 }
 
 .reservationButtons {
-    background-color: #33455e5b; /* Green */
+    background-color: #33455e5b;
+    /* Green */
     border: 1px solid #335e5c;
     box-shadow: 2px 5px 8px #233437;
     border-radius: 10px;
@@ -18,4 +19,8 @@
     margin: 4px 4px;
     cursor: pointer;
     font-size: 20px;
-  }
+}
+
+.modifyingNote {
+    color: orange;
+}

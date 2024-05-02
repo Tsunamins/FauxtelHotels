@@ -19,8 +19,8 @@ export const DateSelection = ({ dateSelected, dateRangePoint, setShowCalendar, s
             {/* todo this div will be for a mini calendar display conditionally shown*/}
             <div className='daySelectionContent'>
                 {dateSelected && <div className='monthDisplay'>{monthDisplay}</div>}
-                <div className='stayDisplay cursiveFont'>{dateSelected ? dateNumber : dateRangePoint}</div>
-                {!dateSelected && <div className='stayDisplay indent cursiveFont'>Stay</div>}
+                <div className={`stayDisplay cursiveFont ${dateSelected ? 'staySize' : 'selectionSize'}`}>{dateSelected ? dateNumber : dateRangePoint}</div>
+                {!dateSelected && <div className='stayDisplay selectionSize indent cursiveFont'>Stay</div>}
                 {dateSelected && <div className='dayDisplay'>{dayDisplay}</div>}
             </div>
         </div>

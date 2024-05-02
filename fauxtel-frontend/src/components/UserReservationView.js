@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { cancelReservation } from '../store/actions/reservations.js';
+import { cancelReservation, modifyReservation } from '../store/actions/reservations.js';
 import { BookNow } from './BookNow.js';
 import { locationMap, roomMap } from '../constants.js';
 import '../styles/Modifying.css';
@@ -19,19 +19,27 @@ export const UserReservationView = ({ reservation }) => {
         navigate('/');
     }
 
-    // todo also want to add an 'are you sure you want to cancel' 
+    const existingStartDate = new Date(reservation.start_date);
+    const existingEndDate = new Date(reservation.end_date);
+    const existingRange = {
+        from: existingStartDate,
+        to: existingEndDate
+    }
+    
+    // todo also want to add an 'are you sure you want to cancel'
+    // todo cannot modify or cancel reservations past the dates
     return (
         <div>
             <h1 className='pageTitle'>Reservation</h1>
             {reservation &&
                 <div className='ModifyingReservation'>
-                    {isModing ? <h3>You are Modifying </h3> : null}
+                    {isModing ? <h3 className="modifyingNote">You are Modifying </h3> : null}
                     <h3 className='topicTitle'>Location: {locationMap[reservation.location_id]}</h3>
                     <p className='topicDetails'>Room Type: {roomMap[reservation.room_id]}</p>
                     <p className='topicDetails'>From: {reservation.start_date}</p>
                     <p className='topicDetails'>To: {reservation.end_date}</p>
                     {/* todo actually might just need reservation id below, bc, would like to offer option of changing location and room */}
-                    {isModing ? <BookNow flowType='modify' modifyingReservation={reservation.id} />
+                    {isModing ? <BookNow flowType='modify' modifyingReservation={reservation} modifyingRange={existingRange} />
                         :
                         <div>
                             <ReservationButton displayText='Modify Reservation' onClick={() => setIsModing(true)} />

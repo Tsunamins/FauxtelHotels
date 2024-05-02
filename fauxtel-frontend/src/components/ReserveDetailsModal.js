@@ -6,8 +6,9 @@ import { modifyReservation } from '../store/actions/reservations';
 import { useNavigate } from 'react-router-dom';
 import { ReservationButton } from './baseComponents/ReservationButton';
 
+// todo right now modifying reservation is the id - so will need to change
 export const ReserveDetailsModal = ({ currentUser, flowType, range, room, modifyingReservation }) => {
-    console.log('modify reservation data in modal: ', modifyingReservation)
+    console.log('modify reservation data in modal: ', range)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export const ReserveDetailsModal = ({ currentUser, flowType, range, room, modify
         } else {
 
             dispatch(modifyReservation(
-                modifyingReservation,                 
+                modifyingReservation.id,                 
                 {
                     start_date: range.from, 
                     end_date: range.to, 

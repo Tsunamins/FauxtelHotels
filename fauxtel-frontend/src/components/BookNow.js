@@ -16,9 +16,8 @@ import { DateSelection } from './baseComponents/DateSelection.js';
 import { CalendarSelection } from './baseComponents/CalendarSelection.js';
 
 // todo, flow type can prob be nixed due to data need if modifying existing reservation
-export const BookNow = ({ flowType, modifyingReservation }) => {
+export const BookNow = ({ flowType, modifyingReservation, modifyingRange }) => {
     const dispatch = useDispatch();
-    // const {rooms} = useSelector(state => state.rooms);
     const rooms = useSelector(selectAllRooms);
     const roomsStatus = useSelector((state) => state.rooms.status);
     const currentUser = useSelector(state => state.currentUser);
@@ -31,7 +30,7 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
     };
     const [availableRooms, setAvailableRooms] = useState();
     const [filledRange, setFilledRange] = useState([]);
-    const [range, setRange] = useState(defaultSelected);
+    const [range, setRange] = useState(modifyingRange || defaultSelected);
     const [isConfirmingDetails, setConfirmingDetails] = useState(false);
     const [roomSelected, setRoomSelected] = useState();
     const [showStartCalendar, setShowStartCalendar] = useState(false);
@@ -69,21 +68,17 @@ export const BookNow = ({ flowType, modifyingReservation }) => {
     return (
         <div id="BookingInteraction">
             <div className="">
-                {range.from && range.to && (
-                    <ReservationButton displayText='Reset' onClick={() => setRange(defaultSelected)} />
-                )}
-
-                {/* todo work on close/cancel button and calendar buttons styling */}
-                {/* check more reservation conditions and make sure finding correct matches */}
-                {/* work on styling more overall */}
-                {/* disabled dates for end date need to exclude at least the first day selected */}
+                {/* todo check more reservation conditions and make sure finding correct matches */}
                 {/* also todo, maybe combine these */}
                 <div id='DateRangeSelection'>
                     <DateSelection setShowCalendar={setShowStartCalendar} showCalendar={showStartCalendar} dateSelected={range.from} dateRangePoint='Begin' />
                     <DateSelection setShowCalendar={setShowEndCalendar} showCalendar={showEndCalendar} dateSelected={range.to} dateRangePoint='Conclude' />
                 </div>
-                {showStartCalendar && <CalendarSelection dateRangePoint='Start' setShowCalendar={setShowStartCalendar} setRange={setRange} range={range} />}
-                {showEndCalendar && <CalendarSelection dateRangePoint='End' setShowCalendar={setShowEndCalendar} setRange={setRange} range={range} />}
+                {showStartCalendar && <CalendarSelection dateRangePoint='Begin' isModing={!!modifyingReservation} setShowCalendar={setShowStartCalendar} setRange={setRange} range={range} />}
+                {showEndCalendar && <CalendarSelection dateRangePoint='Conclude' isModing={!!modifyingReservation} setShowCalendar={setShowEndCalendar} setRange={setRange} range={range} />}
+                {range.from && range.to && (
+                    <ReservationButton displayText='Reset' onClick={() => setRange(defaultSelected)} />
+                )}
                 {range.from && range.to && (
                     <ReservationButton displayText='Show Rooms' onClick={handleShowRooms} />
                 )}
