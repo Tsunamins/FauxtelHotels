@@ -38,8 +38,7 @@ export const UserReservationView = ({ reservation }) => {
                     <p className='topicDetails'>Room Type: {roomMap[reservation.room_id]}</p>
                     <p className='topicDetails'>From: {reservation.start_date}</p>
                     <p className='topicDetails'>To: {reservation.end_date}</p>
-                    {/* todo actually might just need reservation id below, bc, would like to offer option of changing location and room */}
-                    {isModing ? <BookNow flowType='modify' modifyingReservation={reservation} modifyingRange={existingRange} />
+                    {isModing ? <BookNow modifyingReservation={reservation} modifyingRange={existingRange} />
                         :
                         <div>
                             <ReservationButton displayText='Modify Reservation' onClick={() => setIsModing(true)} />

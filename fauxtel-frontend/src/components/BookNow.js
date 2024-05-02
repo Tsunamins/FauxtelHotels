@@ -8,7 +8,7 @@ import { getReservations } from '../store/actions/reservations.js';
 import { getCurrentUser } from '../store/actions/currentUser.js';
 import { checkAvailableRooms, generateDateRange } from './utils/BookingUtils.js';
 import BookRooms from './BookRooms.js';
-import { ReserveDetailsModal } from './ReserveDetailsModal.js';
+import { ReserveDetailsConfirm } from './ReserveDetailsConfirm.js';
 import { getRoom } from '../store/actions/buildReservation.js';
 import { ReservationButton } from './baseComponents/ReservationButton.js';
 import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.js';
@@ -83,15 +83,11 @@ export const BookNow = ({ flowType, modifyingReservation, modifyingRange }) => {
                     <ReservationButton displayText='Show Rooms' onClick={handleShowRooms} />
                 )}
             </div>
-            {/* list out the available rooms that have availability on these dates */}
             <BookRooms availableRooms={availableRooms} setConfirmingDetails={setConfirmingDetails} setRoomSelected={setRoomSelected} />
             {isConfirmingDetails && 
-                <ReserveDetailsModal 
+                <ReserveDetailsConfirm 
                     currentUser={currentUser} 
-                    range={range} 
-                    flowType={flowType}
-                    // todo create a creatingReservation object instead to coincide with this, nix flowType
-                    // but remember that modifying can have a different room and location
+                    range={range}
                     modifyingReservation={modifyingReservation}
                     room={buildReservationRoom.room[0]} 
                 />
