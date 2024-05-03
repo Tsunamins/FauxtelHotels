@@ -7,7 +7,7 @@ import '../../styles/BookNow.css';
 export const CalendarSelection = ({ incomingDate, dateRangePoint, isModing, range, setShowCalendar, setRange }) => {
     const today = new Date();
     const modingDate = new Date(dateRangePoint === 'Begin' ? range.from: range.to);
-    
+    // todo change all from and to in ranges to Begin and Conclude or begin and conclude to avoid all these checks
     const [selected, setSelected] = useState(dateRangePoint === 'Begin' ? range.from : range.to);
     const [monthStart, setMonthStart] = useState(isModing ? modingDate : today);
 
@@ -20,7 +20,7 @@ export const CalendarSelection = ({ incomingDate, dateRangePoint, isModing, rang
         setShowCalendar(false)
     }
 
-    let footer = <p>Select {dateRangePoint} of stay.</p>;
+    let footer = <p>Select {dateRangePoint === 'Begin' ? 'Beginning' : 'Conclusion' } of stay.</p>;
     if (selected) {
       footer = <p className="calendarFooter"><button className='dateConfirm calendarButton' onClick={handleConfirm}>{dateRangePoint} stay on {format(selected, 'PP')}</button></p>;
     }
