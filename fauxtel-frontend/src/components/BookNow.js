@@ -14,8 +14,7 @@ import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.js
 import { DateSelection } from './baseComponents/DateSelection.js';
 import { CalendarSelection } from './baseComponents/CalendarSelection.js';
 
-// todo, flow type can prob be nixed due to data need if modifying existing reservation
-export const BookNow = ({ flowType, modifyingReservation, modifyingRange }) => {
+export const BookNow = ({ modifyingReservation, modifyingRange }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(selectAllRooms);
     const roomsStatus = useSelector((state) => state.rooms.status);
@@ -63,12 +62,12 @@ export const BookNow = ({ flowType, modifyingReservation, modifyingRange }) => {
         setAvailableRooms(checkAvailableRooms(rooms, filledRange));
     }
 
-    const today = new Date();
     return (
         <div id="BookingInteraction">
             <div className="">
                 {/* todo check more reservation conditions and make sure finding correct matches */}
                 {/* also todo, maybe combine these */}
+                {/* new todo - would be nice whether directly selecting or not in a range fashio to have a full calendar range view that pops up especially for the second date */}
                 <div id='DateRangeSelection'>
                     <DateSelection setShowCalendar={setShowStartCalendar} showCalendar={showStartCalendar} dateSelected={range.from} dateRangePoint='Begin' />
                     <DateSelection setShowCalendar={setShowEndCalendar} showCalendar={showEndCalendar} dateSelected={range.to} dateRangePoint='Conclude' />

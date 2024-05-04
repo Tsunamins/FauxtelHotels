@@ -2,7 +2,6 @@ import React from 'react';
 
 
 export function LocationDesc({ loc }) {
-    console.log('location indiv???', loc)
     return (
         loc &&
         <div className='LocationWrapper'>

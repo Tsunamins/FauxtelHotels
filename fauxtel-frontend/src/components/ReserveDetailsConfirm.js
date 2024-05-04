@@ -8,7 +8,6 @@ import { ReservationButton } from './baseComponents/ReservationButton';
 
 // todo right now modifying reservation is the id - so will need to change
 export const ReserveDetailsConfirm = ({ currentUser, range, room, modifyingReservation }) => {
-    console.log('modify reservation data in modal: ', modifyingReservation)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

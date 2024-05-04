@@ -18,7 +18,6 @@ export const Login = () => {
     const [loginInfo, setLoginInfo] = useState(initialState);
     
     const handleChange = (event) => {
-        console.log('handle change')
         setLoginInfo(prevState => {
             return {
                 ...prevState, [event.target.name]: event.target.value

@@ -7,7 +7,6 @@ export const DateSelection = ({ dateSelected, dateRangePoint, setShowCalendar, s
     const dayDisplay = dateSelected && day[dateSelected.getDay()];
     const dateNumber = dateSelected && dateSelected.getDate();
 
-    console.log('date selection ?? ', dateSelected)
     // range display will be start or end of date range to display
     // i.e. Start Stay / Start Date
     const handleClick = () => {

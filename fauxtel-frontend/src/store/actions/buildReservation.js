@@ -33,9 +33,7 @@ export const getRoom = (room_id) => {
             .then(response => {
                 if (response.error) {
                     alert(response.error);
-                    console.log('room error??? ', response.error)
                 } else {;
-                    console.log('room response??? ', response)
                     dispatch(buildReservation(response))
                 }
             })

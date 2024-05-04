@@ -3,7 +3,6 @@ import '../../styles/Forms.css';
 
 export const InputField = ({ className, name, placeholder, value, onClick, type}) => {
     const [fieldValue, setFieldValue] = useState(value || undefined);
-    console.log('field value?? ', fieldValue)
 
     return (
         <input 
