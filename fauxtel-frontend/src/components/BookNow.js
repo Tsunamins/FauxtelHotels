@@ -67,7 +67,9 @@ export const BookNow = ({ modifyingReservation, modifyingRange }) => {
             <div className="">
                 {/* todo check more reservation conditions and make sure finding correct matches */}
                 {/* also todo, maybe combine these */}
-                {/* new todo - would be nice whether directly selecting or not in a range fashio to have a full calendar range view that pops up especially for the second date */}
+                {/* new todo - would be nice whether directly selecting or not in a range fashio to have a full calendar range view that pops up especially for the second date
+                also todo - if clear is selected for dates stop showing rooms, if dates are being re-selectee individually stop showing rooms
+                also todo improve the list view of rooms - have a whole adobe creative cloud to work with btw!! */}
                 <div id='DateRangeSelection'>
                     <DateSelection setShowCalendar={setShowStartCalendar} showCalendar={showStartCalendar} dateSelected={range.from} dateRangePoint='Begin' />
                     <DateSelection setShowCalendar={setShowEndCalendar} showCalendar={showEndCalendar} dateSelected={range.to} dateRangePoint='Conclude' />
