@@ -1,0 +1,61 @@
+.UserResv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #C9E4CA;
+}
+
+.reservationLink {
+    font-size: 20px;
+}
+
+
+li {
+    padding: 10px;
+}
+
+h1 {
+    color: #87bba2;
+}
+
+.reservationButtons {
+    background-color: #33455e5b;
+    /* Green */
+    border: 1px solid #335e5c;
+    box-shadow: 2px 5px 8px #233437;
+    border-radius: 10px;
+    color: #6aacd3;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#BackgroundBlur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+}
+
+
+#ReservationDetails {
+    width: 50vw;
+    height: 50vh;
+    background-color: rgb(14, 125, 129);
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}

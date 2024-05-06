@@ -1,56 +1,48 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import { signup } from '../actions/currentUser.js'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signup } from '../store/actions/currentUser.js';
+import { useNavigate } from 'react-router-dom';
+import { AuthButton } from './baseComponents/AuthButton.js';
 
-class SignUp extends React.Component {
-    state = {
+
+export const SignUp = () => {
+    const initialState = {
         first_name: "",
-        last_name: "",  
+        last_name: "",
         email: "",
         password: "",
-      
-    }
-  
-    handleChange = event => {
-      this.setState({
-        [event.target.name]: event.target.value
-      });
-    }
-  
-    handleSubmit = event => {
-      event.preventDefault()
+    };
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [signUpInfo, setSignUpInfo] = useState(initialState);
 
-      this.props.signup(this.state)
-      this.props.history.push("/")
-      this.setState({
-            first_name: "",
-            last_name: "",
-            email: "",
-            password: ""
-            
-      })
+    const handleChange = (event) => {
+        setSignUpInfo(prevState => {
+            return {
+                ...prevState, [event.target.name]: event.target.value
+            };
+        });
+    };
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        dispatch(signup(signUpInfo));
+        navigate('/');
+        setSignUpInfo(initialState);
     }
 
-    render() {
     return (
-      <div className="SignUp">
-        <form onSubmit={this.handleSubmit}>
-            <input className="form" type="text" name="first_name"  placeholder="first_name" value={this.state.first_name} onChange={this.handleChange}></input>
-            <input className="form" type="text" name="last_name"  placeholder="last_name" value={this.state.last_name} onChange={this.handleChange}></input>
-            <br></br>
-            <input className="form" type="text" name="email"  placeholder="email" value={this.state.email} onChange={this.handleChange}></input>
-            <input className="form" type="password" name="password"  placeholder="password" value={this.state.password} onChange={this.handleChange}></input>
-            <br></br>
-            <input className="button" type="submit" value="Sign Up"></input>
-
-        </form>
+        <div className="SignUp">
+            <form className='formDisplay' onSubmit={handleSubmit}>
+                {/* todo work on changing to an input component */}
+                <input className="form" type="text" name="first_name" placeholder="First Name" value={signUpInfo.first_name} onChange={handleChange}></input>
+                <input className="form" type="text" name="last_name" placeholder="Last Name" value={signUpInfo.last_name} onChange={handleChange}></input>
+                <br />
+                <input className="form" type="text" name="email" placeholder="Email" value={signUpInfo.email} onChange={handleChange}></input>
+                <input className="form" type="password" name="password" placeholder="Password" value={signUpInfo.password} onChange={handleChange}></input>
+                <br />
+                <AuthButton displayText='Sign Up' type='submit' />
+            </form>
         </div>
-    )
-}
-}
-
-export default connect(null, {signup})(SignUp)
-
-
-
-
+    );
+};

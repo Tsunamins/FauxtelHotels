@@ -1,16 +1,22 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { logout } from "../actions/currentUser.js"
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { logout } from '../store/actions/currentUser.js';
+import { useNavigate } from 'react-router-dom';
+import { AuthButton } from './baseComponents/AuthButton.js';
 
+export const Logout = ({ setLoggedInUser }) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-const Logout = ({logout}) => {
+    const handleLogout = () => {
+        // todo, expire token after some time, front and back
+        setLoggedInUser(false);
+        dispatch(logout);
+        localStorage.removeItem('token');
+    };
     return (
-        <div className="Logout">
-            <form onSubmit={logout}>
-                <input className="button" type="submit" value="Logout" />
-            </form>
+        <div className='Logout'>
+            <AuthButton displayText='Logout' onClick={handleLogout} type='submit'/>
         </div>
-    )
-}
-
-export default connect(null, { logout })(Logout)
+    );
+};

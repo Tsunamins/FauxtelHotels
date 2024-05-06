@@ -1,63 +1,28 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom'
-import {connect} from 'react-redux'
-import RoomDesc from './RoomDescriptions.js'
-import '../styles/roomdesc.css'
-import LikeButton from './LikeButton.js'
+import { useDispatch, useSelector } from 'react-redux';
+import { LikeButton } from './baseComponents/LikeButton.js'
+import { selectAllLocations } from '../store/reducerSlices/locationsSlice.js';
 
 
+export function Rooms() {
+    const dispatch = useDispatch();
+    const locations = useSelector(selectAllLocations);
 
-
-function Rooms(props) {
-    console.log(props)
-    const locs = props.locations
-    let room_types = []
-    const location_divs = locs.map(l => 
-       
-        <div key={l.id} className="showcaseRooms">
-          <div className="RoomTypeList">Rooms Featured at {l.attributes.name} </div>
-            {room_types = [...new Set(l.attributes.rooms.map(r => r.room_type))]
-            .map(rt => <div className="RoomTitle" id={rt}>
-                <LikeButton />
-
-                 <RoomDesc roomDetails={l.attributes.rooms.find(r => r.room_type === rt)} /></div>)}
-            
+    return (
+        <div className="LocationsRooms roomsList">
+            <h1 className="pageTitle">Rooms</h1>
+            {locations.map(l =>
+                <div key={l.attributes.name} className="showcaseRooms">
+                    <div className="roomTypeList">Rooms Featured at {l.attributes.name} </div>
+                    {l.attributes.rooms.map(room =>
+                        <div className="topicTitle" id={room.room_type}>
+                            <div className='topicDetail'>{room.room_type}</div>
+                            <div className='topicDetail'>{room.description}</div>
+                            <LikeButton />
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
- 
-      )
-
-     return(
-        <div>
-            <div className="LocationsRooms">
-                {location_divs}
-                
-            </div>
-        
-        </div>
-
-      )
-
- 
-}
-
-//onPointerEnter={handleMouseEnter} onPointerLeave={handleMouseLeave}
-// const handleMouseEnter = () =>{
-//     document.querySelector(".RoomDetailedDisplay").style.display = "block";
-//     console.log("Mouse Has Entered")
-//   }
-  
-//   const handleMouseLeave = () =>{
-//     document.querySelector(".RoomDetailedDisplay").style.display = "none";
-//     console.log("Mouse has Left")
-  
-//   }
-
-const mapStateToProps = state => {
-    return({
-        rooms: state.rooms,
-        locations: state.locations
-    })
-}
-
-
-export default connect(mapStateToProps)(Rooms)
+    );
+};

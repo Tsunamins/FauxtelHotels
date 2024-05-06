@@ -1,47 +1,43 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import { login, getCurrentUser } from '../actions/currentUser.js'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../store/actions/currentUser.js';
+import '../styles/Forms.css';
+import { AuthButton } from './baseComponents/AuthButton.js';
+import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice.js';
 
-class Login extends React.Component {
-    state = {
-      email: "",
-      password: ""
-    }
-  
-    handleChange = event => {
-      this.setState({
-        [event.target.name]: event.target.value
-      });
-    }
-  
-    handleSubmit = event => {
-      event.preventDefault()
-      
 
-      this.props.login(this.state)
-      this.props.history.push("/")
-      this.setState({
-            email: "",
-            password: ""
-      })
-    }
+export const Login = () => {
+    const initialState = {
+        email: '',
+        password: '',
+    };
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     
+    const [loginInfo, setLoginInfo] = useState(initialState);
+    
+    const handleChange = (event) => {
+        setLoginInfo(prevState => {
+            return {
+                ...prevState, [event.target.name]: event.target.value
+            }
+        })
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(loginCurrentUser(loginInfo))
+        // dispatch(login(loginInfo));
+        navigate('/');
+        setLoginInfo(initialState);
+    }
 
-    render() {
-     
     return (
-        <form onSubmit={this.handleSubmit}>
-            <input className="form" type="text" name="email"  placeholder="email" value={this.state.email} onChange={this.handleChange}></input>
-            <input className="form" type="password" name="password"  placeholder="password" value={this.state.password} onChange={this.handleChange}></input>
-            <input className="button" type="submit" value="Log In"></input>
-
+        <form className='formDisplay' onSubmit={handleSubmit}>
+            <input className='form' type='text' name='email' placeholder='Email' value={loginInfo.email} onChange={handleChange}/>
+            <input className='form' type='password' name='password' placeholder='Password' value={loginInfo.password} onChange={handleChange}/>
+            <br />
+            <AuthButton displayText='Log In' type='submit' />
         </form>
-    )
-}
-}
-
-export default connect(null, {login})(Login)
-
-
-
-
+    );
+};

@@ -1,96 +1,53 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {cancelReservation} from '../actions/reservations.js'
-import BookNow from './BookNow.js'
-import { getResv } from '../actions/buildReservation.js'
-import '../styles/modifying.css'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { cancelReservation, modifyReservation } from '../store/actions/reservations.js';
+import { BookNow } from './BookNow.js';
+import { locationMap, roomMap } from '../constants.js';
+import '../styles/Modifying.css';
+import { ReservationButton } from './baseComponents/ReservationButton.js';
 
 
+export const UserReservationView = ({ reservation }) => {
+    const dispatch = useDispatch();
+    const currentUser = useSelector(state => state.currentUser)
+    const navigate = useNavigate();
+    const [isModing, setIsModing] = useState(false);
 
-
-
-  class UserResvView extends React.Component {  
-    // componentDidMount(){
-    //   this.props.getReservations()
-    // }
-
-    state = {
-      renderModify: false
+    const handleCancel = () => {
+        dispatch(cancelReservation(reservation.id));
+        navigate('/');
     }
 
-  handleCancel = () => {
-    console.log(this.props.res.id)
-    this.props.cancelReservation(this.props.res.id)
-    this.props.history.push("/")
-  }
-
-  handleModify = () => {
-    console.log(this.state)
-    console.log(this.props.res)
-    this.props.getResv(this.props.res.id)
-    this.setState({
-      renderModify: true
-    })
-   
-  }
+    const existingStartDate = new Date(reservation.start_date);
+    const existingEndDate = new Date(reservation.end_date);
+    const existingRange = {
+        from: existingStartDate,
+        to: existingEndDate
+    }
     
-  render(){
-   
-    const modify = this.state.renderModify
-    const res = this.props.res
-    const roomChosen = this.props.buildReservation.room.length
-    const resvChosen = this.props.buildReservation.resv.length
-   
-    
-     if(roomChosen === 1){
-       //Could maybe add a modifying statement here, or a resv changes statement
-      return(<div></div>)
-      } else {
-          return (
-
-            res ?
-              <>
-                <div className="ModifyingReservation">
-                  { modify ? <h3>You are Modifying </h3> : null}
-                  <h3>Location: {res.attributes.location.name}</h3>
-                  <p>Room Type: {res.attributes.room.room_type}</p>
-                  <p>From: {res.attributes.start_date}</p>
-                  <p>To: {res.attributes.end_date}</p>
-                  { modify ? <BookNow reservations={this.props.reservations} /> :   
-                      <div>
-               
-                      <button className="button" onClick={this.handleModify}>Modify Reservation</button>
-                      <br></br>
-                      <button className="button" onClick={this.handleCancel}>Cancel Reservation</button>
-                  </div>
-                  }
+    // todo also want to add an 'are you sure you want to cancel'
+    // todo cannot modify or cancel reservations past the dates
+    return (
+        <div>
+            <h1 className='pageTitle'>Reservation</h1>
+            {reservation &&
+                <div className='ModifyingReservation'>
+                    {isModing ? <h3 className="modifyingNote">You are Modifying </h3> : null}
+                    <h3 className='topicTitle'>Location: {locationMap[reservation.location_id]}</h3>
+                    <p className='topicDetails'>Room Type: {roomMap[reservation.room_id]}</p>
+                    <p className='topicDetails'>From: {reservation.start_date}</p>
+                    <p className='topicDetails'>To: {reservation.end_date}</p>
+                    {isModing ? <BookNow modifyingReservation={reservation} modifyingRange={existingRange} />
+                        :
+                        <div>
+                            <ReservationButton displayText='Modify Reservation' onClick={() => setIsModing(true)} />
+                            <br />
+                            <ReservationButton displayText='Cancel Reservation' onClick={handleCancel} />
+                        </div>
+                    }
                 </div>
-              </>
-              :
-              <div>!Resv Display Issue</div>
-          )
-        }
-      }
-    }   
-
-const mapStateToProps = state => {
- 
-  return {
-    rooms: state.rooms,
-    reservations: state.reservations,
-    buildReservation: state.buildReservation
-  
-  }
-}
-
-// const mapDispatchToProps = dispatch => {
-//   return {
-//       modifyReservation: () => { dispatch(modifyReservation()) },
-//       cancelReservation: () => { dispatch(cancelReservation()) },
-//       //getReservations: () => { dispatch(getReservations()) },
-//       getResv: () => { dispatch(getResv()) }
-      
-//   }
-// }
-
-export default connect(mapStateToProps, {cancelReservation, getResv})(UserResvView)
+            }
+        </div>
+    );
+};

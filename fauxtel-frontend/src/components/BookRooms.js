@@ -1,59 +1,39 @@
 import React, { useState } from 'react';
-import { Link, Route } from 'react-router-dom'
-import Reserve from './Reserve.js'
-import {connect} from 'react-redux'
-import { getRoom } from '../actions/buildReservation.js'
-import '../styles/rooms.css' 
+import { useDispatch, useSelector } from 'react-redux';
+import { getRoom } from '../store/actions/buildReservation.js';
+import '../styles/Rooms.css';
+import '../styles/Common.css';
+import '../styles/DayPicker.css'
+import { ReservationButton } from './baseComponents/ReservationButton.js';
 
 
-function BookRooms(props) {
-  const [room, setRoom] = useState(null)
- 
+function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
+    const dispatch = useDispatch();
+    const [room, setRoom] = useState(null);
 
-  const handleSelect = event => {
- 
-    setRoom(event.target.value)
- 
+    const handleSubmit = event => {
+        event.preventDefault();
+        // getRoom triggers the dispatch to build the reservation
+        dispatch(getRoom(room));
+        setConfirmingDetails(true)
+        // todo if this is successful this isn't needed
+        setRoomSelected(room)
+    };
 
-  }
-
-  const handleStyle = event => {
-    // event.target.style.backgroundColor = '#466eb8';
-    // event.target.style.color = 'white';
-  }
-  
-  const handleSubmit = event => {
-    event.preventDefault()
-    props.getRoom(room)
-    
-  }
-
-  if(props.availRooms.length > 0){
-      return(
-        <div>
-          <form onSubmit={handleSubmit}>
-            
-             {props.availRooms.map(room =>
-                <div class="radios" key={room.id}>
-                   <label className="each-room"  onClick={handleStyle}>{room.attributes.room_type}
-                        <input type="radio" key={room.id} id={room.id} name="room" value={room.id} onClick={handleSelect}>
-                   
-                        </input> 
-                    </label>
-                </div>
-                
-             )}
-             <input className="button" type="submit" value="Reserve this Room"></input>
-           
-           </form>
+    return (
+        <div id='BookableRooms'>
+            <form onSubmit={handleSubmit}>
+                {availableRooms && availableRooms.length > 0 && availableRooms.map(room =>
+                    <div className='radios' key={room.id}>
+                        <label className='eachRoom topicTitle'>{room.attributes.room_type}
+                            <input id='accent' type='radio' key={room.id} name='room' value={room.id} onClick={() => setRoom(room.id)} />
+                        </label>
+                    </div>
+                )}
+                {room && <ReservationButton displayText='Reserve this Room' type='submit'/>}
+            </form>
         </div>
-      )
-  } else {
-    return(
-      <div></div>
     )
-  }
 }
 
-
-export default connect(null, {getRoom})(BookRooms)
+export default BookRooms;

@@ -1,37 +1,19 @@
 import React from 'react';
-import { Link, Route } from 'react-router-dom'
-import {connect} from 'react-redux'
+import { Link } from 'react-router-dom';
+import '../styles/Locations.css';
 
 
 
+export function Locations({locations}) {
 
-function Locations(props) {
-
- console.log(props)
- const locationDetails = props.locations.map(l => 
-    <li key={l.id}>
-      <Link to={`/locations/${l.id}`}>Hotel: {l.attributes.name} To: {l.attributes.city}</Link>
-    </li>
-
-  )
-
- 
-      return(
-        <div>
-         
-            {locationDetails}
-         
+    return (
+        <div className='LocationsList'>
+            <h1 className='pageTitle'>Locations</h1>
+            {locations.length > 0 && locations.map(l =>
+                <li key={l.id}>
+                    <Link to={`/locations/${l.id}`}>{l.attributes.name} - {l.attributes.city}</Link>
+                </li>
+            )}
         </div>
-      )
-
- 
-}
-
-const mapStateToProps = state => {
-    return({
-        locations: state.locations
-    })
-}
-
-
-export default connect(mapStateToProps)(Locations)
+    );
+};

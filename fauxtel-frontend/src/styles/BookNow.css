@@ -1,0 +1,141 @@
+
+* {
+    text-align: center;
+}
+
+/* specific to component display, before clicking as link, BookNav piece */
+
+.BookNowOval {
+    padding: 20px;
+    border-radius: 50%;
+    background-color: #edad6d;
+    width: fit-content;
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+#BookNowOvalLink {
+    font-size: 20px;
+    color: rgb(6, 57, 53);
+}
+
+.BookNowOval:hover {
+    background-color: #3b7be3;
+    color: #f2d2c2;
+}
+
+.BookNowOval:hover a {
+    color: #f2d2c2;
+}
+
+#DateRangeSelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 50px;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+
+#BookingInteraction {
+    margin-top: 25px;
+}
+
+
+.dateSelectionBox {
+    border: 1px solid #f2d2c2;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.dateSelectedBox {
+    border: 1px solid #f2d2c2;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 200px;
+
+
+}
+
+.daySelectionContent {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.monthDisplay {
+    font-size: 16px;
+    border-bottom: 1px solid #f2d2c2;
+    padding: 10px;
+    width: 90%;
+
+}
+
+.dayDisplay {
+    font-size: 20px;
+}
+
+.stayDisplay {
+    display: flex;
+    
+}
+
+.selectionSize {
+    font-size: 40px;
+}
+
+.staySize {
+    font-size: 60px;
+    margin-top: 15%;
+}
+
+.indent {
+    align-self: center;
+}
+
+.calendarModal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(104, 78, 50, 0.764); /* Black w/ opacity */
+}
+
+.calendarFooter {
+    font-size: 23px;
+    color: rgb(55, 35, 4);
+}
+
+.calendarButton {
+    background-color: pink;
+    font-size: 25px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+
+}
+
+.dateConfirm {
+
+}
+
+.calendarCentered {
+    margin-top: 10%;
+}

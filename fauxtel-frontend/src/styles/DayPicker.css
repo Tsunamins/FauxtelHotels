@@ -1,0 +1,48 @@
+.rdp {
+    --rdp-cell-size: 70px; /* Size of the day cells. */
+    --rdp-caption-font-size: 18px; /* Font size for the caption labels. */
+    --rdp-accent-color: #063951; /* Accent color for the background of selected days. */
+    --rdp-background-color: #53d7eb; /* Background color for the hovered/focused elements. */
+    --rdp-accent-color-dark: #11485c; /* Accent color for the background of selected days (to use in dark-mode). */
+    --rdp-background-color-dark: #7df0f0; /* Background color for the hovered/focused elements (to use in dark-mode). */
+    --rdp-outline: 2px solid var(--rdp-accent-color); /* Outline border for focused elements */
+    --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
+    --rdp-selected-color: #ef8f4b; /* Color of selected day text */
+  
+    margin: 1em;
+  }
+
+
+  .rdp-month {
+    background-color: #53d7eb;
+    padding: 10px;
+    border-radius: 25px;
+  }
+
+  .rdp-months {
+    justify-content: center;
+  }
+
+
+  /* Selection Text Special Div (not day picker footer */
+  .SelectionText {
+    color: rgb(55, 172, 193);
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  .reservationButtons {
+    background-color: #33455e5b; /* Green */
+    border: 1px solid #335e5c;
+    box-shadow: 2px 5px 8px #233437;
+    border-radius: 10px;
+    color: #6aacd3;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    font-size: 20px;
+  }
