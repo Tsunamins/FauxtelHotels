@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getReservations } from '../store/actions/reservations.js';
 import { Link, NavLink } from 'react-router-dom';
 import { Logout } from '../components/Logout.js';
-import { fetchCurrentUser, selectCurrentUser } from '../store/reducerSlices/currentUserSlice.js';
+import { fetchCurrentUser, selectCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
 
 
 export const UserNav = () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LikeButton } from './baseComponents/LikeButton.js'
-import { selectAllLocations } from '../store/reducerSlices/locationsSlice.js';
+import { selectAllLocations } from '../store/reducerSlices/locationsSlice.ts';
 
 
 export function Rooms() {

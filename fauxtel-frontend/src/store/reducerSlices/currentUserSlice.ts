@@ -1,9 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCurrentUser, loginUser } from '../services/currentUserService';
+import { getCurrentUser, loginUser, logout } from '../services/currentUserService';
+import { UserCreds } from '../../components/Login';
 
-const initialState = { currentUser: null, status: 'idle', error: null };
+const initialState = { currentUser: null, status: 'idle', error: '' };
 
-export const loginCurrentUser = createAsyncThunk('LOGIN_USER', async (credentials) => {
+export type ResponseData = {
+    status: number;
+    data: any;
+    headers: Headers;
+    url: string;
+}
+
+export const loginCurrentUser = createAsyncThunk('LOGIN_USER', async (credentials: UserCreds): Promise<ResponseData> => {
     const response = await loginUser(credentials)
     localStorage.setItem('token', response.data.jwt)
     return response.data.user.data
@@ -14,9 +22,17 @@ export const fetchCurrentUser = createAsyncThunk('GET_USER', async () => {
     return response.data.user.data
 })
 
+// export const logoutCurrentUser = createAsyncThunk('LOGOUT_USER', async () => {
+//     const response = await logout();
+
+// })
+
+// todo need to finish logout and create user, also need to look at backend logout - does it log out?
+
 const currentUserSlice = createSlice({
     name: 'currentUser',
     initialState,
+    reducers: {},
     extraReducers(builder) {
         builder
             .addCase(loginCurrentUser.pending, (state, action) => {
@@ -29,7 +45,7 @@ const currentUserSlice = createSlice({
             })
             .addCase(loginCurrentUser.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.error.message
+                state.error = action.error.message || 'undefined error'
             })
             .addCase(fetchCurrentUser.pending, (state, action) => {
                 state.status = 'loading'
@@ -40,7 +56,7 @@ const currentUserSlice = createSlice({
             })
             .addCase(fetchCurrentUser.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.error.message
+                state.error = action.error.message || 'undefined error'
             })
 
     }
@@ -48,4 +64,4 @@ const currentUserSlice = createSlice({
 
 export default currentUserSlice.reducer
 
-export const selectCurrentUser = (state) => state.currentUser.currentUser
+export const selectCurrentUser = (state: { currentUser: { currentUser: any; }; }) => state.currentUser.currentUser

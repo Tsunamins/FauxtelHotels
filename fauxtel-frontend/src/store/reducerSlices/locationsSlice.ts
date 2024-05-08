@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getLocations } from '../services/locationsService';
 
-const initialState = { locations: [], status: 'idle', error: null };
+const initialState = { locations: [], status: 'idle', error: '' };
 
 export const fetchLocations = createAsyncThunk('GET_LOCS', async () => {
     const response = await getLocations()
@@ -11,6 +11,7 @@ export const fetchLocations = createAsyncThunk('GET_LOCS', async () => {
 const locationsSlice = createSlice({
     name: 'locations',
     initialState,
+    reducers: {},
     extraReducers(builder) {
         builder
             .addCase(fetchLocations.pending, (state, action) => {
@@ -22,7 +23,7 @@ const locationsSlice = createSlice({
             })
             .addCase(fetchLocations.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.error.message
+                state.error = action.error.message || 'undefined error'
             })
 
     }
@@ -30,4 +31,4 @@ const locationsSlice = createSlice({
 
 export default locationsSlice.reducer
 
-export const selectAllLocations = (state) => state.locations.locations
+export const selectAllLocations = (state: { locations: { locations: any; }; }) => state.locations.locations

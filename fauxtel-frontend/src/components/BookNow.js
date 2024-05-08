@@ -10,7 +10,7 @@ import BookRooms from './BookRooms.js';
 import { ReserveDetailsConfirm } from './ReserveDetailsConfirm.js';
 import { getRoom } from '../store/actions/buildReservation.js';
 import { ReservationButton } from './baseComponents/ReservationButton.js';
-import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.js';
+import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.ts';
 import { DateSelection } from './baseComponents/DateSelection.js';
 import { CalendarSelection } from './baseComponents/CalendarSelection.js';
 

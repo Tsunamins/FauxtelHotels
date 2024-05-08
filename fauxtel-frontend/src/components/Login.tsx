@@ -1,33 +1,38 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, ChangeEventHandler, FormEvent, FormEventHandler, SyntheticEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/actions/currentUser.js';
 import '../styles/Forms.css';
-import { AuthButton } from './baseComponents/AuthButton.js';
-import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice.js';
+import { AuthButton } from './baseComponents/AuthButton.tsx';
+import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
+import { AppDispatch } from '../store/store.ts';
 
+export type UserCreds = {
+    email: string;
+    password: string;
+}
 
 export const Login = () => {
-    const initialState = {
+    const initialState: UserCreds = {
         email: '',
         password: '',
     };
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     
-    const [loginInfo, setLoginInfo] = useState(initialState);
+    const [loginInfo, setLoginInfo] = useState<UserCreds>(initialState);
     
-    const handleChange = (event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const target = event.target as HTMLInputElement;
         setLoginInfo(prevState => {
             return {
-                ...prevState, [event.target.name]: event.target.value
+                ...prevState, [target.name]: target.value
             }
         })
     }
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         dispatch(loginCurrentUser(loginInfo))
-        // dispatch(login(loginInfo));
         navigate('/');
         setLoginInfo(initialState);
     }

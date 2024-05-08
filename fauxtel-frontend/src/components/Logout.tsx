@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import { useDispatch } from 'react-redux';
 import { logout } from '../store/actions/currentUser.js';
 import { useNavigate } from 'react-router-dom';
 import { AuthButton } from './baseComponents/AuthButton.js';
 
-export const Logout = ({ setLoggedInUser }) => {
+interface LogoutProps {
+    setLoggedInUser: Dispatch<Boolean>
+}
+
+export const Logout = ({ setLoggedInUser }: LogoutProps) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

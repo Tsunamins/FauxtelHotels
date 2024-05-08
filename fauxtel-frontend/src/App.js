@@ -13,8 +13,8 @@ import { Header } from './containers/Header.js';
 import { Welcome } from './containers/Welcome.js';
 import { UserReservationView } from './components/UserReservationView.js';
 import './styles/BookNow.css';
-import { fetchLocations, selectAllLocations } from './store/reducerSlices/locationsSlice.js';
-import { fetchCurrentUser, selectCurrentUser } from './store/reducerSlices/currentUserSlice.js';
+import { fetchLocations, selectAllLocations } from './store/reducerSlices/locationsSlice.ts';
+import { fetchCurrentUser, selectCurrentUser } from './store/reducerSlices/currentUserSlice.ts';
 
 
 function App() {
