@@ -12,7 +12,7 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import store from './store/store';
+import store from './store/store.ts';
 
 
 

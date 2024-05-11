@@ -8,19 +8,21 @@ import { getCurrentUser } from '../store/actions/currentUser.js';
 import { checkAvailableRooms, generateDateRange } from './utils/BookingUtils.js';
 import BookRooms from './BookRooms.js';
 import { ReserveDetailsConfirm } from './ReserveDetailsConfirm.js';
-import { getRoom } from '../store/actions/buildReservation.js';
+// import { getRoom } from '../store/actions/buildReservation.js';
 import { ReservationButton } from './baseComponents/ReservationButton.js';
 import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.ts';
 import { DateSelection } from './baseComponents/DateSelection.js';
 import { CalendarSelection } from './baseComponents/CalendarSelection.js';
+import { selectCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
 
 export const BookNow = ({ modifyingReservation, modifyingRange }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(selectAllRooms);
     const roomsStatus = useSelector((state) => state.rooms.status);
-    const currentUser = useSelector(state => state.currentUser);
+    // const currentUser = useSelector(state => state.currentUser);
+    const currentUser = useSelector(selectCurrentUser);
     const reservations = useSelector(state => state.reservations);
-    const buildReservationRoom = useSelector(state => state.buildReservation);
+    // const buildReservationRoom = useSelector(state => state.buildReservation);
 
     const defaultSelected = {
         from: null,
@@ -33,6 +35,10 @@ export const BookNow = ({ modifyingReservation, modifyingRange }) => {
     const [roomSelected, setRoomSelected] = useState();
     const [showStartCalendar, setShowStartCalendar] = useState(false);
     const [showEndCalendar, setShowEndCalendar] = useState(false);
+
+    console.log('isConfirmingDetails : ', isConfirmingDetails)
+    console.log('room selected result, but not using?? ', roomSelected)
+    console.log('current user: ', currentUser)
 
     useEffect(() => {
         dispatch(getRooms());
@@ -89,7 +95,7 @@ export const BookNow = ({ modifyingReservation, modifyingRange }) => {
                     currentUser={currentUser} 
                     range={range}
                     modifyingReservation={modifyingReservation}
-                    room={buildReservationRoom.room[0]} 
+                    room={roomSelected} 
                 />
             }
         </div>

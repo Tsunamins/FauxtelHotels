@@ -8,7 +8,7 @@ class ReservationMailer < ApplicationMailer
         @user = params[:user]
         @reservation = params[:reservation]
         
-        @url = 'http//localhost:3001/login'
+        @url = 'http//localhost:3000/login'
         mail(to: @user.email, subject: "Confirming your reservation!")
     
     end

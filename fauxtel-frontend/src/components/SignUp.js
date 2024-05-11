@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signup } from '../store/actions/currentUser.js';
 import { useNavigate } from 'react-router-dom';
-import { AuthButton } from './baseComponents/AuthButton.js';
+import { AuthButton } from './baseComponents/AuthButton.tsx';
 
 
 export const SignUp = () => {

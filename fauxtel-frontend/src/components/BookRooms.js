@@ -5,6 +5,7 @@ import '../styles/Rooms.css';
 import '../styles/Common.css';
 import '../styles/DayPicker.css'
 import { ReservationButton } from './baseComponents/ReservationButton.js';
+import { getOneRoom } from '../store/reducerSlices/roomsSlice.ts';
 
 
 function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
@@ -13,10 +14,8 @@ function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
 
     const handleSubmit = event => {
         event.preventDefault();
-        // getRoom triggers the dispatch to build the reservation
-        dispatch(getRoom(room));
+        dispatch(getOneRoom(room.id));
         setConfirmingDetails(true)
-        // todo if this is successful this isn't needed
         setRoomSelected(room)
     };
 
@@ -26,7 +25,7 @@ function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
                 {availableRooms && availableRooms.length > 0 && availableRooms.map(room =>
                     <div className='radios' key={room.id}>
                         <label className='eachRoom topicTitle'>{room.attributes.room_type}
-                            <input id='accent' type='radio' key={room.id} name='room' value={room.id} onClick={() => setRoom(room.id)} />
+                            <input id='accent' type='radio' key={room.id} name='room' value={room.id} onClick={() => setRoom(room)} />
                         </label>
                     </div>
                 )}

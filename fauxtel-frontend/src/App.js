@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { SignUp } from './components/SignUp.js';
 import { Route, Routes } from 'react-router-dom';
-import { Login } from './components/Login.js';
+import { Login } from './components/Login.tsx';
 import { UserReservations } from './components/UserReservations.js';
 import { LocationDesc } from './components/LocationDesc.js';
-import { Rooms } from './components/Rooms.js';
+import { Rooms } from './components/Rooms.tsx';
 import { Locations } from './components/Locations.js';
 import { BookNow } from './components/BookNow.js';
 import { FauxVenues } from './components/FauxVenues.js';

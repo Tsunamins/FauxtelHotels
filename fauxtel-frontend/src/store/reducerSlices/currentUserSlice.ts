@@ -11,7 +11,7 @@ export type ResponseData = {
     url: string;
 }
 
-export const loginCurrentUser = createAsyncThunk('LOGIN_USER', async (credentials: UserCreds): Promise<ResponseData> => {
+export const loginCurrentUser = createAsyncThunk('LOGIN_USER', async (credentials: UserCreds): Promise<ResponseData | null> => {
     const response = await loginUser(credentials)
     localStorage.setItem('token', response.data.jwt)
     return response.data.user.data
@@ -40,7 +40,7 @@ const currentUserSlice = createSlice({
             })
             .addCase(loginCurrentUser.fulfilled, (state, action) => {
                 state.status = 'succeeded'
-                state.currentUser = action.payload
+                state.currentUser = action.payload || null
                 console.log('current user state: ', state.currentUser)
             })
             .addCase(loginCurrentUser.rejected, (state, action) => {
