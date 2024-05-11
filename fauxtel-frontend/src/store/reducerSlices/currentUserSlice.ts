@@ -22,6 +22,11 @@ export const fetchCurrentUser = createAsyncThunk('GET_USER', async () => {
     return response.data.user.data
 })
 
+export const logoutUser = createAsyncThunk('LOGOUT_USER', async () => {
+    const response = initialState
+    return response
+})
+
 // export const logoutCurrentUser = createAsyncThunk('LOGOUT_USER', async () => {
 //     const response = await logout();
 
@@ -55,6 +60,17 @@ const currentUserSlice = createSlice({
                 state.currentUser = action.payload
             })
             .addCase(fetchCurrentUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message || 'undefined error'
+            })
+            .addCase(logoutUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(logoutUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.currentUser = null
+            })
+            .addCase(logoutUser.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message || 'undefined error'
             })

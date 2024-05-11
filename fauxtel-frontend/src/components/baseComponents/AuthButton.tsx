@@ -8,6 +8,7 @@ interface AuthButtonProps {
     onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
+// todo could really combine buttons and use classname
 export const AuthButton = ({ className, displayText, onClick, type}: AuthButtonProps)  => {
     return (
         <button className='authButtons'  onClick={onClick} type={type}>{displayText}</button>

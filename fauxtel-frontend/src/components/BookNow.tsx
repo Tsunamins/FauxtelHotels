@@ -8,21 +8,24 @@ import { getCurrentUser } from '../store/actions/currentUser.js';
 import { checkAvailableRooms, generateDateRange } from './utils/BookingUtils.js';
 import BookRooms from './BookRooms.js';
 import { ReserveDetailsConfirm } from './ReserveDetailsConfirm.js';
-// import { getRoom } from '../store/actions/buildReservation.js';
 import { ReservationButton } from './baseComponents/ReservationButton.js';
 import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.ts';
-import { DateSelection } from './baseComponents/DateSelection.js';
-import { CalendarSelection } from './baseComponents/CalendarSelection.js';
+import { DateSelection } from './baseComponents/DateSelection.tsx';
+import { CalendarSelection } from './baseComponents/CalendarSelection.tsx';
 import { selectCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
+import { RootState } from '../store/store.ts';
+
+// interface BookNowProps {
+//     modifyingReservation: ;
+//     modifyingRange: 
+// }
 
 export const BookNow = ({ modifyingReservation, modifyingRange }) => {
     const dispatch = useDispatch();
     const rooms = useSelector(selectAllRooms);
-    const roomsStatus = useSelector((state) => state.rooms.status);
-    // const currentUser = useSelector(state => state.currentUser);
+    const roomsStatus = useSelector<RootState>((state) => state.rooms.status);
     const currentUser = useSelector(selectCurrentUser);
-    const reservations = useSelector(state => state.reservations);
-    // const buildReservationRoom = useSelector(state => state.buildReservation);
+    // const reservations = useSelector(state => state.reservations);
 
     const defaultSelected = {
         from: null,
@@ -51,10 +54,6 @@ export const BookNow = ({ modifyingReservation, modifyingRange }) => {
             dispatch(fetchRooms());
         }
     }, [roomsStatus, rooms]);
-
-    // useEffect(() => {
-    //     dispatch(getRoom(roomSelected));
-    // }, [roomSelected]);
 
     useEffect(() => {
         if(range.from && range.to) {

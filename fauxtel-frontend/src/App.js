@@ -7,7 +7,7 @@ import { UserReservations } from './components/UserReservations.js';
 import { LocationDesc } from './components/LocationDesc.js';
 import { Rooms } from './components/Rooms.tsx';
 import { Locations } from './components/Locations.js';
-import { BookNow } from './components/BookNow.js';
+import { BookNow } from './components/BookNow.tsx';
 import { FauxVenues } from './components/FauxVenues.js';
 import { Header } from './containers/Header.js';
 import { Welcome } from './containers/Welcome.js';

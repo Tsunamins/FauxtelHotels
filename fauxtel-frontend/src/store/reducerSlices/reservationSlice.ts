@@ -15,9 +15,7 @@ export type ResponseData = {
 // todo, while this will create an appropriate reservation in the DB, should it really be adding to the list of user reservations?
 // or both? but reservations based on a user allways come from user -> reservations and reservations from a room come from room -> occupied dates??
 export const createNewReservation = createAsyncThunk('ADD_RES', async (resInfo): Promise<ResponseData> => {
-    console.log('res Info in new slice??? ', resInfo)
     const response = await createReservation(resInfo)
-    console.log('response in new resv ', response)
     return response.data
 })
 
@@ -26,12 +24,8 @@ export const fetchAllReservations = createAsyncThunk('GET_RESERVATIONS', async (
     return response.data.user.data
 })
 
-// export const logoutCurrentUser = createAsyncThunk('LOGOUT_USER', async () => {
-//     const response = await logout();
 
-// })
-
-// todo need to finish logout and create user, also need to look at backend logout - does it log out?
+// need to add modifying and delete functions
 
 const reservationSlice = createSlice({
     name: 'currentUser',

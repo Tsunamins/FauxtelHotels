@@ -51,11 +51,11 @@ export const signup = (credentials) => {
     }
 }
 
-export const logout = () => {
-    return dispatch => {
-        dispatch(logoutUser())
-    }
-}
+// export const logout = () => {
+//     return dispatch => {
+//         dispatch(logoutUser())
+//     }
+// }
 
 export const loginUser = async (credentials) => {
     let data;
@@ -107,3 +107,4 @@ export const getCurrentUser = async (credentials) => {
         return Promise.reject(error.message ? error.message : data)
     }
 };
+

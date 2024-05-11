@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { cancelReservation, modifyReservation } from '../store/actions/reservations.js';
-import { BookNow } from './BookNow.js';
+import { BookNow } from './BookNow.tsx';
 import { locationMap, roomMap } from '../constants.js';
 import '../styles/Modifying.css';
 import { ReservationButton } from './baseComponents/ReservationButton.js';

@@ -7,7 +7,7 @@ import { AuthButton } from './baseComponents/AuthButton.tsx';
 import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
 import { AppDispatch } from '../store/store.ts';
 
-export type UserCreds = {
+export interface UserCreds {
     email: string;
     password: string;
 }

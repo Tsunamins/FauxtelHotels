@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { Dispatch } from 'react';
 import '../../styles/BookNow.css';
 import { day, month } from '../../constants';
 
-export const DateSelection = ({ dateSelected, dateRangePoint, setShowCalendar, showCalendar }) => {
+interface DateSelectionProps {
+    dateSelected: Date;
+    dateRangePoint: 'Begin' | 'Conclude';
+    setShowCalendar: Dispatch<boolean>;
+    showCalendar: boolean;
+}
+
+export const DateSelection = ({ dateSelected, dateRangePoint, setShowCalendar, showCalendar }: DateSelectionProps) => {
     const monthDisplay = dateSelected && month[dateSelected.getMonth()];
     const dayDisplay = dateSelected && day[dateSelected.getDay()];
     const dateNumber = dateSelected && dateSelected.getDate();
 
-    // range display will be start or end of date range to display
-    // i.e. Start Stay / Start Date
-    const handleClick = () => {
-        setShowCalendar(!showCalendar)
-    }
     return (
-        // todo onclick will open up a calendar view of react day picker
-        <div className={dateSelected ? 'dateSelectedBox' : 'dateSelectionBox'} onClick={handleClick}>
-            {/* todo this div will be for a mini calendar display conditionally shown*/}
+        <div className={dateSelected ? 'dateSelectedBox' : 'dateSelectionBox'} onClick={() => setShowCalendar(!showCalendar)}>
             <div className='daySelectionContent'>
                 {dateSelected && <div className='monthDisplay'>{monthDisplay}</div>}
                 <div className={`stayDisplay cursiveFont ${dateSelected ? 'staySize' : 'selectionSize'}`}>{dateSelected ? dateNumber : dateRangePoint}</div>

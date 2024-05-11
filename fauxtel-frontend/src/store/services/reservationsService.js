@@ -1,20 +1,5 @@
 import { addReservation, deleteReservation, setAllReservations, updateReservation } from "../actions/reservations";
 
-// export const getReservations = () => {
-//     return dispatch => {
-//         return fetch('http://localhost:3003/api/v1/reservations')
-//             .then(resp => resp.json())
-//             .then(response => {
-//                 if (response.error) {
-//                     // alert(response.error);
-
-//                 } else {
-//                     dispatch(setAllReservations(response.data));
-//                 }
-//             })
-//             .catch(console.log);
-//     };
-// };
 
 export const getReservations = async () => {
     let data;
@@ -34,27 +19,6 @@ export const getReservations = async () => {
         return Promise.reject(error.message ? error.message : data)
     }
 };
-
-// export const createReservation = (res_info) => {
-//     return dispatch => {
-//         return fetch('http://localhost:3003/api/v1/reservations', {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify(res_info)
-//         })
-//             .then(resp => resp.json())
-//             .then(response => {
-//                 if (response.error) {
-//                     // alert(response.error);
-//                 } else {
-//                     dispatch(addReservation(response));
-//                 }
-//             })
-//             .catch(console.log);
-//     };
-// };
 
 export const createReservation = async (resInfo) => {
     console.log('resInfo in the service???? ', resInfo)
