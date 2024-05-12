@@ -1,6 +1,7 @@
-import { UserNav } from './UserNav';
+import { UserNav } from './UserNav.tsx';
 import '../styles/Header.css';
 import { Link } from "react-router-dom";
+import React from 'react';
 
 
 export const Header = () => {

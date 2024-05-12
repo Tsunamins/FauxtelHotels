@@ -32,7 +32,9 @@ class Api::V1::ReservationsController < ApplicationController
     # PATCH/PUT /reservations/1
     def update
         @user = current_user
+        puts '!!!!!!!!!!!!!!!! '
         if @user.id == @reservation.user_id
+          puts reservation_params
       
             if @reservation.update(reservation_params)
                 render json:  ReservationSerializer.new(@reservation), status: :ok
@@ -68,6 +70,6 @@ class Api::V1::ReservationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def reservation_params
-      params.require(:reservation).permit(:start_date, :end_date, :date_range, :user_id, :room_id, :location_id)
+      params.require(:reservation).permit(:start_date, :end_date, :user_id, :room_id, :location_id)
     end
 end

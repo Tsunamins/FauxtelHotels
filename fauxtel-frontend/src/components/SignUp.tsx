@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { signup } from '../store/actions/currentUser.js';
 import { useNavigate } from 'react-router-dom';
-import { AuthButton } from './baseComponents/AuthButton.tsx';
+import { BaseButton } from './baseComponents/BaseButton.tsx';
+import { signUpUser } from '../store/reducerSlices/currentUserSlice.ts';
+import { AppDispatch } from '../store/store.ts';
+import { UserCreateCreds, UserCreateWrapper } from '../store/storeProps.ts';
 
 
 export const SignUp = () => {
@@ -12,9 +14,10 @@ export const SignUp = () => {
         email: "",
         password: "",
     };
-    const dispatch = useDispatch();
+    
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    const [signUpInfo, setSignUpInfo] = useState(initialState);
+    const [signUpInfo, setSignUpInfo] = useState<UserCreateCreds>(initialState);
 
     const handleChange = (event) => {
         setSignUpInfo(prevState => {
@@ -26,7 +29,8 @@ export const SignUp = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(signup(signUpInfo));
+        const credentials: UserCreateWrapper = {user: { ...signUpInfo }}
+        dispatch(signUpUser(credentials))
         navigate('/');
         setSignUpInfo(initialState);
     }
@@ -41,7 +45,7 @@ export const SignUp = () => {
                 <input className="form" type="text" name="email" placeholder="Email" value={signUpInfo.email} onChange={handleChange}></input>
                 <input className="form" type="password" name="password" placeholder="Password" value={signUpInfo.password} onChange={handleChange}></input>
                 <br />
-                <AuthButton displayText='Sign Up' type='submit' />
+                <BaseButton className='authButtons' displayText='Sign Up' type='submit' />
             </form>
         </div>
     );

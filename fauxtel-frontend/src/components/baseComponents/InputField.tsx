@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
 import '../../styles/Forms.css';
+import { InputFieldProps } from './baseComponentProps';
 
-export const InputField = ({ className, name, placeholder, value, onClick, type}) => {
+
+
+export const InputField = ({ className, name, placeholder, value, type}: InputFieldProps) => {
     const [fieldValue, setFieldValue] = useState(value || undefined);
 
     return (
@@ -9,7 +12,6 @@ export const InputField = ({ className, name, placeholder, value, onClick, type}
             className={className}
             name={name}
             onChange={(e) => setFieldValue(e.target.value)} 
-            onClick={onClick}
             placeholder={placeholder}
             type={type} 
             value={fieldValue}/>

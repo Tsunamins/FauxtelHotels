@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRoom } from '../store/actions/buildReservation.js';
+import { useDispatch } from 'react-redux';
 import '../styles/Rooms.css';
 import '../styles/Common.css';
 import '../styles/DayPicker.css'
-import { ReservationButton } from './baseComponents/ReservationButton.js';
-import { getOneRoom } from '../store/reducerSlices/roomsSlice.ts';
+import { BaseButton } from './baseComponents/BaseButton.tsx';
+import { AppDispatch } from '../store/store.ts';
+import { BookRoomsProps, Room } from './componentProps.ts';
 
 
-function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
-    const dispatch = useDispatch();
-    const [room, setRoom] = useState(null);
+function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }: BookRoomsProps) {
+    const dispatch = useDispatch<AppDispatch>();
+    const [room, setRoom] = useState<Room | undefined>(undefined);
 
     const handleSubmit = event => {
         event.preventDefault();
-        dispatch(getOneRoom(room.id));
         setConfirmingDetails(true)
         setRoomSelected(room)
     };
@@ -29,7 +28,7 @@ function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }) {
                         </label>
                     </div>
                 )}
-                {room && <ReservationButton displayText='Reserve this Room' type='submit'/>}
+                {room && <BaseButton className='reservationButtons' displayText='Reserve this Room' type='submit'/>}
             </form>
         </div>
     )

@@ -3,19 +3,9 @@ import { format } from 'date-fns';
 import { DayPicker, Matcher } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import '../../styles/BookNow.css';
+import { CalendarSelectionProps } from './baseComponentProps';
 
-export interface CalendarSelectionProps {
-    dateRangePoint: 'Begin' | 'Conclude';
-    isModing: boolean;
-    range: Range;
-    setShowCalendar: Dispatch<boolean>;
-    setRange: Dispatch<Range>;
-}
 
-export interface Range {
-    from: Matcher | Matcher[] | undefined;
-    to: Matcher | Matcher[] | undefined;
-}
 export const CalendarSelection = ({ dateRangePoint, isModing, range, setShowCalendar, setRange }: CalendarSelectionProps) => {
     const isStart = dateRangePoint === 'Begin';
     const today = new Date();

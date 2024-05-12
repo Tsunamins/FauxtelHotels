@@ -1,15 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getRoom, getRooms } from '../services/roomsService';
+import { ResponseData } from '../storeProps';
 
 const initialState = { rooms: [], status: 'idle', error: '' };
 
-export const fetchRooms = createAsyncThunk('GET_ROOMS', async () => {
+export const fetchRooms = createAsyncThunk('GET_ROOMS', async (): Promise<ResponseData | null> => {
     const response = await getRooms()
     return response.data.data
 });
 
-export const getOneRoom = createAsyncThunk('GET_ROOM', async () => {
-    const response = await getRoom()
+export const getOneRoom = createAsyncThunk('GET_ROOM', async (roomNumber: number): Promise<ResponseData | null> => {
+    const response = await getRoom(roomNumber)
     return response.data.data
 });
 

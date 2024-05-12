@@ -1,13 +1,9 @@
 import React, { Dispatch } from 'react';
 import '../../styles/BookNow.css';
-import { day, month } from '../../constants';
+import { day, month } from '../../constants.ts';
+import { DateSelectionProps } from './baseComponentProps';
 
-interface DateSelectionProps {
-    dateSelected: Date;
-    dateRangePoint: 'Begin' | 'Conclude';
-    setShowCalendar: Dispatch<boolean>;
-    showCalendar: boolean;
-}
+
 
 export const DateSelection = ({ dateSelected, dateRangePoint, setShowCalendar, showCalendar }: DateSelectionProps) => {
     const monthDisplay = dateSelected && month[dateSelected.getMonth()];

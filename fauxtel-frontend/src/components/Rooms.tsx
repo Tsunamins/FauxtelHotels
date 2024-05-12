@@ -6,7 +6,6 @@ import { selectAllLocations } from '../store/reducerSlices/locationsSlice.ts';
 
 export function Rooms() {
     const locations = useSelector(selectAllLocations);
-
     return (
         <div className="LocationsRooms roomsList">
             <h1 className="pageTitle">Rooms</h1>

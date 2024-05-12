@@ -3,14 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/actions/currentUser.js';
 import '../styles/Forms.css';
-import { AuthButton } from './baseComponents/AuthButton.tsx';
 import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
 import { AppDispatch } from '../store/store.ts';
+import { BaseButton } from './baseComponents/BaseButton.tsx';
+import { UserCreds } from '../store/storeProps.ts';
 
-export interface UserCreds {
-    email: string;
-    password: string;
-}
 
 export const Login = () => {
     const initialState: UserCreds = {
@@ -42,7 +39,7 @@ export const Login = () => {
             <input className='form' type='text' name='email' placeholder='Email' value={loginInfo.email} onChange={handleChange}/>
             <input className='form' type='password' name='password' placeholder='Password' value={loginInfo.password} onChange={handleChange}/>
             <br />
-            <AuthButton displayText='Log In' type='submit' />
+            <BaseButton className='authButtons' displayText='Log In' type='submit' />
         </form>
     );
 };

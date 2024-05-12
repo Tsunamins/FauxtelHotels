@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Locations.css';
+import { useSelector } from 'react-redux';
+import { selectAllLocations } from '../store/reducerSlices/locationsSlice.ts';
 
 
+export function Locations() {
 
-export function Locations({locations}) {
+    const locations = useSelector(selectAllLocations);
 
     return (
         <div className='LocationsList'>

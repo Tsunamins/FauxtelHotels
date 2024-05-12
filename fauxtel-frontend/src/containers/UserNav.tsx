@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getCurrentUser } from '../store/actions/currentUser.js';
-
-import { getReservations } from '../store/actions/reservations.js';
 import { Link, NavLink } from 'react-router-dom';
 import { Logout } from '../components/Logout.tsx';
 import { fetchCurrentUser, selectCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
+import { AppDispatch } from '../store/store.ts';
 
 
 export const UserNav = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const currentUser = useSelector(selectCurrentUser);
     const [loggedInUser, setLoggedInUser] = useState(!!currentUser);
-
 
     useEffect(() => {
         dispatch(fetchCurrentUser());

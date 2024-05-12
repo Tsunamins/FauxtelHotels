@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getLocations } from '../services/locationsService';
+import { ResponseData } from '../storeProps';
 
 const initialState = { locations: [], status: 'idle', error: '' };
 
-export const fetchLocations = createAsyncThunk('GET_LOCS', async () => {
+export const fetchLocations = createAsyncThunk('GET_LOCS', async (): Promise<ResponseData | null> => {
     const response = await getLocations()
     return response.data.data
 })

@@ -1,15 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getCurrentUser, loginUser, logout } from '../services/currentUserService';
-import { UserCreds } from '../../components/Login';
+import { createUser, getCurrentUser, loginUser } from '../services/currentUserService';
+import { ResponseData, UserCreateWrapper, UserCreds } from '../storeProps';
 
 const initialState = { currentUser: null, status: 'idle', error: '' };
 
-export type ResponseData = {
-    status: number;
-    data: any;
-    headers: Headers;
-    url: string;
-}
+
 
 export const loginCurrentUser = createAsyncThunk('LOGIN_USER', async (credentials: UserCreds): Promise<ResponseData | null> => {
     const response = await loginUser(credentials)
@@ -27,12 +22,17 @@ export const logoutUser = createAsyncThunk('LOGOUT_USER', async () => {
     return response
 })
 
-// export const logoutCurrentUser = createAsyncThunk('LOGOUT_USER', async () => {
-//     const response = await logout();
+export const signUpUser = createAsyncThunk('CREATE_AND_LOGIN_USER', async (credentials: UserCreateWrapper): Promise<ResponseData | null> => {
+    console.log('creds?? ', credentials)
+    const response = await createUser(credentials)
+    // localStorage.setItem('token', response.data.jw
+    localStorage.setItem('token', response.jwt)
 
-// })
+    console.log('new user?? ', response.data)
+    return response.data.user.data
+})
 
-// todo need to finish logout and create user, also need to look at backend logout - does it log out?
+// todo need to finish create user, also need to look at backend logout - does it log out?
 
 const currentUserSlice = createSlice({
     name: 'currentUser',
@@ -71,6 +71,17 @@ const currentUserSlice = createSlice({
                 state.currentUser = null
             })
             .addCase(logoutUser.rejected, (state, action) => {
+                state.status = 'failed'
+                state.error = action.error.message || 'undefined error'
+            })
+            .addCase(signUpUser.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(signUpUser.fulfilled, (state, action) => {
+                state.status = 'succeeded'
+                state.currentUser = action.payload || null
+            })
+            .addCase(signUpUser.rejected, (state, action) => {
                 state.status = 'failed'
                 state.error = action.error.message || 'undefined error'
             })
