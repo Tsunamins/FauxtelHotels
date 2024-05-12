@@ -4,7 +4,7 @@ Associated blog post: https://tsunamins.github.io/fauxtel_hotels_-_the_final_pro
 
 Video demo: https://youtu.be/G4u_KgDfBYI
 
-Skills utilized for this project: Ruby, Ruby on Rails, JavaScript, React, Redux, ActiveMailer, JWT authorization
+Skills utilized for this project: Ruby, Ruby on Rails, Typescript, React, Redux Toolkit, React Router, React Day Picker ActiveMailer, JWT authorization
 
 Recently updated to latest: Ruby, Rails, related dependencies; React 18, React Router Dom and related dependencies
 

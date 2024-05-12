@@ -16,7 +16,8 @@ class ApplicationController < ActionController::API
     end
 
     def current_user
-        begin    
+        begin
+            puts "did this run???"
           User.find(decode_token_and_get_user_id)
         rescue
             return nil
