@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getRoom, getRooms } from '../services/roomsService';
 import { ResponseData } from '../storeProps';
+import { getRoom, getRooms } from '../services/roomsService';
 
 const initialState = { rooms: [], status: 'idle', error: '' };
 

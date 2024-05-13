@@ -1,12 +1,18 @@
 import { useDispatch } from 'react-redux';
 import '../styles/Reservations.css';
-import { locationMap } from '../constants.ts';
+import { AppDispatch } from '../store/store';
+import { ReserveDetailsConfirmProps } from './componentProps';
 import { useNavigate } from 'react-router-dom';
-import { BaseButton } from './baseComponents/BaseButton.tsx';
-import { AppDispatch } from '../store/store.ts';
-import { ReserveDetailsConfirmProps } from './componentProps.ts';
-import { createNewReservation, updateReservation } from '../store/reducerSlices/reservationSlice.ts';
-import React from 'react';
+import { createNewReservation, updateReservation } from '../store/reducerSlices/reservationSlice';
+import { locationMap } from '../constants';
+import { BaseButton } from './baseComponents/BaseButton';
+// import { locationMap } from '../constants.ts';
+// import { useNavigate } from 'react-router-dom';
+// import { BaseButton } from './baseComponents/BaseButton.tsx';
+// import { AppDispatch } from '../store/store.ts';
+// import { ReserveDetailsConfirmProps } from './componentProps.ts';
+// import { createNewReservation, updateReservation } from '../store/reducerSlices/reservationSlice.ts';
+
 
 export const ReserveDetailsConfirm = ({ currentUser, range, room, modifyingReservation }: ReserveDetailsConfirmProps) => {
     const dispatch = useDispatch<AppDispatch>();

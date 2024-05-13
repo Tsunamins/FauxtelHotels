@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getLocations } from '../services/locationsService';
 import { ResponseData } from '../storeProps';
+import { getLocations } from '../services/locationsService';
 
 const initialState = { locations: [], status: 'idle', error: '' };
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles/FauxVenues.css';
 
 export const FauxVenues = () => {

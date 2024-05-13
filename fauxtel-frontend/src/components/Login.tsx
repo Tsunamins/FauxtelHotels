@@ -1,12 +1,10 @@
-import React, { ChangeEvent, ChangeEventHandler, FormEvent, FormEventHandler, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { login } from '../store/actions/currentUser.js';
-import '../styles/Forms.css';
-import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
-import { AppDispatch } from '../store/store.ts';
-import { BaseButton } from './baseComponents/BaseButton.tsx';
-import { UserCreds } from '../store/storeProps.ts';
+import { UserCreds } from '../store/storeProps';
+import { AppDispatch } from '../store/store';
+import { loginCurrentUser } from '../store/reducerSlices/currentUserSlice';
+import { BaseButton } from './baseComponents/BaseButton';
 
 
 export const Login = () => {

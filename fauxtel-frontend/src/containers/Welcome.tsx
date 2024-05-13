@@ -1,8 +1,18 @@
+import styled from "styled-components";
 
 export const Welcome = () => {
     return (
-        <div id='Welcome' className='pageTitle'>
+        <WelcomeContainer >
             <h1>Welcome</h1>
-        </div>
+        </WelcomeContainer>
     )
 }
+
+const WelcomeContainer = styled.div`
+    font-size: 35px;
+    color: teal;
+
+    @media only screen and (min-width: 600px) {
+        font-size: 50px;
+    }
+`;

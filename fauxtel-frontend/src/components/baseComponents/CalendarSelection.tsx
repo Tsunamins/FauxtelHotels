@@ -1,6 +1,6 @@
-import React, { Dispatch, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { format } from 'date-fns';
-import { DayPicker, Matcher } from 'react-day-picker';
+import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import '../../styles/BookNow.css';
 import { CalendarSelectionProps } from './baseComponentProps';

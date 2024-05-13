@@ -1,7 +1,6 @@
-import React from 'react';
 import { useSelector } from 'react-redux';
-import { LikeButton } from './baseComponents/LikeButton.tsx'
-import { selectAllLocations } from '../store/reducerSlices/locationsSlice.ts';
+import { selectAllLocations } from '../store/reducerSlices/locationsSlice';
+import { LikeButton } from './baseComponents/LikeButton';
 
 
 export function Rooms() {

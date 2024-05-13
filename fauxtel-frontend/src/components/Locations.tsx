@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Locations.css';
 import { useSelector } from 'react-redux';
-import { selectAllLocations } from '../store/reducerSlices/locationsSlice.ts';
+import { selectAllLocations } from '../store/reducerSlices/locationsSlice';
 
 
 export function Locations() {

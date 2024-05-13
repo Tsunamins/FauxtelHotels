@@ -1,4 +1,4 @@
 Front end only
-use npm i
+use npx vite
 npm start
-ran on port 3000
+ran on port 5173

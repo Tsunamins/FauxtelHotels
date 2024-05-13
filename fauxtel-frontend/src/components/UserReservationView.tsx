@@ -1,13 +1,13 @@
-import React, { ReactNode, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { ReactNode, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { BookNow } from './BookNow.tsx';
-import { locationMap, roomMap } from '../constants.ts';
-import '../styles/Modifying.css';
-import { BaseButton } from './baseComponents/BaseButton.tsx';
-import { cancelReservation } from '../store/reducerSlices/reservationSlice.ts';
-import { AppDispatch } from '../store/store.ts';
-import { ReservationView } from './componentProps.ts';
+import { ReservationView } from './componentProps';
+import { AppDispatch } from '../store/store';
+import { cancelReservation } from '../store/reducerSlices/reservationSlice';
+import { locationMap, roomMap } from '../constants';
+import { BookNow } from './BookNow';
+import { BaseButton } from './baseComponents/BaseButton';
+// import '../styles/Modifying.css';
 
 
 export const UserReservationView = ({ reservation }: ReservationView) => {

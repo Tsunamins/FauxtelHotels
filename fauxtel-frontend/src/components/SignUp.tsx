@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { BaseButton } from './baseComponents/BaseButton.tsx';
-import { signUpUser } from '../store/reducerSlices/currentUserSlice.ts';
-import { AppDispatch } from '../store/store.ts';
-import { UserCreateCreds, UserCreateWrapper } from '../store/storeProps.ts';
+import { AppDispatch } from '../store/store';
+import { UserCreateCreds, UserCreateWrapper } from '../store/storeProps';
+import { signUpUser } from '../store/reducerSlices/currentUserSlice';
+import { BaseButton } from './baseComponents/BaseButton';
 
 
 export const SignUp = () => {

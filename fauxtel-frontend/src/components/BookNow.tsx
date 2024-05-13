@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import 'react-day-picker/dist/style.css';
 import '../styles/DayPicker.css';
-import { checkAvailableRooms, generateDateRange } from './utils/BookingUtils.ts';
-import BookRooms from './BookRooms.tsx';
-import { ReserveDetailsConfirm } from './ReserveDetailsConfirm.tsx';
-import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice.ts';
-import { DateSelection } from './baseComponents/DateSelection.tsx';
-import { CalendarSelection } from './baseComponents/CalendarSelection.tsx';
-import { selectCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
-import { AppDispatch, RootState } from '../store/store.ts';
+import { BookNowProps, Range, Room } from './componentProps';
+import { AppDispatch, RootState } from '../store/store';
+import { fetchRooms, selectAllRooms } from '../store/reducerSlices/roomsSlice';
+import { selectCurrentUser } from '../store/reducerSlices/currentUserSlice';
 import { Matcher } from 'react-day-picker';
-import { BaseButton } from './baseComponents/BaseButton.tsx';
-import { BookNowProps, Range, Room } from './componentProps.ts';
-
+import { checkAvailableRooms, generateDateRange } from './utils/BookingUtils';
+import { DateSelection } from './baseComponents/DateSelection';
+import { CalendarSelection } from './baseComponents/CalendarSelection';
+import { BaseButton } from './baseComponents/BaseButton';
+import BookRooms from './BookRooms';
+import { ReserveDetailsConfirm } from './ReserveDetailsConfirm';
 
 
 export const BookNow = ({ modifyingReservation, modifyingRange }: BookNowProps) => {
@@ -54,7 +53,7 @@ export const BookNow = ({ modifyingReservation, modifyingRange }: BookNowProps) 
 
     return (
         <div id="BookingInteraction">
-            <div className="">
+            <div>
                 {/* todo check more reservation conditions and make sure finding correct matches */}
                 {/* also todo, maybe combine these */}
                 {/* new todo - would be nice whether directly selecting or not in a range fashio to have a full calendar range view that pops up especially for the second date

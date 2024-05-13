@@ -1,11 +1,10 @@
-import React, { Dispatch } from 'react';
+
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logoutUser } from '../store/reducerSlices/currentUserSlice.ts';
-import { AppDispatch } from '../store/store.ts';
-import { BaseButton } from './baseComponents/BaseButton.tsx';
-import { LogoutProps } from './componentProps.ts';
-
+import { LogoutProps } from './componentProps';
+import { AppDispatch } from '../store/store';
+import { logoutUser } from '../store/reducerSlices/currentUserSlice';
+import { BaseButton } from './baseComponents/BaseButton';
 
 
 export const Logout = ({ setLoggedInUser }: LogoutProps) => {

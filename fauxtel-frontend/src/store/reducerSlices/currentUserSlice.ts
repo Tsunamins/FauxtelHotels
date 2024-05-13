@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createUser, getCurrentUser, loginUser } from '../services/currentUserService';
+// import { createUser, getCurrentUser, loginUser } from '../services/currentUserService.ts';
 import { ResponseData, UserCreateWrapper, UserCreds } from '../storeProps';
+import { createUser, getCurrentUser, loginUser } from '../services/currentUserService';
 
 const initialState = { currentUser: null, status: 'idle', error: '' };
 

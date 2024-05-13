@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import '../styles/Rooms.css';
 import '../styles/Common.css';
 import '../styles/DayPicker.css'
-import { BaseButton } from './baseComponents/BaseButton.tsx';
-import { AppDispatch } from '../store/store.ts';
-import { BookRoomsProps, Room } from './componentProps.ts';
+import { BookRoomsProps, Room } from './componentProps';
+import { AppDispatch } from '../store/store';
+import { BaseButton } from './baseComponents/BaseButton';
 
 
 function BookRooms({ availableRooms, setConfirmingDetails, setRoomSelected }: BookRoomsProps) {

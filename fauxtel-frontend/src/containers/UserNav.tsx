@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import { Logout } from '../components/Logout.tsx';
-import { fetchCurrentUser, selectCurrentUser } from '../store/reducerSlices/currentUserSlice.ts';
-import { AppDispatch } from '../store/store.ts';
+import styled from 'styled-components';
+import { Logout } from '../components/Logout.js';
+import { AppDispatch } from '../store/store.js';
+import { fetchCurrentUser, selectCurrentUser } from '../store/reducerSlices/currentUserSlice.js';
 
 
 export const UserNav = () => {
@@ -20,27 +21,64 @@ export const UserNav = () => {
     }, [currentUser])
 
     return (
-        <div className="User UserNav">
+        <AuthedToggle>
             {loggedInUser
                 ?
-                <div className="AuthedUserWrapper">
-                    <div className="UserDisplay">
-                        <div id="UserName">Logged in as {currentUser.attributes.first_name} </div>
+                <>
+                    <UserGreeting>Welcome {currentUser.attributes.first_name} </UserGreeting>
+                    <SignUpLogin>
+                            {/* todo this should maybe be /user/view-reservations // or /view-reservations/userid */}
+                            <div><NavLink to="/view-reservations">Reservations</NavLink></div>
+                            {/* todo would also want a view user info link at some point to view/edit etc */}
                         <Logout setLoggedInUser={setLoggedInUser} />
-                    </div>
-                    <div className="UserLinks">
-                        {/* todo this should maybe be /user/view-reservations // or /view-reservations/userid */}
-                        <li><NavLink to="/view-reservations">View My Reservations</NavLink></li>
-                        {/* todo would also want a view user info link at some point to view/edit etc */}
-                    </div>
-                </div>
+                    </SignUpLogin>
+                </>
                 :     
-                <ul className="SignUpLogin">
-                    <li><Link to="/signup">Sign Up</Link></li>
-                    <li><Link to="/login">Log In</Link></li>
-                </ul>
+                <SignUpLogin>
+                    <div><Link to="/signup">Sign Up</Link></div>
+                    <div><Link to="/login">Log In</Link></div>
+                </SignUpLogin>
             }
-        </div>
+        </AuthedToggle>
     );
-
 }
+
+const UserNavContanier = styled.div`
+
+`;
+
+
+const SignUpLogin = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    list-style: none;
+    padding: 10px;
+    border: 1px solid #0f7171;
+    border-right: none;
+    font-size: 20px;
+    margin-left: 25%;
+    margin-right: -10px;
+    max-width: 80%;
+    column-gap: 10px;
+
+
+    @media only screen and (min-width: 600px) {
+        max-width: 50%;
+        margin-left: 50%;
+        // todo logged out put this back
+        // margin-top: -100px;
+
+    }
+`;
+
+const AuthedToggle = styled.div`
+    margin-top: 25px;
+`;
+
+const UserGreeting = styled.div`
+    color: #fa6484;
+    text-align: right;
+
+`;

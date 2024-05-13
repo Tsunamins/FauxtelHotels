@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from 'react';
+import { useState } from 'react';
 import '../../styles/Forms.css';
 import { InputFieldProps } from './baseComponentProps';
 

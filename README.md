@@ -20,9 +20,9 @@ Local installation pre-reqs:
 `rake db:migrate`
 `rails s`
 
-### Starting frontend (will run on port 3000):
+### Starting frontend (will run on port 5173):
 `cd fauxtel-frontend`
-`npm start`
+`npx vite`
 
 ### Next ideas I'm working on
 1) More newb refactor

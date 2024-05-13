@@ -1,6 +1,5 @@
-import React, { Dispatch } from 'react';
+import { day, month } from '../../constants';
 import '../../styles/BookNow.css';
-import { day, month } from '../../constants.ts';
 import { DateSelectionProps } from './baseComponentProps';
 
 

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { createReservation, deleteReservation, getReservations, patchReservation } from '../services/reservationsService';
 import { ReservationPayload, ReservationUpdatePayload, ResponseData } from '../storeProps';
+import { createReservation, deleteReservation, getReservations, patchReservation } from '../services/reservationsService';
+
 
 const initialState = { allReservations: [], status: 'idle', error: '' };
 
@@ -89,4 +90,4 @@ const reservationSlice = createSlice({
 
 export default reservationSlice.reducer
 
-export const selectCurrentUser = (state: { allReservations: { allReservations: any; }; }) => state.allReservations.allReservations;
+export const selectAllReservations = (state: { allReservations: { allReservations: any; }; }) => state.allReservations.allReservations;

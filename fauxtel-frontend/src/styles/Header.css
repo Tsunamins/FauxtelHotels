@@ -27,7 +27,7 @@
     margin-top: -20px;
 }
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
     60% {
         opacity: 0;
     }
@@ -45,7 +45,7 @@
     100% {
         transform: translateX(0);
     }
-}
+} */
 
 .NavWrapper {
     display: flex;
