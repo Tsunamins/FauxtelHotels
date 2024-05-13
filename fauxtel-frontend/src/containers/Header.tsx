@@ -17,7 +17,6 @@ export const Header = () => {
 
             <div className="NavWrapper">
                 <hr className='headerDivider' />
-                {/* todo find opportunities like this to not hard code and map over */}
                 <ul className="SiteNav">
                     <li><Link to="/room-types">View Room Types</Link></li>
                     <li><Link to="/locations">All Fauxtel Locations</Link></li>
