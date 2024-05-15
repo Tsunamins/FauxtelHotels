@@ -4,7 +4,6 @@ import { Matcher } from "react-day-picker";
 export interface BaseButtonProps {
     displayText: string;
     type: 'submit' | 'reset' | 'button' | undefined;
-    className: string;
     onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 

@@ -4,6 +4,7 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import '../../styles/BookNow.css';
 import { CalendarSelectionProps } from './baseComponentProps';
+import styled from 'styled-components';
 
 
 export const CalendarSelection = ({ dateRangePoint, isModing, range, setShowCalendar, setRange }: CalendarSelectionProps) => {
@@ -33,13 +34,16 @@ export const CalendarSelection = ({ dateRangePoint, isModing, range, setShowCale
 
     let footer = <p>Select {isStart ? 'Beginning' : 'Conclusion' } of stay.</p>;
     if (selected) {
-      footer = <p className="calendarFooter"><button className='dateConfirm calendarButton' onClick={handleConfirm}>{dateRangePoint} stay on {format(selected, 'PP')}</button></p>;
+      footer = 
+        <CalendarFooter>
+            <CalendarButton onClick={handleConfirm}>{dateRangePoint} stay on {format(selected, 'PP')}</CalendarButton>
+        </CalendarFooter>;
     }
     // todo here or in parent - handle click outside to close, escape to close
     return (
-        <div className='calendarModal'>
-            <div className='calendarCentered'>
-                <button className='calendarButton' onClick={() => setShowCalendar(false)}>Close</button>      
+        <CalendarModal>
+            <CalendarCentering>
+                <CalendarButton onClick={() => setShowCalendar(false)}>Close</CalendarButton>      
                 <DayPicker
                     disabled={{ before: today }}
                     mode="single"
@@ -48,7 +52,36 @@ export const CalendarSelection = ({ dateRangePoint, isModing, range, setShowCale
                     footer={footer}
                     defaultMonth={monthStart}
                 />
-            </div>
-        </div>
+            </CalendarCentering>
+        </CalendarModal>
     );
 };
+
+const CalendarFooter = styled.p`
+    color: rgb(55, 35, 4);
+    font-size: 23px;
+`;
+
+const CalendarModal = styled.div`
+    position: fixed; // Stay in place
+    z-index: 1; // Sit on top
+    left: 0;
+    top: 0;
+    width: 100%; // Full width
+    height: 100%; // Full height
+    overflow: auto; // Enable scroll if needed
+    background-color: rgb(0,0,0); // Fallback color
+    background-color: rgba(104, 78, 50, 0.764); // Black w/ opacity
+`;
+
+const CalendarCentering = styled.div`
+    margin-top: 10%;
+`;
+
+const CalendarButton = styled.button`
+    background-color: pink;
+    font-size: 25px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+`;

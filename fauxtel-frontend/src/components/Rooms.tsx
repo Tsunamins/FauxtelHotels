@@ -1,25 +1,49 @@
 import { useSelector } from 'react-redux';
 import { selectAllLocations } from '../store/reducerSlices/locationsSlice';
 import { LikeButton } from './baseComponents/LikeButton';
+import styled from 'styled-components';
 
 
 export function Rooms() {
     const locations = useSelector(selectAllLocations);
     return (
-        <div className="LocationsRooms roomsList">
-            <h1 className="pageTitle">Rooms</h1>
+        <RoomsList>
+            <PageHeader>Rooms</PageHeader>
             {locations.map(l =>
-                <div key={l.attributes.name} className="showcaseRooms">
-                    <div className="roomTypeList">Rooms Featured at {l.attributes.name} </div>
+                <FeaturedRooms key={l.attributes.name}>
+                    <div>Rooms Featured at {l.attributes.name} </div>
                     {l.attributes.rooms.map(room =>
-                        <div className="topicTitle" id={room.room_type}>
-                            <div className='topicDetail'>{room.room_type}</div>
-                            <div className='topicDetail'>{room.description}</div>
+                        <DetailsHeader key={room.room_type}>
+                            <DetailsLine>{room.room_type}</DetailsLine>
+                            <DetailsLine>{room.description}</DetailsLine>
                             <LikeButton />
-                        </div>
+                        </DetailsHeader>
                     )}
-                </div>
+                </FeaturedRooms>
             )}
-        </div>
+        </RoomsList>
     );
 };
+
+const RoomsList = styled.div`
+    margin-top: 50px;
+    margin-bottom: 100px;
+`;
+
+const FeaturedRooms = styled.div`
+    margin-bottom: 50px;
+    color: #C9E4CA;
+`;
+
+const PageHeader = styled.h1`
+    font-size: 50px;
+    color: teal;
+`;
+
+const DetailsHeader = styled.h3`
+    color: #C9E4CA;
+`;
+
+const DetailsLine = styled.p`
+    color: #C9E4CA;
+`;

@@ -112,6 +112,3 @@ export interface BookRoomsProps {
     setConfirmingDetails: Dispatch<boolean>;
     setRoomSelected: Dispatch<Room | undefined>;
 }
-
-
-

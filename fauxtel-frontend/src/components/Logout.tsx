@@ -5,6 +5,7 @@ import { LogoutProps } from './componentProps';
 import { AppDispatch } from '../store/store';
 import { logoutUser } from '../store/reducerSlices/currentUserSlice';
 import { BaseButton } from './baseComponents/BaseButton';
+import styled from 'styled-components';
 
 
 export const Logout = ({ setLoggedInUser }: LogoutProps) => {
@@ -18,8 +19,21 @@ export const Logout = ({ setLoggedInUser }: LogoutProps) => {
         localStorage.removeItem('token');
     };
     return (
-        <div className='Logout'>
-            <BaseButton className='authButtons' displayText='Logout' onClick={handleLogout} type='submit'/>
+        <div>
+            <AuthButton displayText='Logout' onClick={handleLogout} type='submit'/>
         </div>
     );
 };
+
+const AuthButton = styled(BaseButton)`
+    background-color: #335e5c5b;
+    border: none;
+    border-radius: 10px;
+    color: #f2d2c2;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    cursor: pointer;
+`;

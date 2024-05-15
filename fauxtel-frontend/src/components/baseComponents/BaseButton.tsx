@@ -1,7 +1,7 @@
 import { BaseButtonProps } from './baseComponentProps';
 
-export const BaseButton = ({ className, displayText, onClick, type}: BaseButtonProps) => {
+export const BaseButton = ({ displayText, onClick, type}: BaseButtonProps) => {
     return (
-        <button className={className} onClick={onClick} type={type}>{displayText}</button>
+        <button onClick={onClick} type={type}>{displayText}</button>
     );
 };

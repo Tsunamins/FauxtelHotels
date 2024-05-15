@@ -7,6 +7,7 @@ import { cancelReservation } from '../store/reducerSlices/reservationSlice';
 import { locationMap, roomMap } from '../constants';
 import { BookNow } from './BookNow';
 import { BaseButton } from './baseComponents/BaseButton';
+import styled from 'styled-components';
 // import '../styles/Modifying.css';
 
 
@@ -31,24 +32,65 @@ export const UserReservationView = ({ reservation }: ReservationView) => {
     // todo cannot modify or cancel reservations past the dates
     return (
         <div>
-            <h1 className='pageTitle'>Reservation</h1>
+            <PageHeader>Reservation</PageHeader>
             {reservation &&
-                <div className='ModifyingReservation'>
-                    {isModing ? <h3 className="modifyingNote">You are Modifying </h3> : null}
-                    <h3 className='topicTitle'>Location: {locationMap[reservation.location_id]}</h3>
-                    <p className='topicDetails'>Room Type: {roomMap[reservation.room_id]}</p>
-                    <p className='topicDetails'>From: {reservation.start_date as ReactNode}</p>
-                    <p className='topicDetails'>To: {reservation.end_date as ReactNode}</p>
+                <ModifyReservationContainer>
+                    {isModing ? <ModifyingAlert >You are Modifying </ModifyingAlert> : null}
+                    <DetailsHeader>Location: {locationMap[reservation.location_id]}</DetailsHeader>
+                    <DetailsLine>Room Type: {roomMap[reservation.room_id]}</DetailsLine>
+                    <DetailsLine>From: {reservation.start_date as ReactNode}</DetailsLine>
+                    <DetailsLine>To: {reservation.end_date as ReactNode}</DetailsLine>
                     {isModing ? <BookNow modifyingReservation={reservation} modifyingRange={existingRange} />
                         :
                         <div>
-                            <BaseButton className='reservationButtons' displayText='Modify Reservation' onClick={() => setIsModing(true)} type='button' />
+                            <ReservationButton displayText='Modify Reservation' onClick={() => setIsModing(true)} type='button' />
                             <br />
-                            <BaseButton className='reservationButtons' displayText='Cancel Reservation' onClick={handleCancel} type='button' />
+                            <ReservationButton displayText='Cancel Reservation' onClick={handleCancel} type='button' />
                         </div>
                     }
-                </div>
+                </ModifyReservationContainer>
             }
         </div>
     );
 };
+
+const PageHeader = styled.h1`
+    font-size: 50px;
+    color: teal;
+`;
+
+const ModifyReservationContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+`;
+
+const ModifyingAlert = styled.h3`
+    color: orange;
+`;
+
+const DetailsHeader = styled.h3`
+    color: #C9E4CA;
+`;
+
+const DetailsLine = styled.p`
+    color: #C9E4CA;
+`;
+
+const ReservationButton = styled(BaseButton)`
+    background-color: #33455e5b; /* Green */
+    border: 1px solid #335e5c;
+    box-shadow: 2px 5px 8px #233437;
+    border-radius: 10px;
+    color: #6aacd3;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 4px;
+    cursor: pointer;
+    font-size: 20px;
+`;
+
+

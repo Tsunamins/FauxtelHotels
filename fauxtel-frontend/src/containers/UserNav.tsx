@@ -43,10 +43,6 @@ export const UserNav = () => {
     );
 }
 
-const UserNavContanier = styled.div`
-
-`;
-
 
 const SignUpLogin = styled.div`
     display: flex;
@@ -67,6 +63,7 @@ const SignUpLogin = styled.div`
     @media only screen and (min-width: 600px) {
         max-width: 50%;
         margin-left: 50%;
+        // I think by this I mean use a conditional/prop
         // todo logged out put this back
         // margin-top: -100px;
 
